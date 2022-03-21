@@ -1,0 +1,24 @@
+.input-color {
+  position: relative;
+  padding-bottom: 20px;
+}
+.input-color input {
+  padding-left: 20px;
+}
+.input-color .color-box {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background-color: #ccc;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+.AdjustColorCabecalho h1,
+.AdjustColorCabecalho h2,
+.AdjustColorCabecalho h3,
+.AdjustColorCabecalho h4,
+.AdjustColorCabecalho h5 {
+  background-color: orange;
+}
