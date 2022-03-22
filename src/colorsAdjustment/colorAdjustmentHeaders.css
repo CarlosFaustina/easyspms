@@ -14,11 +14,44 @@
   left: 5px;
   top: 5px;
 }
-
+/*
 .AdjustColorCabecalho h1,
 .AdjustColorCabecalho h2,
 .AdjustColorCabecalho h3,
 .AdjustColorCabecalho h4,
 .AdjustColorCabecalho h5 {
   background-color: orange;
+}
+*/
+
+.HeaderVermelho h1,
+.HeaderVermelho h2,
+.HeaderVermelho h3,
+.HeaderVermelho h4,
+.HeaderVermelho h5 {
+  color: red;
+}
+
+.HeaderAzul h1,
+.HeaderAzul h2,
+.HeaderAzul h3,
+.HeaderAzul h4,
+.HeaderAzul h5 {
+  color: blue;
+}
+
+.HeaderAmarelo h1,
+.HeaderAmarelo h2,
+.HeaderAmarelo h3,
+.HeaderAmarelo h4,
+.HeaderAmarelo h5 {
+  color: yellow;
+}
+
+.HeaderRosa h1,
+.HeaderRosa h2,
+.HeaderRosa h3,
+.HeaderRosa h4,
+.HeaderRosa h5 {
+  color: pink;
 }

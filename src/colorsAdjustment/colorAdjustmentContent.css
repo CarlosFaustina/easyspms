@@ -15,8 +15,24 @@
   top: 5px;
 }
 
-.AdjustColorConteudo p,
-.AdjustColorConteudo span,
-.AdjustColorConteudo li {
-  color: orange;
+.ConteudoAmarelo p,
+.ConteudoAmarelo span,
+.ConteudoAmarelo li {
+  color: yellow;
+}
+
+.ConteudoVermelho p,
+.ConteudoVermelho span,
+.ConteudoVermelho li {
+  color: red;
+}
+.ConteudoRosa p,
+.ConteudoRosa span,
+.ConteudoRosa li {
+  color: pink;
+}
+.ConteudoAzul p,
+.ConteudoAzul span,
+.ConteudoAzul li {
+  color: blue;
 }

@@ -11,3 +11,31 @@ $("#btn_mudaCorCabecalho").click(function (e) {
     $("#mudaCorCabecalho").show();
   }
 });
+
+$('input:radio[name="editaCor"]').change(function () {
+  if ($(this).val() == "cabecalho") {
+    $('input:radio[name="Cor"]').change(function () {
+      if ($(this).val() == "red") {
+        $("body").removeClass("HeaderAzul");
+        $("body").removeClass("HeaderAmarelo");
+        $("body").removeClass("HeaderRosa");
+        $("body").addClass("HeaderVermelho");
+      } else if ($(this).val() == "blue") {
+        $("body").removeClass("HeaderVermelho");
+        $("body").removeClass("HeaderAmarelo");
+        $("body").removeClass("HeaderRosa");
+        $("body").addClass("HeaderAzul");
+      } else if ($(this).val() == "yellow") {
+        $("body").removeClass("HeaderVermelho");
+        $("body").removeClass("HeaderAzul");
+        $("body").removeClass("HeaderRosa");
+        $("body").addClass("HeaderAmarelo");
+      } else if ($(this).val() == "pink") {
+        $("body").removeClass("HeaderVermelho");
+        $("body").removeClass("HeaderAzul");
+        $("body").removeClass("HeaderAmarelo");
+        $("body").addClass("HeaderRosa");
+      }
+    });
+  }
+});
