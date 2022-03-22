@@ -125,6 +125,15 @@
 </head>
 
 <body class="p-4">
+    <header>
+                    <nav>
+                        <menu type="context" id="navmenu">
+                            <span label="Home"> <a href="/">Home</a> </span>
+                            <span label="Easy"> <a href="/easy.html">Easy</a> </span>
+                            <span label="Texto"> <a href="/#textarea">Texto</a> </span>
+                        </menu>
+                    </nav>
+                </header>
     <!-- SKIP -> Para navegação com o teclado, vai para o .container-fluid -->
     <div id="skip" class="d-none"><a href="#content">Skip navigation</a></div>
     <!--
@@ -283,7 +292,42 @@
 
             </div>
 
+<div class="VoicetoText">
+        <div class="mt-4" id="div_language">
+                <h2 class="mb-3">Idioma</h2>
+            <div class="row">
+                <div class="col-sm-4">
+                    <select class="form-select bg-secondary text-light" id="select_language" ></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <select class="form-select bg-secondary text-light mt-2" id="select_dialect"></select>
+                </div>
+            </div>
+                    
 
+        </div>
+            <h2 class="mt-4 ">Transcrição</h2>
+            <div class="p-3" style="border: 1px solid gray; height: 300px; border-radius: 8px;">
+                <span id="final" ></span>
+                <span id="interim" class="text-secondary"></span>
+            </div>
+          
+                <div class="row">
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-success btn-sm" id="start">Iniciar</button> </div>
+                        <div class="col-sm-2"><button type="button" class="btn btn-danger" id="stop">Parar</button></div>
+                        <div class="col-sm-2"><button type="button"  class="btn btn-primary" id="limpar">Limpar</button></div>
+                   
+                   </div>
+           
+                
+                
+                <p id="status" class="lead mt-3 text-light" style="display: none">A vouvir ...</p>
+            </div>
+        
+ </div>
 <!--'Botão funcionalidade-> navegação por teclado '-->
    <div class="btn_geral" id="btn_keyboardnav">
     <div class="btn_particular">
@@ -302,7 +346,13 @@
     </div>
 <!--Fim do visto a verde que aparece quando a funcionalidade está ativa-->
     </div>
- 
+ <!---  Voice to TEXT -->
+
+<br>
+<hr>
+
+    
+  
 
 <!--Imagem do botão-->
 <div class="btn_imagem">
@@ -529,7 +579,7 @@ Desligar Alterações
 <!--<button type="button" id="lupaTotal" style="width: 100px; height: 100px;">Ampliador de Texto (Lupa)</button><br>
 <button type="button" id="lupaParcial" style="width: 100px; height: 100px;">Guia de Leitura</button><br>
 <button type="button"  id="desligaAlteracoes" style="width: 100px; height: 100px;" data-toggle="tooltip" data-placement="bottom" >Desligar Alterações-->
-</button><br>
+                            </button><br>
 
             <hr class="my-5">
             <!--
@@ -556,7 +606,7 @@ Desligar Alterações
 
                 <!-- INIT PROPRIETARY HTML -->
                 <hr class="my-5">
-            </div>
+    </div>
             <!--
     PAVLO PLAYGROUND END
 -->
@@ -605,6 +655,10 @@ Desligar Alterações
             <div class="col-12">teste</div>
             <div id="anderson" class="col-12 d-flex justify-content-center anderson"></div>
             <div class="d-none">Água de Côco. áeee! parceiro :D</div>
+            <!-- TOOTIPBOX accessibility -->
+            <div id="accessibilityTootipBox">
+            </div>
+            
             <!-- REPRODUTOR -->
             <div class="col-12 d-flex justify-content-center mb-3">
                 <a class="btn btn-outline-primary btn-lg" id="btnSpeaker" role="button">
@@ -625,7 +679,7 @@ Desligar Alterações
                     <div class="row g-3">
                         <div class="col-auto">
                             <label for="comboBoxLanguages" class="form-label">Tradutor</label>
-                            <select class="form-select " id="comboBoxLanguages">
+                            <select class="form-select notranslate" id="comboBoxLanguages">
                                 <option value="" selected>Selecione o idioma</option>
                                 <option value="ar">العربية</option>
                                 <option value="bg">bălgarski</option>
@@ -693,6 +747,25 @@ Desligar Alterações
                     tratados científicos, a humanidade lê e escreve textos. Mas, de fato, o que é um texto?
                 </span>
             </div>
+
+            <div class="col-12 d-flex justify-content-center">
+                <a class="btn btn-outline-primary btn-lg" id="btnTextSpeaker" role="button">Ativar reprodutor de texto</a>
+            </div>
+            <h2 class="hasText">Texto para teste do dicionário e reprodutor</h2>
+            <div class="col-12 d-flex justify-content-center mt-3 ">
+                <span class="hasText">
+                    A pergunta parece ingênua, mas você sabe o que é um texto? Passamos boa parte de nossos dias
+                    lendo
+                    os mais
+                    diversos textos, interpretando-os e reagindo a eles por meio de novos textos. Desde os
+                    textos mais
+                    corriqueiros, como placas de trânsito ou cumprimentos, até os mais elaborados, como as obras
+                    de arte
+                    ou
+                    tratados científicos, a humanidade lê e escreve textos. Mas, de fato, o que é um texto?
+                </span>
+            </div>
+                    
             <hr class="my-5">
             <!--
     ANDERSON PLAYGROUND END
@@ -1265,6 +1338,11 @@ on our API rather than parse the HTML below, we have XML and JSON available.
     <!--
     MARCIO SECTION END
 -->
+
+<!---script Voice to Text -->
+
+<script type="module" src="src/VoiceTotext/VoiceToText.js"></script>
+<script type="module" src="src/VoiceTotext/language.js"></script>
 
     <!-- THE END -->
     <!--
