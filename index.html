@@ -86,6 +86,9 @@
 <link rel="stylesheet" href="src/js-files/joao-scripts/realcaLink.css?v=1.0" />
 <link rel="stylesheet" href="src/js-files/joao-scripts/interatividadebotoes.css?v=1.0" />
 <link rel="stylesheet" href="src/js-files/joao-scripts/KeyboardNavigation.css?v=1.0" />
+<link rel="stylesheet" href="src/colorsAdjustment/colorAdjustmentHeaders.css?v=1.0" />
+<link rel="stylesheet" href="src/colorsAdjustment/colorAdjustmentBackground.css?v=1.0" />
+<link rel="stylesheet" href="src/colorsAdjustment/colorAdjustmentContent.css?v=1.0" />
 
 
 
@@ -183,7 +186,7 @@
                 DEV xHTML CODE
 -->
 
-
+<!-- Início top menu que é mostrado quando é ativado a navegação por teclado -->
 <div class="keyboardNavMenu" id="keyboardNavMenu">
     <span data-tooltip="Esta funcionalidade permite navegar com o teclado. Para voltar a interagir com o menu rápido, carregue na tecla 'espaço'." data-tooltip-position="bottom"><i class="fas fa-info"></i></span>
 <a class="active" href="#marcio-playground" tabindex="1">Márcio</a>
@@ -193,7 +196,7 @@
   <a href="#anderson-playground" tabindex="1">Anderson</a>
 
    </div>
-
+<!-- FIM do top menu que é mostrado quando é ativado a navegação por teclado -->
 
 
     <!-- MARCIO PLAYGROUND BEGIN -->
@@ -333,8 +336,8 @@
 
          <span data-tooltip="Esta funcionalidade permite que o utilizador navegue na página através de teclado" data-tooltip-position="bottom"><i class="fas fa-info"></i></span>
     </div>
-
 <!--Fim de mensagem que aparece no icon de informação-->
+
 <!--Visto a verde que aparece quando a funcionalidade está ativa-->
     <div class="check" id="keyboardNavCheck">
        <span>
@@ -364,13 +367,15 @@
 
    </div>
 
+
+
+
 <!--'Botão Funcionalidade -> muda de cor cabeçalho '-->
 <div class="btn_geral" id="btn_mudaCorCabecalho">
     <div class="btn_particular">
 <!--Mensagem que aparece no icon de informação-->
     <div class="info">
-
-         <span data-tooltip="Esta funcionalidade permite que o utilizador mude a cor dos cabeçalhos" data-tooltip-position="bottom"><i class="fas fa-info"></i></span>
+        <span data-tooltip="Esta funcionalidade permite que o utilizador mude a cor dos cabeçalhos" data-tooltip-position="bottom"><i class="fas fa-info"></i></span>
     </div>
 <!--Fim de mensagem que aparece no icon de informação-->
 <!--Visto a verde que aparece quando a funcionalidade está ativa-->
@@ -384,21 +389,127 @@
 
     </div>
  
-<!--Imagem do botão-->
+<!--Imagem do botão
 <div class="btn_imagem">
     <img src="https://w7.pngwing.com/pngs/279/877/png-transparent-hyperlink-computer-icons-link-text-logo-number.png">
 </div>
- <!--Fim da imagem do botão-->
+ Fim da imagem do botão-->
 
-<!--Texto da funcionalidade-->
-    <div class="texto">
-        Muda cor de cabeçalho
-    </div>
+
+<!-- Início do teste das cores -->
+<div class="AdjustColorCabecalho" id="AdjustColorCabecalho">
+    <p style="font-size: 10px;">Cabeçalhos</p>
+</div>
+
+
+<div class="input-color">
+    <div class="color-box" style="background-color: #FF850A;"></div>
+    <!-- Replace "#FF850A" to change the color -->
+</div>
+<!-- Fim do teste das cores -->
+
 
 
    </div>
-
 <!--'Fim Botão Muda cor de cabeçalhos '-->
+
+
+
+
+
+<!--'Botão Funcionalidade -> muda de cor Fundo '-->
+<div class="btn_geral" id="btn_mudaCorFundo">
+    <div class="btn_particular">
+<!--Mensagem que aparece no icon de informação-->
+    <div class="info">
+        <span data-tooltip="Esta funcionalidade permite que o utilizador mude a cor dos fundos" data-tooltip-position="bottom"><i class="fas fa-info"></i></span>
+    </div>
+<!--Fim de mensagem que aparece no icon de informação-->
+<!--Visto a verde que aparece quando a funcionalidade está ativa-->
+    <div class="check" id="mudaCorFundo">
+       <span>
+           <img src="https://media.istockphoto.com/vectors/checkmark-icon-check-mark-vector-isolated-illustration-vector-id1205148147?k=20&m=1205148147&s=612x612&w=0&h=6WoITHTxFwIBVnfODxsh7wAzU3-AZFkg0YZ5U_8COqw="">
+       </span>
+    </div>
+ <!--Fim do visto a verde que aparece quando a funcionalidade está ativa-->
+
+
+    </div>
+ 
+<!--Imagem do botão
+<div class="btn_imagem">
+    <img src="https://w7.pngwing.com/pngs/279/877/png-transparent-hyperlink-computer-icons-link-text-logo-number.png">
+</div>
+ Fim da imagem do botão-->
+
+
+<!-- Início do teste das cores
+<div class="AdjustColorFundo" id="AdjustColorFundo"> -->
+  <div id="AdjustColorFundo">
+       <p style="font-size: 10px;">Fundo</p>
+</div>
+
+
+<div class="input-color">
+    <div class="color-box" style="background-color: #FF850A;"></div>
+    <!-- Replace "#FF850A" to change the color -->
+</div>
+<!-- Fim do teste das cores -->
+
+
+
+   </div>
+<!--'Fim Botão Muda cor de Fundo '-->
+
+
+
+
+<!--'Botão Funcionalidade -> muda de cor Conteudo '-->
+<div class="btn_geral" id="btn_mudaCorConteudo">
+    <div class="btn_particular">
+<!--Mensagem que aparece no icon de informação-->
+    <div class="info">
+        <span data-tooltip="Esta funcionalidade permite que o utilizador mude a cor do Conteudo" data-tooltip-position="bottom"><i class="fas fa-info"></i></span>
+    </div>
+<!--Fim de mensagem que aparece no icon de informação-->
+<!--Visto a verde que aparece quando a funcionalidade está ativa-->
+    <div class="check" id="mudaCorConteudo">
+       <span>
+           <img src="https://media.istockphoto.com/vectors/checkmark-icon-check-mark-vector-isolated-illustration-vector-id1205148147?k=20&m=1205148147&s=612x612&w=0&h=6WoITHTxFwIBVnfODxsh7wAzU3-AZFkg0YZ5U_8COqw="">
+       </span>
+    </div>
+ <!--Fim do visto a verde que aparece quando a funcionalidade está ativa-->
+
+
+    </div>
+ 
+<!--Imagem do botão
+<div class="btn_imagem">
+    <img src="https://w7.pngwing.com/pngs/279/877/png-transparent-hyperlink-computer-icons-link-text-logo-number.png">
+</div>
+ Fim da imagem do botão-->
+
+
+<!-- Início do teste das cores -->
+<div id="AdjustColorConteudo">
+    <p style="font-size: 10px;">Conteudo</p>
+</div>
+
+
+<div class="input-color">
+    <div class="color-box" style="background-color: #FF850A;"></div>
+    <!-- Replace "#FF850A" to change the color -->
+</div>
+<!-- Fim do teste das cores -->
+
+
+
+   </div>
+<!--'Fim Botão Muda cor de Conteudo '-->
+
+
+
+
 
 <!--'Botão reset funcionalidades '-->
  <div class="btn_geral" id="btn_resetall">
@@ -427,15 +538,17 @@
                                 src="https://w7.pngwing.com/pngs/279/877/png-transparent-hyperlink-computer-icons-link-text-logo-number.png">
                     </div>
 <!--Fim da imagem do botão-->
-<!--Texto da funcionalidade-->
 
-                    <div class="texto">
-                        Desligar Alterações
-                    </div>
+<!--Texto da funcionalidade-->
+<div class="texto">
+Desligar Alterações
+</div>
 <!--Fim do texto da funcionalidade-->
 
                 </div>
 <!--'Fim Botão reset funcionalidades '-->
+
+
 
 
                 <a href="#">UM LINK DE TESTE</a><br>
@@ -1179,6 +1292,10 @@ on our API rather than parse the HTML below, we have XML and JSON available.
 <script src="src/js-files/joao-scripts/tabkeynavigation.js?v=1.0"></script>
 <script src="src/js-files/joao-scripts/interatividadedebotoes.js?v=1.0"></script>
 <script src="src/js-files/joao-scripts/keyboardnav.js?v=1.0"></script>
+<script src="src/colorsAdjustment/colorAdjustmentHeaders.js?v=1.0"></script>
+<script src="src/colorsAdjustment/colorAdjustmentBackground.js?v=1.0"></script>
+<script src="src/colorsAdjustment/colorAdjustmentContent.js?v=1.0"></script>
+
 
 
 
