@@ -237,19 +237,18 @@ export const construtor_teclado_virtual = {
   },
 };
 
-(function vai_buscar_todos_campos_texto() {
+export function vai_buscar_todos_campos_texto() {
   // VAI BUSCAR TODOS OS CAMPOS DE TEXTO DA PÁGINA PARA DEPOIS CHAMAR O TECLADO
-  const textarea_total = document.getElementsByTagName("textarea").length;
-  const input_total = document.getElementsByTagName("textarea").length;
-  const textarea = document.getElementsByTagName("textarea");
-  const input = document.getElementsByTagName("input");
+  let textarea_total = document.getElementsByTagName("textarea").length;
+  let input_total = document.getElementsByTagName("textarea").length;
+  let textarea = document.getElementsByTagName("textarea");
+  let input = document.getElementsByTagName("input");
   for (let i = 0; i < textarea_total && i < input_total; i++) {
     textarea[i].classList.add("use-keyboard-input");
     input[i].classList.add("use-keyboard-input");
   }
-})();
+}
 
-construtor_teclado_virtual._isMobile();
 export function virtualKeyboard() {
   $(".keyboard").hasClass("keyboard--hidden")
     ? construtor_teclado_virtual.open()

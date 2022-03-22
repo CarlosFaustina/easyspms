@@ -1,12 +1,65 @@
 (function () {
   /**
    *******************************
+   * INIT TOOTIP
+   *******************************
+   */
+  let accessibilityTootipBox = document.getElementById(
+    "accessibilityTootipBox"
+  );
+
+  function _showTootip() {
+    accessibilityTootipBox.style.display = "block";
+    accessibilityTootipBox.style.color = "white";
+  }
+
+  function _hideTootip() {
+    accessibilityTootipBox.style.display = "none";
+    accessibilityTootipBox.style.color = "transparent";
+  }
+
+  /**
+   *
+   * @param {CSSStyleDeclaration} styles
+   */
+  function _setCustomStyleTootip(styles) {
+    for (const key in styles) {
+      accessibilityTootipBox.style[key] = styles[key];
+    }
+  }
+
+  function _setTootipText(text) {
+    accessibilityTootipBox.innerHTML = text;
+  }
+
+  function _onMouseMoveForTootip(event) {
+    _showTootip();
+
+    if (event.x <= window.innerWidth / 2) {
+      accessibilityTootipBox.style.left = `${event.x + 20}px`;
+      accessibilityTootipBox.style.right = "auto";
+    } else {
+      accessibilityTootipBox.style.right = `${
+        window.innerWidth - event.x + 20
+      }px`;
+      accessibilityTootipBox.style.left = "auto";
+    }
+  }
+
+  /**
+   *******************************
+   * FIM INIT TOOTIP
+   *******************************
+   */
+
+  /**
+   *******************************
    * ADICIONA A CLASSE "hasText" PARA USO DO DICIONÁRIO
    *******************************
    */
 
   //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
-  var nodes = document.evaluate(
+  let nodes = document.evaluate(
     ".//*[normalize-space(text())]",
     document,
     null,
@@ -14,21 +67,21 @@
     null
   );
 
-  var textElements = [];
+  let textElements = [];
 
-  var nextNode = nodes.iterateNext();
+  let nextNode = nodes.iterateNext();
 
   while (!!nextNode) {
     textElements.push(nextNode);
     nextNode = nodes.iterateNext();
   }
 
-  for (var element of textElements) {
+  for (let element of textElements) {
     element.classList.add("hasText");
   }
 
   textElements.forEach((textElement) => {
-    var childWithSameClass = textElement.querySelectorAll(".hasText");
+    let childWithSameClass = textElement.querySelectorAll(".hasText");
 
     if (!!childWithSameClass.length) {
       textElement.childNodes.forEach((childElem, index) => {
@@ -52,9 +105,24 @@
     }
   });
 
+  //Recupera todos os elementos com a classe "hasText"
+  let allTexts = document.querySelectorAll(".hasText");
+
   /**
    *******************************
    * FIM ADICIONA "hasText"
+   *******************************
+   */
+
+  /**
+   *******************************
+   * INIT SPEAKER
+   *******************************
+   */
+  let speaker = new SpeechSynthesisUtterance();
+  /**
+   *******************************
+   * FIM INIT SPEAKER
    *******************************
    */
 
@@ -64,10 +132,7 @@
    *******************************
    */
 
-  var btnDicio = document.getElementById("btnDicio");
-
-  //Recupera todos os elementos com a classe "hasText" para o dicionário encontrar as palavras
-  var allTexts = document.querySelectorAll(".hasText");
+  let btnDicio = document.getElementById("btnDicio");
 
   /**
    * Adiciona separa frase em palavras, e adiciona o a tag "diciotext", após isso escuta eventos de "mouseenter" e "mouseleve" nas palavras
@@ -79,33 +144,40 @@
       "<diciotext class='dicioTooltip'>$1</diciotext>"
     );
 
-    var words = event.target.getElementsByTagName("diciotext");
-    var spanElement = document.createElement("span");
-    var dicioTootipBox = document.getElementById("dicioTootipBox");
+    let words = event.target.getElementsByTagName("diciotext");
+
+    let fetchMeaningTimeOut = null;
+
+    let onMouseMoveWord = (wordEvent) => {
+      _onMouseMoveForTootip(wordEvent);
+      _setCustomStyleTootip({
+        top: `${wordEvent.y - wordEvent.target.offsetHeight * 2}px`,
+      });
+    };
+
+    let onMouseEnterWord = (wordEvent) => {
+      wordEvent.target.style.backgroundColor = "red";
+      // _onMouseMoveForTootip(wordEvent)
+      // _setCustomStyleTootip({
+      //   top: `${wordEvent.y - wordEvent.target.offsetHeight * 2}px`,
+      // });
+      _setTootipText("Procurando siginificado...");
+
+      fetchMeaningTimeOut = setTimeout(() => {
+        _fetchMeaning(wordEvent.target.innerText);
+      }, 1000);
+    };
 
     for (const word of words) {
-      //FAZENDO
-      // word.addEventListener("mousemove", (evt) => {
-      //   dicioTootipBox.style.display = "block";
-      //   dicioTootipBox.style.color = "white";
-      //   dicioTootipBox.style.top = `${evt.y}px`;
-      //   dicioTootipBox.style.left = `${evt.x}px`;
+      word.addEventListener("mouseenter", onMouseEnterWord);
 
-      // });
+      word.addEventListener("mousemove", onMouseMoveWord);
 
-      word.addEventListener("mouseenter", (wordEvent) => {
-        spanElement.classList.add("dicioTooltipText");
-        spanElement.innerHTML = "Procurando siginificado...";
-
-        _fetchMeaning(
-          wordEvent.target,
-          wordEvent.target.innerText,
-          spanElement
-        );
-        wordEvent.target.style.backgroundColor = "red";
-      });
-      word.addEventListener("mouseleave", (wordEvent) => {
-        wordEvent.target.removeChild(spanElement);
+      word.addEventListener("mouseout", (wordEvent) => {
+        _hideTootip();
+        if (!!fetchMeaningTimeOut) {
+          clearTimeout(fetchMeaningTimeOut);
+        }
         wordEvent.target.style.backgroundColor = "";
       });
     }
@@ -117,8 +189,7 @@
    * @param {String} wordText
    * @param {HTMLElement} wordText
    */
-  function _fetchMeaning(wordElement, wordText, spanElement) {
-    wordElement.appendChild(spanElement);
+  function _fetchMeaning(wordText) {
     fetch(
       `https://significado.herokuapp.com/meanings/${wordText
         .normalize("NFD")
@@ -129,15 +200,22 @@
         .json()
         .then((jsonResponse) => {
           if (!!jsonResponse.length) {
-            const meanings = jsonResponse[0].meanings.join("<br>");
-            spanElement.innerHTML = meanings;
+            let meanings = jsonResponse[0].meanings.slice(0, 3).join("<br>");
+
+            _setTootipText(meanings);
+            let currentTopValue = parseInt(accessibilityTootipBox.style.top);
+
+            _setCustomStyleTootip({
+              top: `${
+                currentTopValue - (accessibilityTootipBox.offsetHeight - 50)
+              }px`,
+            });
           } else {
-            spanElement.innerHTML = "Siginificado não foi localizado.";
+            _setTootipText("Siginificado não foi localizado.");
           }
         })
-        .catch((err) => {
-          console.log(err);
-          spanElement.innerHTML = "Siginificado não foi localizado.";
+        .catch(() => {
+          _setTootipText("Siginificado não foi localizado.");
         });
     });
   }
@@ -166,7 +244,9 @@
   function _dicioDisableOnHoverText() {
     for (const text of allTexts) {
       text.removeEventListener("mouseenter", _diciohandleMouseEnter);
+      text.removeEventListener("mouseleave", _dicioHandleMouseLeave);
     }
+    _hideTootip();
   }
 
   /**
@@ -210,9 +290,9 @@
 
   //OBS: Tradutor é iniciado no arquivo "custom_translate.js";
 
-  var comboBoxLanguages = document.getElementById("comboBoxLanguages");
+  let comboBoxLanguages = document.getElementById("comboBoxLanguages");
 
-  var resetTranslate = document.getElementById("resetTranslate");
+  let resetTranslate = document.getElementById("resetTranslate");
 
   function _handleRestoreLanguage() {
     restoreLanguage();
@@ -243,16 +323,15 @@
    ******************************
    */
 
-  var btnSpeaker = document.getElementById("btnSpeaker");
-  var allImages = document.getElementsByTagName("img");
-  var speaker = new SpeechSynthesisUtterance();
+  let btnSpeaker = document.getElementById("btnSpeaker");
+  let allImages = document.getElementsByTagName("img");
 
   /**
    * Reproduz "alt" ao clicar na imagem
    * @param {MouseEvent} event
    */
   function _imageOnClick(event) {
-    var image = event.target;
+    let image = event.target;
     speaker.lang = "pt-BR";
     speaker.text = "Imagem sem descrição";
 
@@ -262,12 +341,30 @@
     speechSynthesis.speak(speaker);
   }
 
+  function _imageMouseMove(imageEvent) {
+    _onMouseMoveForTootip(imageEvent);
+    _setCustomStyleTootip({
+      top: `${imageEvent.y}px`,
+    });
+  }
+
+  function _imageMouseEnter(imageEvent) {
+    _setTootipText(imageEvent.target.alt || "Imagem sem descrição");
+  }
+
+  function _imageMouseOut() {
+    _hideTootip();
+  }
+
   /**
    * Ativa evento para reproduzir
    */
   function _enableImageSpeaker() {
     for (const image of allImages) {
       image.addEventListener("click", _imageOnClick);
+      image.addEventListener("mouseenter", _imageMouseEnter);
+      image.addEventListener("mousemove", _imageMouseMove);
+      image.addEventListener("mouseout", _imageMouseOut);
     }
   }
 
@@ -277,7 +374,12 @@
   function _disableImageSpeaker() {
     for (const image of allImages) {
       image.removeEventListener("click", _imageOnClick);
+      image.removeEventListener("mousemove", _imageMouseMove);
+      image.removeEventListener("mouseenter", _imageMouseEnter);
+      image.removeEventListener("mouseout", _imageMouseOut);
     }
+    _hideTootip();
+    speechSynthesis.cancel();
   }
 
   /**
@@ -307,6 +409,82 @@
   /**
    ******************************
    * FINALIZA REPRODUTOR DE IMAGENS
+   ******************************
+   */
+
+  /**
+   ******************************
+   * LEITURA DE TEXTOS
+   ******************************
+   */
+
+  /**
+   * Ao clicar no texto, executa a leitura
+   * @param {MouseEvent} event
+   */
+  function _onClickTextSpeaker(event) {
+    speaker.lang = "pt-BR";
+    speaker.text = "Não foi possível ser o texto";
+
+    let parentEl = event.target.parentElement;
+
+    let childWithHasText = parentEl.getElementsByClassName("hasText");
+
+    if (!!childWithHasText.length) {
+      speaker.text = parentEl.innerText;
+    } else {
+      let text = event.target.innerText;
+      if (!!text) {
+        speaker.text = text;
+      }
+    }
+
+    speechSynthesis.speak(speaker);
+  }
+
+  /**
+   * Ativa evento "click" para leitura do texto
+   */
+  function _enableTextSpeaker() {
+    allTexts.forEach((textElement) => {
+      textElement.addEventListener("click", _onClickTextSpeaker);
+    });
+  }
+
+  /**
+   * Desativa evento "click" para leitura do texto
+   */
+  function _disableTextSpeaker() {
+    allTexts.forEach((textElement) => {
+      textElement.removeEventListener("click", _onClickTextSpeaker);
+    });
+    speechSynthesis.cancel();
+  }
+
+  let btnTextSpeaker = document.getElementById("btnTextSpeaker");
+
+  function _toogleTextSpeaker(e) {
+    e.preventDefault();
+    if (btnTextSpeaker.classList.contains("btn-outline-primary")) {
+      _enableTextSpeaker();
+      btnTextSpeaker.classList.remove("btn-outline-primary");
+      btnTextSpeaker.classList.add("btn-primary");
+      btnTextSpeaker.innerText = "Desativar reprodutor de texto";
+    } else {
+      _disableTextSpeaker();
+      btnTextSpeaker.classList.remove("btn-primary");
+      btnTextSpeaker.classList.add("btn-outline-primary");
+      btnTextSpeaker.innerText = "Ativar reprodutor de texto";
+    }
+
+    btnTextSpeaker.blur();
+  }
+
+  btnTextSpeaker.addEventListener("click", _toogleTextSpeaker);
+
+  /**
+   ******************************
+   * FINALIZA LEITURA DE TEXTOS
    ******************************
    */
 })();

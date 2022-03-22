@@ -19,6 +19,5 @@ $("#btn_keyboardnav").click(function (e) {
       }
     };
   }
-
   //   //document.getElementById("youridhere").scrollIntoView();
 });
