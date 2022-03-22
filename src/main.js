@@ -18,6 +18,7 @@ import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
 import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
 import readingGuide from "../src/readingGuide/readingGuide.mjs";
 import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
+import grayHues from "../src/grayHues/grayHues.mjs";
 import parseKeys from "../src/utils/parseKeys/parseKeys.mjs";
 import runHotkey from "../src/utils/parseKeys/runHotkey.mjs";
 import resetLineHeight from "../src/fontAdjustment/resetLineHeight.mjs";
@@ -63,7 +64,6 @@ let _options = {
     helpTitles: true,
     keys: {
       toggleMenu: ["ctrlKey", "altKey", 65], // Toggle Menu	CTRL + ALT + A
-      invertColors: ["ctrlKey", "altKey", 73], //invertColors CTRL + ALT + I
       grayHues: ["ctrlKey", "altKey", 71], // Gray Hues	CTRL + ALT + G
       linkHighlight: ["ctrlKey", "altKey", 85], // Underline Links	CTRL + ALT + U
       bigCursor: ["ctrlKey", "altKey", 67], // Big Cursor	CTRL + ALT + C
@@ -98,7 +98,6 @@ let _options = {
     decreaselineHeight: "Diminuir expaço entre linhas",
     increaseTextSpacing: "Aumentar expaço do texto",
     decreaseTextSpacing: "Diminuir expaço do texto",
-    invertColors: "Invertir cores",
     grayHues: "Modo mono-cromatico",
     bigCursor: "Aumentar Cursor",
     readingGuide: "Guia de leitura",
@@ -121,7 +120,6 @@ let _options = {
     decreaselineHeight: false,
     increaseTextSpacing: true,
     decreaseTextSpacing: true,
-    invertColors: true,
     grayHues: true,
     bigCursor: true,
     readingGuide: true,
@@ -159,7 +157,6 @@ export class Accessibility {
       textSize: 0,
       lineHeight: 0,
       textSpace: 0,
-      invertColors: false,
       grayHues: false,
       linkHighlight: false,
       bigCursor: false,
@@ -628,20 +625,7 @@ export class Accessibility {
                 },
               ],
             },
-            {
-              type: "li",
-              attrs: {
-                "data-access-action": "invertColors",
-                tabindex: "0",
-                title: parseKeys(this, this.options.hotkeys.keys.invertColors),
-              },
-              children: [
-                {
-                  type: "#text",
-                  text: this.options.labels.invertColors,
-                },
-              ],
-            },
+
             {
               type: "li",
               attrs: {
@@ -768,7 +752,6 @@ export class Accessibility {
     this.menuInterface.speechToText(true);
     this.menuInterface.linkHighlight(true);
     this.menuInterface.grayHues(true);
-    this.menuInterface.invertColors(true);
     this.menuInterface.bigCursor(true);
     this.menuInterface.readingGuide(true);
     resetLineHeight(this);
@@ -964,112 +947,8 @@ export class Accessibility {
       tecladoVirtual: () => {
         this.callTecladoVirtual();
       },
-      invertColors: (destroy) => {
-        if (typeof this.initialValues.html.backgroundColor === "undefined")
-          this.initialValues.html.backgroundColor = getComputedStyle(
-            this.html
-          ).backgroundColor;
-        if (typeof this.initialValues.html.color === "undefined")
-          this.initialValues.html.color = getComputedStyle(this.html).color;
-
-        if (destroy) {
-          resetIfDefined(
-            this.initialValues.html.backgroundColor,
-            this.html.style,
-            "backgroundColor"
-          );
-          resetIfDefined(
-            this.initialValues.html.color,
-            this.html.style,
-            "color"
-          );
-          document
-            .querySelector('._access-menu [data-access-action="invertColors"]')
-            .classList.remove("active");
-          this.initialValues.invertColors = false;
-          this.sessionState.invertColors = this.initialValues.invertColors;
-          this.onChange(true);
-          this.html.style.filter = "";
-          return;
-        }
-
-        document
-          .querySelector('._access-menu [data-access-action="invertColors"]')
-          .classList.toggle("active");
-        this.initialValues.invertColors = !this.initialValues.invertColors;
-        this.sessionState.invertColors = this.initialValues.invertColors;
-        this.onChange(true);
-        if (this.initialValues.invertColors) {
-          if (this.initialValues.grayHues) this.menuInterface.grayHues(true);
-          this.html.style.filter = "invert(1)";
-        } else {
-          this.html.style.filter = "";
-        }
-      },
       grayHues: (destroy) => {
-        if (typeof this.initialValues.html.filter === "undefined")
-          this.initialValues.html.filter = getComputedStyle(this.html).filter;
-        if (typeof this.initialValues.html.webkitFilter === "undefined")
-          this.initialValues.html.webkitFilter = getComputedStyle(
-            this.html
-          ).webkitFilter;
-        if (typeof this.initialValues.html.mozFilter === "undefined")
-          this.initialValues.html.mozFilter = getComputedStyle(
-            this.html
-          ).mozFilter;
-        if (typeof this.initialValues.html.msFilter === "undefined")
-          this.initialValues.html.msFilter = getComputedStyle(
-            this.html
-          ).msFilter;
-
-        if (destroy) {
-          document
-            .querySelector('._access-menu [data-access-action="grayHues"]')
-            .classList.remove("active");
-          this.initialValues.grayHues = false;
-          this.sessionState.grayHues = this.initialValues.grayHues;
-          this.onChange(true);
-          resetIfDefined(
-            this.initialValues.html.filter,
-            this.html.style,
-            "filter"
-          );
-          resetIfDefined(
-            this.initialValues.html.webkitFilter,
-            this.html.style,
-            "webkitFilter"
-          );
-          resetIfDefined(
-            this.initialValues.html.mozFilter,
-            this.html.style,
-            "mozFilter"
-          );
-          resetIfDefined(
-            this.initialValues.html.msFilter,
-            this.html.style,
-            "msFilter"
-          );
-          return;
-        }
-
-        document
-          .querySelector('._access-menu [data-access-action="grayHues"]')
-          .classList.toggle("active");
-        this.initialValues.grayHues = !this.initialValues.grayHues;
-        this.sessionState.grayHues = this.initialValues.grayHues;
-        this.onChange(true);
-        let val;
-        if (this.initialValues.grayHues) {
-          val = "grayscale(1)";
-          if (this.initialValues.invertColors)
-            this.menuInterface.invertColors(true);
-        } else {
-          val = "";
-        }
-        this.html.style.webkitFilter = val;
-        this.html.style.mozFilter = val;
-        this.html.style.msFilter = val;
-        this.html.style.filter = val;
+        grayHues(this, destroy);
       },
       bigCursor: (destroy) => {
         if (destroy) {
