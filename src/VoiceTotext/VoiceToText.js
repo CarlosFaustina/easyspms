@@ -1,14 +1,23 @@
+"use strict";
+import common from '../utils/common.js';
 
+let css = `button{width: 50%;
+          height: 80%;}`;
+
+let className= 'btn';
+
+common.injectStyle(css,className);
 
 if ("webkitSpeechRecognition" in window) {
   let speechRecognition = new webkitSpeechRecognition();
   let final_transcript = "";
-
+  let dialect="";
 
 
   speechRecognition.continuous = true;
   speechRecognition.interimResults = true;
   //speechRecognition.lang = document.querySelector("#select_dialect").value;
+  
 
   speechRecognition.onstart = () => {
     document.querySelector("#status").style.display = "block";
@@ -37,7 +46,8 @@ if ("webkitSpeechRecognition" in window) {
   };
 
   document.querySelector("#start").onclick = () => {
-    speechRecognition.lang= select_dialect.value;
+    dialect = document.getElementById('select_dialect');
+    speechRecognition.lang= dialect.value;
     speechRecognition.start();
   };
   document.querySelector("#stop").onclick = () => {

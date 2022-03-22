@@ -87,5 +87,8 @@ var langs = [
       select_dialect.options.add(new Option(list[i][1], list[i][0]));
     }
     select_dialect.style.visibility = list[1].length == 1 ? "hidden" : "visible";
+    document.querySelectorAll('#final,#interim').forEach(el =>el.innerHTML="");
   }
+
+  document.querySelector('#select_language').addEventListener('change',updateCountry);
   
