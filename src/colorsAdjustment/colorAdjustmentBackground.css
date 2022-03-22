@@ -15,6 +15,22 @@
   top: 5px;
 }
 
-.AdjustColorFundo {
-  background-color: orange;
+.FundoVermelho span,
+.FundoVermelho div {
+  background-color: red;
+}
+
+.FundoAzul span,
+.FundoAzul div {
+  background-color: blue;
+}
+
+.FundoAmarelo span,
+.FundoAmarelo div {
+  background-color: yellow;
+}
+
+.FundoRosa span,
+.FundoRosa div {
+  background-color: pink;
 }
