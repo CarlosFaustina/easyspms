@@ -1,3 +1,5 @@
+import resetIfDefined from "../utils/resetIfDefined/resetIfDefined.mjs";
+
 export default function grayHues(self, destroy) {
   if (typeof self.initialValues.html.filter === "undefined")
     self.initialValues.html.filter = getComputedStyle(self.html).filter;
@@ -45,7 +47,10 @@ export default function grayHues(self, destroy) {
   let val;
   if (self.initialValues.grayHues) {
     val = "grayscale(1)";
-    if (self.initialValues.invertColors) self.menuInterface.invertColors(true);
+    if (self.initialValues.invertColors) {
+      //turn off func invert Colors?
+      // self.menuInterface.invertColors(true);
+    }
   } else {
     val = "";
   }
