@@ -4,7 +4,7 @@ module.exports = {
   entry: "./src/accessibility.js",
   mode: "production",
   output: {
-    path: path.resolve(__dirname, "functions"),
+    path: path.resolve(__dirname, "api"),
     libraryTarget: "umd",
     filename: "accessibility.js",
     auxiliaryComment: "accessibility output",
