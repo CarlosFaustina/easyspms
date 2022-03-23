@@ -14,10 +14,13 @@ import {
 import disabledUnsupportedFeatures from "../src/utils/disabledUnsupportedFeatures/disabledUnsupportedFeatures.mjs";
 import disableUnsupportedModules from "../src/utils/disableUnsupportedModules/disableUnsupportedModules.mjs";
 import setSessionFromCache from "../src/utils/setSessionFromCache/setSessionFromCache.mjs";
-import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
-import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
+import {
+  toogleImageSpeaker,
+  describeImgCss,
+} from "../src/describeImg/describeImg.mjs";
+import bigCursorWhite from "../src/bigCursorWhite/bigCursorWhite.mjs";
+import bigCursorBlack from "../src/bigCursorBlack/bigCursorBlack.mjs";
 import readingGuide from "../src/readingGuide/readingGuide.mjs";
-import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
 import grayHues from "../src/grayHues/grayHues.mjs";
 import parseKeys from "../src/utils/parseKeys/parseKeys.mjs";
 import runHotkey from "../src/utils/parseKeys/runHotkey.mjs";
@@ -31,6 +34,9 @@ import alterTextSize from "../src/fontAdjustment/alternateTextSize.mjs";
 import linkHighlight from "../src/linkHighlight/linkHighlight.mjs";
 import textToSpeech from "../src/textToSpeech/textToSpeech.mjs";
 import addListeners from "../src/utils/addListeners/addListeners.mjs";
+import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
+import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
+import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
 
 const bootstrap = [
   "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css",
@@ -117,6 +123,7 @@ let _options = {
   modules: {
     keyboardNav: true,
     increaseText: true,
+    imageSpeaker: true,
     decreaseText: true,
     increaselineHeight: true,
     decreaselineHeight: false,
@@ -157,6 +164,7 @@ export class Accessibility {
     this.sessionState = {
       keyboardNav: false,
       callTecladoVirtual: false,
+      imageSpeaker: false,
       textSize: 0,
       lineHeight: 0,
       textSpace: 0,
@@ -177,6 +185,7 @@ export class Accessibility {
       `
       ${keyboardCss}
       ${keyboardNavCss}
+      ${describeImgCss}
         ._access-scrollbar::-webkit-scrollbar-track, .mat-autocomplete-panel::-webkit-scrollbar-track, .mat-tab-body-content::-webkit-scrollbar-track, .mat-select-panel:not([class*='mat-elevation-z'])::-webkit-scrollbar-track, .mat-menu-panel::-webkit-scrollbar-track {
             -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
             background-color: #F5F5F5;
@@ -470,6 +479,23 @@ export class Accessibility {
     return iconElem;
   }
 
+  ingectImageSpeakerTooltipBox() {
+    let menuElem = common.jsonToHtml({
+      type: "div",
+      attrs: {
+        class: "accessibilityTootipBox",
+      },
+    });
+
+    for (let i in this.options.icon.position) {
+      menuElem.classList.add(i);
+    }
+
+    this.body.appendChild(menuElem);
+
+    return menuElem;
+  }
+
   injectMenu() {
     let menuElem = common.jsonToHtml({
       type: "div",
@@ -602,7 +628,21 @@ export class Accessibility {
               children: [
                 {
                   type: "#text",
-                  text: "Teclado Virtual click 2x",
+                  text: "Teclado Virtual",
+                },
+              ],
+            },
+            {
+              type: "li",
+              attrs: {
+                id: "virtual-keyboard",
+                "data-access-action": "imageSpeaker",
+                tabindex: "0",
+              },
+              children: [
+                {
+                  type: "#text",
+                  text: "Image Speaker",
                 },
               ],
             },
@@ -785,6 +825,7 @@ export class Accessibility {
     this.menuInterface.speechToText(true);
     this.menuInterface.linkHighlight(true);
     this.menuInterface.grayHues(true);
+    this.menuInterface.imageSpeaker(true);
     this.menuInterface.bigCursorWhite(true);
     this.menuInterface.bigCursorBlack(true);
     this.menuInterface.readingGuide(true);
@@ -913,6 +954,7 @@ export class Accessibility {
       initFontSize(this);
     }
     this.injectCss();
+    this.ingectImageSpeakerTooltipBox();
     this.icon = this.injectIcon();
     this.menu = this.injectMenu();
     addListeners(this);
@@ -982,59 +1024,19 @@ export class Accessibility {
       tecladoVirtual: () => {
         this.callTecladoVirtual();
       },
+      imageSpeaker: (destroy) => {
+        toogleImageSpeaker(this, destroy);
+      },
       grayHues: (destroy) => {
         grayHues(this, destroy);
       },
-      bigCursorBlack: (destroy) => {
-        if (this.sessionState.bigCursorWhite) {
-          this.menuInterface.bigCursorWhite(true);
-        }
-        if (destroy) {
-          this.html.classList.remove("_access_cursor_black");
-          document
-            .querySelector(
-              '._access-menu [data-access-action="bigCursorBlack"]'
-            )
-            .classList.remove("active");
-          this.initialValues.bigCursorBlack = false;
-          this.sessionState.bigCursorBlack = false;
-          this.onChange(true);
-          return;
-        }
-
-        document
-          .querySelector('._access-menu [data-access-action="bigCursorBlack"]')
-          .classList.toggle("active");
-        this.initialValues.bigCursorBlack = !this.initialValues.bigCursorBlack;
-        this.sessionState.bigCursorBlack = this.initialValues.bigCursorBlack;
-        this.onChange(true);
-        this.html.classList.toggle("_access_cursor_black");
-      },
       bigCursorWhite: (destroy) => {
-        if (this.sessionState.bigCursorBlack) {
-          this.menuInterface.bigCursorBlack(true);
-        }
-        if (destroy) {
-          this.html.classList.remove("_access_cursor_white");
-          document
-            .querySelector(
-              '._access-menu [data-access-action="bigCursorWhite"]'
-            )
-            .classList.remove("active");
-          this.initialValues.bigCursorWhite = false;
-          this.sessionState.bigCursorWhite = false;
-          this.onChange(true);
-          return;
-        }
-
-        document
-          .querySelector('._access-menu [data-access-action="bigCursorWhite"]')
-          .classList.toggle("active");
-        this.initialValues.bigCursorWhite = !this.initialValues.bigCursorWhite;
-        this.sessionState.bigCursorWhite = this.initialValues.bigCursorWhite;
-        this.onChange(true);
-        this.html.classList.toggle("_access_cursor_white");
+        bigCursorWhite(this, destroy);
       },
+      bigCursorBlack: (destroy) => {
+        bigCursorBlack(this, destroy);
+      },
+
       readingGuide: (destroy) => {
         readingGuide(this, destroy);
       },
