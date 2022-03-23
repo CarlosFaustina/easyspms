@@ -939,6 +939,7 @@ export class Accessibility {
 
   build() {
     this.initialValues = {
+      imageSpeaker: false,
       linkHighlight: false,
       textToSpeech: false,
       bigCursorWhite: false,

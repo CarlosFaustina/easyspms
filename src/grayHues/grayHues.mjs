@@ -47,10 +47,6 @@ export default function grayHues(self, destroy) {
   let val;
   if (self.initialValues.grayHues) {
     val = "grayscale(1)";
-    if (self.initialValues.invertColors) {
-      //turn off func invert Colors?
-      // self.menuInterface.invertColors(true);
-    }
   } else {
     val = "";
   }
@@ -58,4 +54,5 @@ export default function grayHues(self, destroy) {
   self.html.style.mozFilter = val;
   self.html.style.msFilter = val;
   self.html.style.filter = val;
+  //to make it workinhg in Firefox, have to apply stuyles to all elements in body, exsept easy menu. because grayscale brakes position:sticky (and some other). Firefox bug. https://code-examples.net/en/q/2325eb1
 }
