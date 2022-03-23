@@ -6,7 +6,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "api"),
     libraryTarget: "umd",
-    filename: "accessibility.js",
+    filename: "accessibility.min.js",
     auxiliaryComment: "accessibility output",
   },
 };
