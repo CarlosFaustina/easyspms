@@ -83,6 +83,7 @@ export function toogleImageSpeaker(self, destroy) {
     self.initialValues.imageSpeaker = false;
     self.sessionState.imageSpeaker = false;
     self.onChange(true);
+    return;
   }
   document
     .querySelector('._access-menu [data-access-action="imageSpeaker"]')
@@ -96,7 +97,7 @@ export function toogleImageSpeaker(self, destroy) {
   self.initialValues.imageSpeaker = !self.initialValues.imageSpeaker;
   self.sessionState.imageSpeaker = self.initialValues.imageSpeaker;
   self.onChange(true);
-  self.html.classList.toggle("accessibility_tootip_box");
+  // self.html.classList.toggle("accessibility_tootip_box");
 }
 
 export const describeImgCss = `

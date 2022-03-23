@@ -479,7 +479,7 @@ export class Accessibility {
     return iconElem;
   }
 
-  ingectImageSpeakerTooltipBox() {
+  injectImageSpeakerTooltipBox() {
     let menuElem = common.jsonToHtml({
       type: "div",
       attrs: {
@@ -955,7 +955,7 @@ export class Accessibility {
       initFontSize(this);
     }
     this.injectCss();
-    this.ingectImageSpeakerTooltipBox();
+    this.injectImageSpeakerTooltipBox();
     this.icon = this.injectIcon();
     this.menu = this.injectMenu();
     addListeners(this);
