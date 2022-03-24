@@ -38,10 +38,10 @@ import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
 import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
 import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
 
-const bootstrap = [
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css",
-];
-common.injectFont(bootstrap);
+// const bootstrap = [
+//   "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css",
+// ];
+// common.injectFont(bootstrap);
 // Default options
 let _options = {
   icon: {
