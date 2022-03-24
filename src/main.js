@@ -18,6 +18,10 @@ import {
   toogleImageSpeaker,
   describeImgCss,
 } from "../src/describeImg/describeImg.mjs";
+import customTranslateFFF, {
+  customTranslate,
+} from "../src/customTranslate/customTranslate.mjs";
+import addHasText from "../src/addHasText/addHasText.mjs";
 import bigCursorWhite from "../src/bigCursorWhite/bigCursorWhite.mjs";
 import bigCursorBlack from "../src/bigCursorBlack/bigCursorBlack.mjs";
 import readingGuide from "../src/readingGuide/readingGuide.mjs";
@@ -38,10 +42,6 @@ import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
 import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
 import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
 
-// const bootstrap = [
-//   "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css",
-// ];
-// common.injectFont(bootstrap);
 // Default options
 let _options = {
   icon: {
@@ -121,6 +121,7 @@ let _options = {
     buttons: true,
   },
   modules: {
+    customTranslate: true,
     keyboardNav: true,
     increaseText: true,
     imageSpeaker: true,
@@ -160,8 +161,15 @@ export class Accessibility {
     vai_buscar_todos_campos_texto();
     construtor_teclado_virtual._isMobile();
 
+    //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
+    addHasText();
+
+    // customTranslateFFF();
+    // customTranslate.init();
+
     disabledUnsupportedFeatures(this);
     this.sessionState = {
+      customTranslate: false,
       keyboardNav: false,
       callTecladoVirtual: false,
       imageSpeaker: false,
@@ -544,6 +552,114 @@ export class Accessibility {
           ],
         },
         {
+          type: "div",
+          attrs: {
+            class: "d-none",
+            id: "google_translate_element",
+          },
+          children: [
+            {
+              type: "#text",
+              text: "Mostrar original",
+            },
+          ],
+        },
+        {
+          type: "div",
+          attrs: {
+            class: "btn btn-primary",
+            style: "margin-top: 2rem; display: none;",
+            id: "resetTranslate",
+          },
+          children: [
+            {
+              type: "#text",
+              text: "Mostrar original",
+            },
+          ],
+        },
+        {
+          type: "div",
+          attrs: {
+            class: "col-auto",
+          },
+          children: [
+            {
+              type: "label",
+              attrs: {
+                for: "comboBoxLanguages",
+                class: "form-label",
+              },
+              children: [
+                {
+                  type: "#text",
+                  text: "Tradutor",
+                },
+              ],
+            },
+            {
+              type: "select",
+              attrs: {
+                class: "form-select notranslate",
+                id: "comboBoxLanguages",
+                tabindex: "0",
+              },
+              children: [
+                {
+                  type: "option",
+                  attrs: {
+                    value: "",
+                    selected: true,
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Selecione o idioma",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "en-GB",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "English(British)",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "pt",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Português (Brasileiro)",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "es",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Español",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+
+        {
           type: "ul",
           attrs: {
             class: this.options.animations.buttons
@@ -632,6 +748,7 @@ export class Accessibility {
                 },
               ],
             },
+
             {
               type: "li",
               attrs: {
