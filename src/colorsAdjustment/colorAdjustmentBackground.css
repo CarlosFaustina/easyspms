@@ -1,36 +1,39 @@
-.input-color {
-  position: relative;
-  padding-bottom: 20px;
-}
-.input-color input {
-  padding-left: 20px;
-}
-.input-color .color-box {
-  width: 10px;
-  height: 10px;
-  display: inline-block;
-  background-color: #ccc;
-  position: absolute;
-  left: 5px;
-  top: 5px;
-}
-
 .FundoVermelho span,
 .FundoVermelho div {
-  background-color: red;
+  background-color: #e4111c;
 }
 
 .FundoAzul span,
 .FundoAzul div {
-  background-color: blue;
+  background-color: #06a1dd;
 }
 
 .FundoAmarelo span,
 .FundoAmarelo div {
-  background-color: yellow;
+  background-color: #feef16;
 }
 
 .FundoRosa span,
 .FundoRosa div {
-  background-color: pink;
+  background-color: #e40d7d;
+}
+
+.FundoPreto span,
+.FundoPreto div {
+  background-color: #000000;
+}
+
+.FundoVerde span,
+.FundoVerde div {
+  background-color: #17963e;
+}
+
+.FundoRoxo span,
+.FundoRoxo div {
+  background-color: #312582;
+}
+
+.FundoBranco span,
+.FundoBranco div {
+  background-color: #ffffff;
 }
