@@ -159,12 +159,6 @@ export class Accessibility {
         .querySelector("html")
         .getAttribute("lang");
     }
-    //inicialize Virtual Keyboard
-    vai_buscar_todos_campos_texto();
-    construtor_teclado_virtual._isMobile();
-
-    // customTranslate.init();
-    customTranslate();
 
     disabledUnsupportedFeatures(this);
     this.sessionState = {
@@ -182,6 +176,12 @@ export class Accessibility {
       bigCursorBlack: false,
       readingGuide: false,
     };
+    //inicialize Virtual Keyboard
+    vai_buscar_todos_campos_texto();
+    construtor_teclado_virtual._isMobile();
+
+    // customTranslate.init();
+    customTranslate(this);
     common.injectFont(this.options.icon.fontFaceSrc, () => {
       this.build();
     });

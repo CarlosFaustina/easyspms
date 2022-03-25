@@ -1,5 +1,6 @@
 export default function dicionario(self, destroy) {
-  let allTexts = document.querySelectorAll(".hasText");
+  const allTexts = document.querySelectorAll(".hasText");
+  console.log(allTexts);
 
   let accessibilityTootipBox = document.getElementsByClassName(
     "accessibilityTootipBox"
@@ -139,34 +140,37 @@ export default function dicionario(self, destroy) {
     _hideTootip();
 
     return;
-  }
-
-  document
-    .querySelector('._access-menu [data-access-action="dicionario"]')
-    .classList.toggle("active");
-  self.initialValues.dicionario = !self.initialValues.dicionario;
-  self.sessionState.dicionario = self.initialValues.dicionario;
-  // self.onChange(true);
-  if (self.initialValues.dicionario) {
-    console.log(
-      "============>>>>>>>>>>>>>>>>>>>>>>>>ON<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<======================="
-    );
-
-    for (const text of allTexts) {
-      text.addEventListener("mouseenter", _diciohandleMouseEnter);
-      text.addEventListener("mouseleave", _dicioHandleMouseLeave);
-    }
-    _showTootip();
   } else {
-    console.log(
-      "============>>>>>>>>>>>>>>>>>>>>>>>>OFF<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<======================="
-    );
+    document
+      .querySelector('._access-menu [data-access-action="dicionario"]')
+      .classList.toggle("active");
+    self.initialValues.dicionario = !self.initialValues.dicionario;
+    self.sessionState.dicionario = self.initialValues.dicionario;
+    // self.onChange(true);
+    if (self.initialValues.dicionario) {
+      console.log(
+        "============>>>>>>>>>>>>>>>>>>>>>>>>ON<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<======================="
+      );
 
-    for (const text of allTexts) {
-      text.removeEventListener("mouseenter", _diciohandleMouseEnter);
-      text.removeEventListener("mouseleave", _dicioHandleMouseLeave);
+      for (const text of allTexts) {
+        text.addEventListener("mouseenter", _diciohandleMouseEnter);
+        text.addEventListener("mouseleave", _dicioHandleMouseLeave);
+      }
+      _showTootip();
+    } else {
+      console.log(
+        "============>>>>>>>>>>>>>>>>>>>>>>>>OFF<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<======================="
+      );
+
+      for (const text of allTexts) {
+        console.log(allTexts);
+
+        text.removeEventListener("mouseenter", _diciohandleMouseEnter);
+        text.removeEventListener("mouseleave", _dicioHandleMouseLeave);
+      }
+      _hideTootip();
     }
-    _hideTootip();
   }
+
   ///
 }
