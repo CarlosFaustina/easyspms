@@ -1,0 +1,49 @@
+/*.tooltip{
+	position:absolute;
+	background-color:#eeeefe;
+	border: 1px solid #aaaaca;
+	font-size:larger;
+	padding:4px;
+	width: 160px;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);	
+}*/
+
+.tool-tip[title-new]:hover:after {
+    content: attr(title-new);
+    position:absolute;
+    display: inline;
+    top:-25 ;
+    
+    text-align: center;
+    max-width: auto;
+	background-color:#262626;
+	border: 2px solid #ccc;
+	text-transform: uppercase;
+    font-family: Arial;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 7.5px;
+    max-height: auto;
+    z-index: 100;
+    overflow: auto;
+    padding: 10px 15px;
+  }
+
+  /*
+
+ content: attr(title-new);
+    position: absolute;
+    border: #c0c0c0 1px dotted;
+    padding: 10px;
+    display: block;
+    z-index: 100;
+    background-color: #000000;
+    color: #ffffff;
+    max-width: 200px;
+    text-decoration: none;
+    text-align:center;
+
+
+  */
