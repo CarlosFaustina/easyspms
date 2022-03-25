@@ -18,9 +18,10 @@ import {
   toogleImageSpeaker,
   describeImgCss,
 } from "../src/describeImg/describeImg.mjs";
-import customTranslateFFF, {
-  customTranslate,
+import customTranslate, {
+  customTranslateCss,
 } from "../src/customTranslate/customTranslate.mjs";
+import dicionario from "../src/dicionario/dicionario.mjs";
 import addHasText from "../src/addHasText/addHasText.mjs";
 import bigCursorWhite from "../src/bigCursorWhite/bigCursorWhite.mjs";
 import bigCursorBlack from "../src/bigCursorBlack/bigCursorBlack.mjs";
@@ -121,6 +122,7 @@ let _options = {
     buttons: true,
   },
   modules: {
+    dicionario: true,
     customTranslate: true,
     keyboardNav: true,
     increaseText: true,
@@ -161,14 +163,12 @@ export class Accessibility {
     vai_buscar_todos_campos_texto();
     construtor_teclado_virtual._isMobile();
 
-    //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
-    addHasText();
-
-    // customTranslateFFF();
     // customTranslate.init();
+    customTranslate();
 
     disabledUnsupportedFeatures(this);
     this.sessionState = {
+      dicionario: false,
       customTranslate: false,
       keyboardNav: false,
       callTecladoVirtual: false,
@@ -191,6 +191,8 @@ export class Accessibility {
   injectCss() {
     let css =
       `
+
+      ${customTranslateCss}
       ${keyboardCss}
       ${keyboardNavCss}
       ${describeImgCss}
@@ -487,7 +489,7 @@ export class Accessibility {
     return iconElem;
   }
 
-  injectImageSpeakerTooltipBox() {
+  injectTooltipBox() {
     let menuElem = common.jsonToHtml({
       type: "div",
       attrs: {
@@ -557,27 +559,8 @@ export class Accessibility {
             class: "d-none",
             id: "google_translate_element",
           },
-          children: [
-            {
-              type: "#text",
-              text: "Mostrar original",
-            },
-          ],
         },
-        {
-          type: "div",
-          attrs: {
-            class: "btn btn-primary",
-            style: "margin-top: 2rem; display: none;",
-            id: "resetTranslate",
-          },
-          children: [
-            {
-              type: "#text",
-              text: "Mostrar original",
-            },
-          ],
-        },
+
         {
           type: "div",
           attrs: {
@@ -621,12 +604,72 @@ export class Accessibility {
                 {
                   type: "option",
                   attrs: {
-                    value: "en-GB",
+                    value: "ar",
                   },
                   children: [
                     {
                       type: "#text",
-                      text: "English(British)",
+                      text: "العربية",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "bg",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "bălgarski",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "ca",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "català",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "cs",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "čeština",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "da",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "dansk",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "de",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Deutsch",
                     },
                   ],
                 },
@@ -658,7 +701,20 @@ export class Accessibility {
             },
           ],
         },
-
+        {
+          type: "div",
+          attrs: {
+            class: "btn btn-primary",
+            style: "margin-top: 2rem; display: none;",
+            id: "resetTranslate",
+          },
+          children: [
+            {
+              type: "#text",
+              text: "Mostrar original",
+            },
+          ],
+        },
         {
           type: "ul",
           attrs: {
@@ -667,6 +723,20 @@ export class Accessibility {
               : "_access-scrollbar",
           },
           children: [
+            {
+              type: "li",
+              attrs: {
+                "data-access-action": "dicionario",
+                class: "btn_geral",
+                tabindex: "0",
+              },
+              children: [
+                {
+                  type: "#text",
+                  text: "Ativar dicionário",
+                },
+              ],
+            },
             {
               type: "li",
               attrs: {
@@ -943,6 +1013,7 @@ export class Accessibility {
     this.menuInterface.linkHighlight(true);
     this.menuInterface.grayHues(true);
     this.menuInterface.imageSpeaker(true);
+    this.menuInterface.dicionario(true);
     this.menuInterface.bigCursorWhite(true);
     this.menuInterface.bigCursorBlack(true);
     this.menuInterface.readingGuide(true);
@@ -1056,7 +1127,7 @@ export class Accessibility {
 
   build() {
     this.initialValues = {
-      imageSpeaker: false,
+      dicionario: false,
       linkHighlight: false,
       textToSpeech: false,
       bigCursorWhite: false,
@@ -1072,7 +1143,7 @@ export class Accessibility {
       initFontSize(this);
     }
     this.injectCss();
-    this.injectImageSpeakerTooltipBox();
+    this.injectTooltipBox();
     this.icon = this.injectIcon();
     this.menu = this.injectMenu();
     addListeners(this);
@@ -1142,7 +1213,14 @@ export class Accessibility {
       tecladoVirtual: () => {
         this.callTecladoVirtual();
       },
+      dicionario: (destroy) => {
+        //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
+        addHasText(destroy);
+        dicionario(this, destroy);
+      },
       imageSpeaker: (destroy) => {
+        //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
+        addHasText(destroy);
         toogleImageSpeaker(this, destroy);
       },
       grayHues: (destroy) => {
@@ -1154,7 +1232,6 @@ export class Accessibility {
       bigCursorBlack: (destroy) => {
         bigCursorBlack(this, destroy);
       },
-
       readingGuide: (destroy) => {
         readingGuide(this, destroy);
       },
