@@ -1,4 +1,4 @@
-export default function addHasText() {
+export default function addHasText(destroy) {
   //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
   let nodes = document.evaluate(
     ".//*[normalize-space(text())]",
@@ -17,10 +17,40 @@ export default function addHasText() {
     nextNode = nodes.iterateNext();
   }
 
+  if (destroy) {
+    for (let element of textElements) {
+      element.classList.remove("hasText");
+    }
+    //  textElements.forEach((textElement) => {
+    //    let childWithSameClass = textElement.querySelectorAll(".hasText");
+
+    //    if (!!childWithSameClass.length) {
+    //      textElement.childNodes.forEach((childElem, index) => {
+    //        if (
+    //          childElem.nodeType === 3 &&
+    //          !!childElem.data.replace(/\r?\n|\r/, "").trim()
+    //        ) {
+    //          let span = document.createElement("span");
+
+    //          span.classList.add("hasText");
+
+    //          span.innerHTML = childElem.data;
+
+    //          textElement.insertBefore(span, textElement.childNodes[index]);
+
+    //          childElem.remove();
+    //        }
+    //      });
+
+    //      textElement.classList.remove("hasText");
+    //    }
+    //  });
+
+    return;
+  }
   for (let element of textElements) {
     element.classList.add("hasText");
   }
-
   textElements.forEach((textElement) => {
     let childWithSameClass = textElement.querySelectorAll(".hasText");
 

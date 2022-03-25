@@ -42,6 +42,7 @@ export default function setSessionFromCache(self) {
         }
       }
     }
+    if (sessionState.dicionario) self.menuInterface.dicionario();
     if (sessionState.invertColors) self.menuInterface.invertColors();
     if (sessionState.grayHues) self.menuInterface.grayHues();
     if (sessionState.imageSpeaker) self.menuInterface.imageSpeaker();

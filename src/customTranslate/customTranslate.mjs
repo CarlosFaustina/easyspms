@@ -1,10 +1,13 @@
-export default function customTranslateFFF(self, destroy) {
+export default function customTranslate(self, destroy) {
   var selectGoogleTranslate = null;
+  var resetTranslate = null;
+  var comboBoxLanguages = null;
 
   /**
    * Incia google tradutor
    */
-  function translateInit() {
+
+  setTimeout(() => {
     new google.translate.TranslateElement(
       {
         pageLanguage: "pt-PT",
@@ -17,6 +20,42 @@ export default function customTranslateFFF(self, destroy) {
     selectGoogleTranslate = document
       .getElementById("google_translate_element")
       .querySelector(".goog-te-combo");
+
+    comboBoxLanguages = document.getElementById("comboBoxLanguages");
+    resetTranslate = document.getElementById("resetTranslate");
+
+    //Escuta evento do combobox do tradutor
+    comboBoxLanguages.addEventListener("change", _onChangeLanguage);
+
+    //Restora para linguagem padrão
+    resetTranslate.addEventListener("click", _handleRestoreLanguage);
+    console.log(comboBoxLanguages);
+  }, 2000);
+
+  /**
+   *
+   * @param {Event} event
+   */
+  function _onChangeLanguage(event) {
+    console.log(event.target.value);
+
+    if (!!event.target.value) {
+      changeLanguage(event.target.value);
+      resetTranslate.style.display = "block";
+    } else {
+      _handleRestoreLanguage();
+    }
+  }
+
+  /**
+   * Função que será chamada para realizar a troca de idioma
+   * @param {String} lang
+   */
+  function changeLanguage(lang) {
+    if (selectGoogleTranslate) {
+      selectGoogleTranslate.value = lang;
+      changeTranslateEvent(selectGoogleTranslate); //Dispara a troca
+    }
   }
 
   /**
@@ -29,17 +68,7 @@ export default function customTranslateFFF(self, destroy) {
     } else {
       var evt = new Event("change", { bubbles: false, cancelable: true });
       el.dispatchEvent(evt);
-    }
-  }
-
-  /**
-   * Função que será chamada para realizar a troca de idioma
-   * @param {String} lang
-   */
-  function changeLanguage(lang) {
-    if (selectGoogleTranslate) {
-      selectGoogleTranslate.value = lang;
-      changeTranslateEvent(selectGoogleTranslate); //Dispara a troca
+      console.log(el);
     }
   }
 
@@ -62,40 +91,43 @@ export default function customTranslateFFF(self, destroy) {
       }
     }
   }
-}
-export const customTranslate = {
-  elements: {
-    comboBoxLanguages: document.getElementById("comboBoxLanguages"),
-    resetTranslate: document.getElementById("resetTranslate"),
-  },
-  _handleRestoreLanguage() {
-    restoreLanguage();
-    customTranslate.elements.resetTranslate.style.display = "none";
-    customTranslate.elements.comboBoxLanguages.value = "";
-  },
-  /**
-   *
-   * @param {Event} event
-   */
-  _onChangeLanguage(event) {
-    if (!!event.target.value) {
-      changeLanguage(event.target.value);
-      customTranslate.elements.resetTranslate.style.display = "block";
-    } else {
-      customTranslate._handleRestoreLanguage();
-    }
-  },
-  init() {
-    //Escuta evento do combobox do tradutor
-    customTranslate.elements.comboBoxLanguages.addEventListener(
-      "change",
-      customTranslate._onChangeLanguage
-    );
 
-    //Restora para linguagem padrão
-    resetTranslate.addEventListener(
-      "click",
-      customTranslate._handleRestoreLanguage
-    );
-  },
-};
+  function _handleRestoreLanguage() {
+    restoreLanguage();
+    resetTranslate.style.display = "none";
+    comboBoxLanguages.value = "";
+  }
+}
+
+export const customTranslateCss = `
+
+#accessibilityTootipBox {
+  display: block;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.9);
+  color: transparent;
+  font-size: 1rem;
+  white-space: pre-wrap;
+  padding: 10px;
+  line-height: 1 !important;
+  width: auto;
+  max-width: 50%;
+  border-radius: 3px;
+  max-height: auto;
+  z-index: 45454564;
+  overflow: auto;
+}
+
+.goog-te-banner-frame {
+  display: none !important;
+}
+#goog-gt-tt {
+  display: none !important;
+  visibility: hidden !important;
+}
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: 0px 0px 0px transparent !important;
+}
+
+`;
