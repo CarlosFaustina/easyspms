@@ -35,7 +35,7 @@ $(function () {
             end;
 
         //Fdeterminar o inicio da frase
-        while (i > 0 && (data[i] !== "," )) { --i; };
+        while (i > 0 && data[i] !== ",") { --i; };
         begin = i;
 
         //determinar o fim da frase
@@ -48,7 +48,7 @@ $(function () {
     }
 
     
-    var $hoverText = $("body").find('p,span');
+    var $hoverText = $("body").find('*');
     $hoverText.mousemove(function (e) {
         var word = getWordUnderCursor(e);
       //  var $this = $(this)[0].lastElementChild;
@@ -64,12 +64,60 @@ $(function () {
           
             if( $(this).find('span').length > 0 ){
               $(this).find('span').addClass('tool-tip');
+              //$('.tool-tip').attr('title-new',word)
+              //console.log($(this));
             }else{
-              $(this).addClass('tool-tip');
+              // se for a colleçao 
+              try {
+              if($(this).length >1 ){
+
+               
+                  $(this).each(function(index,item){
+                    if( $(item).parent()){
+                      $(item).parent().each(function(index,el){
+                        $(item).parent(el).removeClass('tool-tip');
+                        //console.log(el);
+                      });
+                      // se o elemento tiver parent adicionar classe nos filhos
+                      $(item).children().addClass('tool-tip');
+                      
+                     
+                    }else{
+                     
+                      $(item).closest().addClass('tool-tip');
+                    }
+                    
+                   
+                  })
+                 // $(this).addClass('tool-tip');
+                 
+                }else{
+                  if($(this).children().length > 0 ){
+                    $(this).children().each(function(index,item){
+                    $(this).parent(item).removeClass('tool-tip');
+                       console.log($(this.children().length > 0));
+                    })
+
+                  }else{
+                    $(this).addClass('tool-tip');
+                  }
+                //  console.log(this);
+                  
+                  
+                  
+                
+                }
+                  
+                } catch (error) {
+                  
+                }
+                
+              //$(this).addClass('tool-tip');
+           
             }
-    
-       
             $('.tool-tip').attr('title-new',word);
+       
+            
     });
 });
 
