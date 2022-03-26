@@ -434,9 +434,15 @@
 
 
 <!--Novos menus de cabeçalho, fundo, conteudo-->
-<input type="radio" name="editaCor" value="cabecalho" class="editarCores"/>Cabeçalho
-<input type="radio" name="editaCor" value="fundo" class="editarCores"/>Fundo
-<input type="radio" name="editaCor" value="conteudo" class="editarCores"/>Conteudo
+<div class="RadioCoresSeccao">
+<input type="radio" name="editaCor" value="cabecalho" id="cabecalho" class="editarCores"/>
+<label for="cabecalho">Cabeçalho</label>
+
+<input type="radio" name="editaCor" value="fundo" id="fundo" class="editarCores"/>
+<label for="fundo">Fundo</label>
+<input type="radio" name="editaCor" value="conteudo" id="conteudo" class="editarCores"/>
+<label for="conteudo">Conteudo</label>
+</div>
 
 </br>
 <div class="RadioCores">
@@ -467,7 +473,28 @@
 </div>
 <!--Fim dos novos menus de cabeçalho, fundo, conteudo-->
 
+<!--Inicio do slider de saturação-->
+      <div class="col-12 d-flex justify-content-center flex-wrap flex-row mb-3">
+            <div class="col-12 sub_titulo_nav mb-3">Saturação (<span id="saturation_percent">0</span>%)</div>
+            <div class="col-12 d-flex justify-content-between flex-wrap flex-row align-items-center lh-1">
+              <div class="trazzo col-10 col-md-10 col-lg-auto mx-auto"></div>
+              <div class="col-1 col-md-1 col-lg-auto lh-1 sat_less easy_basic_color d-flex justify-content-start align-items-center">-</div>
+              <div id="slider_saturation" class="lh-1 d-flex justify-content-center align-items-center col-10 col-md-10 col-lg-auto">
+                <!-- <div class="test"><br><br><br><br><br></div> -->
+                <input id="r" type="range" />
+              </div>
+              <div class="col-1 col-md-1 col-lg-auto text-end lh-1 sat_plus easy_basic_color d-flex justify-content-end align-items-center">+</div>
+            </div>
+          </div>
+<!--Fim do slider de saturação-->
 
+
+
+<!--Início do reset das cores-->
+<div class="ResetCores" id="ResetCores">
+  <p>Redefinir Cores</p>
+</div>
+<!--Fim do reset das cores-->
 
 
 
@@ -1420,6 +1447,7 @@ on our API rather than parse the HTML below, we have XML and JSON available.
                 <script src="src/colorsAdjustment/colorAdjustmentHeaders.js?v=1.0"></script>
                 <script src="src/colorsAdjustment/colorAdjustmentBackground.js?v=1.0"></script>
                 <script src="src/colorsAdjustment/colorAdjustmentContent.js?v=1.0"></script>
+                <script src="src/colorsAdjustment/colorAdjustmentResetColors.js?v=1.0"></script>
 
 
 
