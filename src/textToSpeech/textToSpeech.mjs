@@ -21,6 +21,8 @@ export default function textToSpeech(self, destroy) {
       .querySelector('._access-menu [data-access-action="textToSpeech"]')
       .classList.remove("active");
     self.initialValues.textToSpeech = false;
+    console.log("pause");
+
     return remove();
   }
 
@@ -38,7 +40,72 @@ export default function textToSpeech(self, destroy) {
     common.injectStyle(css, { className: className });
     common.deployedObjects.set("." + className, true);
     document.addEventListener("click", read, false);
+
+    // injectReaderBtns(self);
   } else {
+    console.log("parar leitura");
+    // window.speechSynthesis.pause();
+    window.speechSynthesis.cancel();
     remove();
   }
+}
+
+function injectReaderBtns(self) {
+  let readerBtns = common.jsonToHtml({
+    type: "div",
+    attrs: {
+      class: "_access-read-btns-wrapper sticky-top",
+      // style: "position: sticky; top:0; right:0;",
+    },
+    children: [
+      {
+        type: "button",
+        attrs: {
+          onclick: "() => {window.speechSynthesis.pause();}",
+          class: "btn btn-success",
+          title: "Ler",
+          tabindex: "0",
+        },
+        children: [
+          {
+            type: "#text",
+            text: "Ler",
+          },
+        ],
+      },
+      {
+        type: "button",
+        attrs: {
+          onclick: "() => window.speechSynthesis.pause()",
+          class: "btn btn-warning",
+          title: "Pause",
+          tabindex: "0",
+        },
+        children: [
+          {
+            type: "#text",
+            text: "Pause",
+          },
+        ],
+      },
+      {
+        type: "button",
+        attrs: {
+          class: "btn btn-danger",
+          title: "Parar",
+          tabindex: "0",
+        },
+        children: [
+          {
+            type: "#text",
+            text: "Parar",
+          },
+        ],
+      },
+    ],
+  });
+
+  self.body.appendChild(readerBtns);
+
+  return readerBtns;
 }
