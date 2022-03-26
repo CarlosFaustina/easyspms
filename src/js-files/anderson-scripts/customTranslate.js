@@ -7,7 +7,8 @@ function translateInit() {
   new google.translate.TranslateElement(
     {
       pageLanguage: "pt-PT",
-      includedLanguages: "ar,bg,ca,cs,da,de,el,en,en-GB,en-CA,en-AU,en-ZA,es,es-MX,et,eu,fi,fr,gl,he,hr,hu,it,ja,ko,lt,lv,nb,nl,pl,pt,pt-PT,ro,ru,sk,sl,sv,tr,uk,zh,zh-CN",
+      includedLanguages:
+        "ar,bg,ca,cs,da,de,el,en,en-GB,en-CA,en-AU,en-ZA,es,es-MX,et,eu,fi,fr,gl,he,hr,hu,it,ja,ko,lt,lv,nb,nl,pl,pt,pt-PT,ro,ru,sk,sl,sv,tr,uk,zh,zh-CN",
       // layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
     },
     "google_translate_element"
@@ -19,7 +20,7 @@ function translateInit() {
 
 /**
  * Dispara evento para trocar o idioma
- * @param {Element} el 
+ * @param {Element} el
  */
 function changeTranslateEvent(el) {
   if (el.fireEvent) {
@@ -32,11 +33,11 @@ function changeTranslateEvent(el) {
 
 /**
  * Função que será chamada para realizar a troca de idioma
- * @param {String} sigla 
+ * @param {String} lang
  */
-function changeLanguage(sigla) {
+function changeLanguage(lang) {
   if (selectGoogleTranslate) {
-    selectGoogleTranslate.value = sigla;
+    selectGoogleTranslate.value = lang;
     changeTranslateEvent(selectGoogleTranslate); //Dispara a troca
   }
 }
@@ -60,3 +61,40 @@ function restoreLanguage() {
     }
   }
 }
+
+let customTranslate = {
+  elements: {
+    comboBoxLanguages: document.getElementById("comboBoxLanguages"),
+    resetTranslate: document.getElementById("resetTranslate"),
+  },
+  _handleRestoreLanguage() {
+    restoreLanguage();
+    customTranslate.elements.resetTranslate.style.display = "none";
+    customTranslate.elements.comboBoxLanguages.value = "";
+  },
+  /**
+   * 
+   * @param {Event} event 
+   */
+  _onChangeLanguage(event) {
+    if (!!event.target.value) {
+      changeLanguage(event.target.value);
+      customTranslate.elements.resetTranslate.style.display = "block";
+    } else {
+      customTranslate._handleRestoreLanguage();
+    }
+  },
+  init() {
+    //Escuta evento do combobox do tradutor
+    customTranslate.elements.comboBoxLanguages.addEventListener(
+      "change",
+      customTranslate._onChangeLanguage
+    );
+
+    //Restora para linguagem padrão
+    resetTranslate.addEventListener(
+      "click",
+      customTranslate._handleRestoreLanguage
+    );
+  },
+};

@@ -1,0 +1,192 @@
+.input-color {
+  position: relative;
+  padding-bottom: 20px;
+}
+.input-color input {
+  padding-left: 20px;
+}
+.input-color .color-box {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  background-color: #ccc;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
+.RadioCores input[type="radio"] {
+  display: none;
+}
+.RadioCores input[type="radio"]:checked + label {
+  border: 4px solid;
+}
+
+.RadioCores label {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  padding: 4px 11px;
+  font-family: Arial;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.RadioCores label[for="corVermelho"] {
+  background-color: #e4111c;
+}
+
+.RadioCores label[for="corAzul"] {
+  background-color: #06a1dd;
+}
+.RadioCores label[for="corAmarelo"] {
+  background-color: #feef16;
+}
+
+.RadioCores label[for="corRosa"] {
+  background-color: #e40d7d;
+}
+
+.RadioCores label[for="corBranco"] {
+  background-color: #ffffff;
+}
+
+.RadioCores label[for="corPreto"] {
+  background-color: #000000;
+}
+
+.RadioCores label[for="corVerde"] {
+  background-color: #17963e;
+}
+
+.RadioCores label[for="corRoxo"] {
+  background-color: #312582;
+}
+
+.RadioCoresSeccao input[type="radio"] {
+  display: none;
+}
+
+.RadioCoresSeccao label {
+  display: inline-block;
+  padding: 4px 11px;
+  font-family: Arial;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/*Range Saturação*/
+/*
+BEGIN RANGE
+*/
+.trazzo {
+  margin-top: 0.9em;
+  position: absolute;
+  box-sizing: border-box;
+  border: none;
+  width: 32px;
+  height: 32px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 13'><text transform='translate(0 5)' style='font-size:10px;fill:%23000000;'>|</text></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position: center;
+  background-size: contain;
+  background-origin: border-box;
+  left: 188px;
+  z-index: -1;
+}
+.sat_plus {
+  width: 13px !important;
+}
+.sat_less {
+  width: 10px !important;
+}
+.sat_plus,
+.sat_less {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: -1px;
+}
+[type="range"] {
+  margin: 0;
+  padding: 0;
+  width: 381px;
+  height: 2px;
+  background: transparent;
+  font: 1em/1 arial, sans-serif;
+}
+[type="range"],
+[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+[type="range"]::-webkit-slider-runnable-track {
+  box-sizing: border-box;
+  border: none;
+  width: 381px;
+  height: 2px;
+  background: #ccc;
+}
+[type="range"]::-moz-range-track {
+  box-sizing: border-box;
+  border: none;
+  /* width: 381px; */
+  width: auto;
+  height: 2px;
+  background: #ccc;
+}
+
+/* SAFARI / CHROME / OPERA / MOZILLA / EDGE CONTROLLER / IOS */
+[type="range"]::-webkit-slider-thumb {
+  /* margin-top: -0.625em; */
+  margin-top: -0.9em;
+  box-sizing: border-box;
+  border: none;
+  width: 32px;
+  height: 32px;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 38 38' xmlns='http://www.w3.org/2000/svg'><path d='M19,3A16,16,0,1,1,3,19,16,16,0,0,1,19,3Z' fill='%230f4e64' stroke='%23f6f6f6' stroke-width='6px'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-size: contain;
+  background-origin: border-box;
+  z-index: 0;
+}
+[type="range"]::-ms-track {
+  box-sizing: border-box;
+  border: none;
+  width: 381px;
+  height: 2px;
+  background: #ccc;
+}
+/* MOZILLA CONTROLLER */
+[type="range"]::-moz-range-thumb {
+  box-sizing: border-box;
+  border: none;
+  width: 32px;
+  height: 32px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 38 38'><circle cx='16' cy='16' r='16' transform='translate(3 3)' fill='%230f4e64' stroke='%23f6f6f6' stroke-miterlimit='10' stroke-width='6'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-size: contain;
+  background-origin: border-box;
+  background-color: transparent !important;
+}
+/* OLD INTERNET EXPLORER CONTROLLER */
+[type="range"]::-ms-thumb {
+  margin-top: 0;
+  box-sizing: border-box;
+  border: none;
+  width: 32px;
+  height: 32px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='38' height='38' viewBox='0 0 38 38'><circle cx='16' cy='16' r='16' transform='translate(3 3)' fill='%230f4e64' stroke='%23f6f6f6' stroke-miterlimit='10' stroke-width='6'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-size: contain;
+  background-origin: border-box;
+  background-color: transparent !important;
+}
+[type="range"]::-ms-tooltip {
+  display: none;
+}
+/*
+END RANGE
+*/

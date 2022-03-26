@@ -14,10 +14,19 @@ import {
 import disabledUnsupportedFeatures from "../src/utils/disabledUnsupportedFeatures/disabledUnsupportedFeatures.mjs";
 import disableUnsupportedModules from "../src/utils/disableUnsupportedModules/disableUnsupportedModules.mjs";
 import setSessionFromCache from "../src/utils/setSessionFromCache/setSessionFromCache.mjs";
-import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
-import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
+import {
+  toogleImageSpeaker,
+  describeImgCss,
+} from "../src/describeImg/describeImg.mjs";
+import customTranslate, {
+  customTranslateCss,
+} from "../src/customTranslate/customTranslate.mjs";
+import dicionario from "../src/dicionario/dicionario.mjs";
+import addHasText from "../src/addHasText/addHasText.mjs";
+import bigCursorWhite from "../src/bigCursorWhite/bigCursorWhite.mjs";
+import bigCursorBlack from "../src/bigCursorBlack/bigCursorBlack.mjs";
 import readingGuide from "../src/readingGuide/readingGuide.mjs";
-import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
+import grayHues from "../src/grayHues/grayHues.mjs";
 import parseKeys from "../src/utils/parseKeys/parseKeys.mjs";
 import runHotkey from "../src/utils/parseKeys/runHotkey.mjs";
 import resetLineHeight from "../src/fontAdjustment/resetLineHeight.mjs";
@@ -30,11 +39,10 @@ import alterTextSize from "../src/fontAdjustment/alternateTextSize.mjs";
 import linkHighlight from "../src/linkHighlight/linkHighlight.mjs";
 import textToSpeech from "../src/textToSpeech/textToSpeech.mjs";
 import addListeners from "../src/utils/addListeners/addListeners.mjs";
+import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
+import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
+import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
 
-const bootstrap = [
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css",
-];
-common.injectFont(bootstrap);
 // Default options
 let _options = {
   icon: {
@@ -63,10 +71,10 @@ let _options = {
     helpTitles: true,
     keys: {
       toggleMenu: ["ctrlKey", "altKey", 65], // Toggle Menu	CTRL + ALT + A
-      invertColors: ["ctrlKey", "altKey", 73], //invertColors CTRL + ALT + I
       grayHues: ["ctrlKey", "altKey", 71], // Gray Hues	CTRL + ALT + G
       linkHighlight: ["ctrlKey", "altKey", 85], // Underline Links	CTRL + ALT + U
-      bigCursor: ["ctrlKey", "altKey", 67], // Big Cursor	CTRL + ALT + C
+      bigCursorWhite: ["ctrlKey", "altKey", 67], // Big Cursor	CTRL + ALT + C
+      bigCursorBlack: ["ctrlKey", "altKey", 68], // Big Cursor	CTRL + ALT + C
       readingGuide: ["ctrlKey", "altKey", 82], // Reading Guide	CTRL + ALT + R
       textToSpeech: ["ctrlKey", "altKey", 84], // Text To Speech	CTRL + ALT + T
       speechToText: ["ctrlKey", "altKey", 83], // Speech To Text	CTRL + ALT + S
@@ -98,9 +106,9 @@ let _options = {
     decreaselineHeight: "Diminuir expaço entre linhas",
     increaseTextSpacing: "Aumentar expaço do texto",
     decreaseTextSpacing: "Diminuir expaço do texto",
-    invertColors: "Invertir cores",
     grayHues: "Modo mono-cromatico",
-    bigCursor: "Aumentar Cursor",
+    bigCursorWhite: "Ponteiro do Rato Branco",
+    bigCursorBlack: "Ponteiro do Rato Preto",
     readingGuide: "Guia de leitura",
     linkHighlight: "Destaque e inks",
     textToSpeech: "Leia Texto",
@@ -114,16 +122,19 @@ let _options = {
     buttons: true,
   },
   modules: {
+    dicionario: true,
+    customTranslate: true,
     keyboardNav: true,
     increaseText: true,
+    imageSpeaker: true,
     decreaseText: true,
     increaselineHeight: true,
     decreaselineHeight: false,
     increaseTextSpacing: true,
     decreaseTextSpacing: true,
-    invertColors: true,
     grayHues: true,
-    bigCursor: true,
+    bigCursorWhite: true,
+    bigCursorBlack: true,
     readingGuide: true,
     linkHighlight: true,
     textToSpeech: true,
@@ -148,23 +159,29 @@ export class Accessibility {
         .querySelector("html")
         .getAttribute("lang");
     }
+
+    disabledUnsupportedFeatures(this);
+    this.sessionState = {
+      dicionario: false,
+      customTranslate: false,
+      keyboardNav: false,
+      callTecladoVirtual: false,
+      imageSpeaker: false,
+      textSize: 0,
+      lineHeight: 0,
+      textSpace: 0,
+      grayHues: false,
+      linkHighlight: false,
+      bigCursorWhite: false,
+      bigCursorBlack: false,
+      readingGuide: false,
+    };
     //inicialize Virtual Keyboard
     vai_buscar_todos_campos_texto();
     construtor_teclado_virtual._isMobile();
 
-    disabledUnsupportedFeatures(this);
-    this.sessionState = {
-      keyboardNav: false,
-      callTecladoVirtual: false,
-      textSize: 0,
-      lineHeight: 0,
-      textSpace: 0,
-      invertColors: false,
-      grayHues: false,
-      linkHighlight: false,
-      bigCursor: false,
-      readingGuide: false,
-    };
+    // customTranslate.init();
+    customTranslate(this);
     common.injectFont(this.options.icon.fontFaceSrc, () => {
       this.build();
     });
@@ -174,8 +191,11 @@ export class Accessibility {
   injectCss() {
     let css =
       `
+
+      ${customTranslateCss}
       ${keyboardCss}
       ${keyboardNavCss}
+      ${describeImgCss}
         ._access-scrollbar::-webkit-scrollbar-track, .mat-autocomplete-panel::-webkit-scrollbar-track, .mat-tab-body-content::-webkit-scrollbar-track, .mat-select-panel:not([class*='mat-elevation-z'])::-webkit-scrollbar-track, .mat-menu-panel::-webkit-scrollbar-track {
             -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
             background-color: #F5F5F5;
@@ -361,8 +381,11 @@ export class Accessibility {
           line-height: initial!important;
           overflow: auto;
         }
-        html._access_cursor * {
-            cursor: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSIyOS4xODhweCIgaGVpZ2h0PSI0My42MjVweCIgdmlld0JveD0iMCAwIDI5LjE4OCA0My42MjUiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI5LjE4OCA0My42MjUiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwb2x5Z29uIGZpbGw9IiNGRkZGRkYiIHN0cm9rZT0iI0Q5REFEOSIgc3Ryb2tlLXdpZHRoPSIxLjE0MDYiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgcG9pbnRzPSIyLjgsNC41NDkgMjYuODQ3LDE5LjkwMiAxNi45NjQsMjIuNzAxIDI0LjIzOSwzNy43NDkgMTguMjc4LDQyLjAxNyA5Ljc0MSwzMC43MjQgMS4xMzgsMzUuODA5ICIvPjxnPjxnPjxnPjxwYXRoIGZpbGw9IiMyMTI2MjciIGQ9Ik0yOS4xNzUsMjEuMTU1YzAuMDcxLTAuNjEzLTAuMTY1LTEuMjUzLTAuNjM1LTEuNTczTDIuMTY1LDAuMjU4Yy0wLjQyNC0wLjMyLTAuOTg4LTAuMzQ2LTEuNDM1LTAuMDUzQzAuMjgyLDAuNDk3LDAsMS4wMywwLDEuNjE3djM0LjE3MWMwLDAuNjEzLDAuMzA2LDEuMTQ2LDAuNzc2LDEuNDM5YzAuNDcxLDAuMjY3LDEuMDU5LDAuMjEzLDEuNDgyLTAuMTZsNy40ODItNi4zNDRsNi44NDcsMTIuMTU1YzAuMjU5LDAuNDgsMC43MjksMC43NDYsMS4yLDAuNzQ2YzAuMjM1LDAsMC40OTQtMC4wOCwwLjcwNi0wLjIxM2w2Ljk4OC00LjU4NWMwLjMyOS0wLjIxMywwLjU2NS0wLjU4NiwwLjY1OS0xLjAxM2MwLjA5NC0wLjQyNiwwLjAyNC0wLjg4LTAuMTg4LTEuMjI2bC02LjM3Ni0xMS4zODJsOC42MTEtMi43NDVDMjguNzA1LDIyLjI3NCwyOS4xMDUsMjEuNzY4LDI5LjE3NSwyMS4xNTV6IE0xNi45NjQsMjIuNzAxYy0wLjQyNCwwLjEzMy0wLjc3NiwwLjUwNi0wLjk0MSwwLjk2Yy0wLjE2NSwwLjQ4LTAuMTE4LDEuMDEzLDAuMTE4LDEuNDM5bDYuNTg4LDExLjc4MWwtNC41NDEsMi45ODVsLTYuODk0LTEyLjMxNWMtMC4yMTItMC4zNzMtMC41NDEtMC42NC0wLjk0MS0wLjcyYy0wLjA5NC0wLjAyNy0wLjE2NS0wLjAyNy0wLjI1OS0wLjAyN2MtMC4zMDYsMC0wLjU4OCwwLjEwNy0wLjg0NywwLjMyTDIuOCwzMi41OVY0LjU0OWwyMS41OTksMTUuODA2TDE2Ljk2NCwyMi43MDF6Ii8+PC9nPjwvZz48L2c+PC9nPjwvc3ZnPg==),auto!important;
+        html._access_cursor_white * {
+            cursor: url(https://firebasestorage.googleapis.com/v0/b/fir-react-upload-bc250.appspot.com/o/images%2Fbigcursorwhite.cur?alt=media&token=d9201ab7-e37f-41a8-ac96-f82543d4cdee),auto!important;
+        }
+        html._access_cursor_black * {
+            cursor: url(https://firebasestorage.googleapis.com/v0/b/fir-react-upload-bc250.appspot.com/o/images%2Fbigcursorblack.cur?alt=media&token=16386120-f2a1-4fa9-b7e2-a7a94f46a543),auto!important;
         }
         ._access-menu ul li {
           display:inline;
@@ -466,6 +489,23 @@ export class Accessibility {
     return iconElem;
   }
 
+  injectTooltipBox() {
+    let menuElem = common.jsonToHtml({
+      type: "div",
+      attrs: {
+        class: "accessibilityTootipBox",
+      },
+    });
+
+    for (let i in this.options.icon.position) {
+      menuElem.classList.add(i);
+    }
+
+    this.body.appendChild(menuElem);
+
+    return menuElem;
+  }
+
   injectMenu() {
     let menuElem = common.jsonToHtml({
       type: "div",
@@ -514,6 +554,168 @@ export class Accessibility {
           ],
         },
         {
+          type: "div",
+          attrs: {
+            class: "d-none",
+            id: "google_translate_element",
+          },
+        },
+
+        {
+          type: "div",
+          attrs: {
+            class: "col-auto",
+          },
+          children: [
+            {
+              type: "label",
+              attrs: {
+                for: "comboBoxLanguages",
+                class: "form-label",
+              },
+              children: [
+                {
+                  type: "#text",
+                  text: "Tradutor",
+                },
+              ],
+            },
+            {
+              type: "select",
+              attrs: {
+                class: "form-select notranslate",
+                id: "comboBoxLanguages",
+                tabindex: "0",
+              },
+              children: [
+                {
+                  type: "option",
+                  attrs: {
+                    value: "",
+                    selected: true,
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Selecione o idioma",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "ar",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "العربية",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "bg",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "bălgarski",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "ca",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "català",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "cs",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "čeština",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "da",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "dansk",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "de",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Deutsch",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "pt",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Português (Brasileiro)",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "es",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Español",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          type: "div",
+          attrs: {
+            class: "btn btn-primary",
+            style: "margin-top: 2rem; display: none;",
+            id: "resetTranslate",
+          },
+          children: [
+            {
+              type: "#text",
+              text: "Mostrar original",
+            },
+          ],
+        },
+        {
           type: "ul",
           attrs: {
             class: this.options.animations.buttons
@@ -521,6 +723,20 @@ export class Accessibility {
               : "_access-scrollbar",
           },
           children: [
+            {
+              type: "li",
+              attrs: {
+                "data-access-action": "dicionario",
+                class: "btn_geral",
+                tabindex: "0",
+              },
+              children: [
+                {
+                  type: "#text",
+                  text: "Ativar dicionário",
+                },
+              ],
+            },
             {
               type: "li",
               attrs: {
@@ -598,7 +814,22 @@ export class Accessibility {
               children: [
                 {
                   type: "#text",
-                  text: "Teclado Virtual click 2x",
+                  text: "Teclado Virtual",
+                },
+              ],
+            },
+
+            {
+              type: "li",
+              attrs: {
+                id: "virtual-keyboard",
+                "data-access-action": "imageSpeaker",
+                tabindex: "0",
+              },
+              children: [
+                {
+                  type: "#text",
+                  text: "Image Speaker",
                 },
               ],
             },
@@ -628,20 +859,7 @@ export class Accessibility {
                 },
               ],
             },
-            {
-              type: "li",
-              attrs: {
-                "data-access-action": "invertColors",
-                tabindex: "0",
-                title: parseKeys(this, this.options.hotkeys.keys.invertColors),
-              },
-              children: [
-                {
-                  type: "#text",
-                  text: this.options.labels.invertColors,
-                },
-              ],
-            },
+
             {
               type: "li",
               attrs: {
@@ -673,20 +891,46 @@ export class Accessibility {
             {
               type: "li",
               attrs: {
-                "data-access-action": "bigCursor",
+                "data-access-action": "bigCursorWhite",
                 tabindex: "0",
-                title: parseKeys(this, this.options.hotkeys.keys.bigCursor),
+                title: parseKeys(
+                  this,
+                  this.options.hotkeys.keys.bigCursorWhite
+                ),
               },
               children: [
                 {
                   type: "div",
                   attrs: {
-                    id: "iconBigCursor",
+                    id: "iconBigCursorWhite",
                   },
                 },
                 {
                   type: "#text",
-                  text: this.options.labels.bigCursor,
+                  text: this.options.labels.bigCursorWhite,
+                },
+              ],
+            },
+            {
+              type: "li",
+              attrs: {
+                "data-access-action": "bigCursorBlack",
+                tabindex: "0",
+                title: parseKeys(
+                  this,
+                  this.options.hotkeys.keys.bigCursorBlack
+                ),
+              },
+              children: [
+                {
+                  type: "div",
+                  attrs: {
+                    id: "iconbigCursorBlack",
+                  },
+                },
+                {
+                  type: "#text",
+                  text: this.options.labels.bigCursorBlack,
                 },
               ],
             },
@@ -768,8 +1012,10 @@ export class Accessibility {
     this.menuInterface.speechToText(true);
     this.menuInterface.linkHighlight(true);
     this.menuInterface.grayHues(true);
-    this.menuInterface.invertColors(true);
-    this.menuInterface.bigCursor(true);
+    this.menuInterface.imageSpeaker(true);
+    this.menuInterface.dicionario(true);
+    this.menuInterface.bigCursorWhite(true);
+    this.menuInterface.bigCursorBlack(true);
     this.menuInterface.readingGuide(true);
     resetLineHeight(this);
     resetTextSize(this);
@@ -881,9 +1127,11 @@ export class Accessibility {
 
   build() {
     this.initialValues = {
+      dicionario: false,
       linkHighlight: false,
       textToSpeech: false,
-      bigCursor: false,
+      bigCursorWhite: false,
+      bigCursorBlack: false,
       readingGuide: false,
       body: {},
       html: {},
@@ -895,6 +1143,7 @@ export class Accessibility {
       initFontSize(this);
     }
     this.injectCss();
+    this.injectTooltipBox();
     this.icon = this.injectIcon();
     this.menu = this.injectMenu();
     addListeners(this);
@@ -964,132 +1213,24 @@ export class Accessibility {
       tecladoVirtual: () => {
         this.callTecladoVirtual();
       },
-      invertColors: (destroy) => {
-        if (typeof this.initialValues.html.backgroundColor === "undefined")
-          this.initialValues.html.backgroundColor = getComputedStyle(
-            this.html
-          ).backgroundColor;
-        if (typeof this.initialValues.html.color === "undefined")
-          this.initialValues.html.color = getComputedStyle(this.html).color;
-
-        if (destroy) {
-          resetIfDefined(
-            this.initialValues.html.backgroundColor,
-            this.html.style,
-            "backgroundColor"
-          );
-          resetIfDefined(
-            this.initialValues.html.color,
-            this.html.style,
-            "color"
-          );
-          document
-            .querySelector('._access-menu [data-access-action="invertColors"]')
-            .classList.remove("active");
-          this.initialValues.invertColors = false;
-          this.sessionState.invertColors = this.initialValues.invertColors;
-          this.onChange(true);
-          this.html.style.filter = "";
-          return;
-        }
-
-        document
-          .querySelector('._access-menu [data-access-action="invertColors"]')
-          .classList.toggle("active");
-        this.initialValues.invertColors = !this.initialValues.invertColors;
-        this.sessionState.invertColors = this.initialValues.invertColors;
-        this.onChange(true);
-        if (this.initialValues.invertColors) {
-          if (this.initialValues.grayHues) this.menuInterface.grayHues(true);
-          this.html.style.filter = "invert(1)";
-        } else {
-          this.html.style.filter = "";
-        }
+      dicionario: (destroy) => {
+        //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
+        addHasText(destroy);
+        dicionario(this, destroy);
+      },
+      imageSpeaker: (destroy) => {
+        //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
+        addHasText(destroy);
+        toogleImageSpeaker(this, destroy);
       },
       grayHues: (destroy) => {
-        if (typeof this.initialValues.html.filter === "undefined")
-          this.initialValues.html.filter = getComputedStyle(this.html).filter;
-        if (typeof this.initialValues.html.webkitFilter === "undefined")
-          this.initialValues.html.webkitFilter = getComputedStyle(
-            this.html
-          ).webkitFilter;
-        if (typeof this.initialValues.html.mozFilter === "undefined")
-          this.initialValues.html.mozFilter = getComputedStyle(
-            this.html
-          ).mozFilter;
-        if (typeof this.initialValues.html.msFilter === "undefined")
-          this.initialValues.html.msFilter = getComputedStyle(
-            this.html
-          ).msFilter;
-
-        if (destroy) {
-          document
-            .querySelector('._access-menu [data-access-action="grayHues"]')
-            .classList.remove("active");
-          this.initialValues.grayHues = false;
-          this.sessionState.grayHues = this.initialValues.grayHues;
-          this.onChange(true);
-          resetIfDefined(
-            this.initialValues.html.filter,
-            this.html.style,
-            "filter"
-          );
-          resetIfDefined(
-            this.initialValues.html.webkitFilter,
-            this.html.style,
-            "webkitFilter"
-          );
-          resetIfDefined(
-            this.initialValues.html.mozFilter,
-            this.html.style,
-            "mozFilter"
-          );
-          resetIfDefined(
-            this.initialValues.html.msFilter,
-            this.html.style,
-            "msFilter"
-          );
-          return;
-        }
-
-        document
-          .querySelector('._access-menu [data-access-action="grayHues"]')
-          .classList.toggle("active");
-        this.initialValues.grayHues = !this.initialValues.grayHues;
-        this.sessionState.grayHues = this.initialValues.grayHues;
-        this.onChange(true);
-        let val;
-        if (this.initialValues.grayHues) {
-          val = "grayscale(1)";
-          if (this.initialValues.invertColors)
-            this.menuInterface.invertColors(true);
-        } else {
-          val = "";
-        }
-        this.html.style.webkitFilter = val;
-        this.html.style.mozFilter = val;
-        this.html.style.msFilter = val;
-        this.html.style.filter = val;
+        grayHues(this, destroy);
       },
-      bigCursor: (destroy) => {
-        if (destroy) {
-          this.html.classList.remove("_access_cursor");
-          document
-            .querySelector('._access-menu [data-access-action="bigCursor"]')
-            .classList.remove("active");
-          this.initialValues.bigCursor = false;
-          this.sessionState.bigCursor = false;
-          this.onChange(true);
-          return;
-        }
-
-        document
-          .querySelector('._access-menu [data-access-action="bigCursor"]')
-          .classList.toggle("active");
-        this.initialValues.bigCursor = !this.initialValues.bigCursor;
-        this.sessionState.bigCursor = this.initialValues.bigCursor;
-        this.onChange(true);
-        this.html.classList.toggle("_access_cursor");
+      bigCursorWhite: (destroy) => {
+        bigCursorWhite(this, destroy);
+      },
+      bigCursorBlack: (destroy) => {
+        bigCursorBlack(this, destroy);
       },
       readingGuide: (destroy) => {
         readingGuide(this, destroy);
@@ -1184,6 +1325,7 @@ export class Accessibility {
         }
       },
     };
+
     if (this.options.session.persistent) setSessionFromCache(this);
   }
 

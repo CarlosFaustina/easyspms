@@ -42,10 +42,13 @@ export default function setSessionFromCache(self) {
         }
       }
     }
+    if (sessionState.dicionario) self.menuInterface.dicionario();
     if (sessionState.invertColors) self.menuInterface.invertColors();
     if (sessionState.grayHues) self.menuInterface.grayHues();
+    if (sessionState.imageSpeaker) self.menuInterface.imageSpeaker();
     if (sessionState.linkHighlight) self.menuInterface.linkHighlight();
-    if (sessionState.bigCursor) self.menuInterface.bigCursor();
+    if (sessionState.bigCursorWhite) self.menuInterface.bigCursorWhite();
+    if (sessionState.bigCursorBlack) self.menuInterface.bigCursorBlack();
     if (sessionState.readingGuide) self.menuInterface.readingGuide();
     self.sessionState = sessionState;
   }
