@@ -39,6 +39,12 @@ import alterTextSize from "../src/fontAdjustment/alternateTextSize.mjs";
 import linkHighlight from "../src/linkHighlight/linkHighlight.mjs";
 import textToSpeech from "../src/textToSpeech/textToSpeech.mjs";
 import addListeners from "../src/utils/addListeners/addListeners.mjs";
+import { injectColorAdjustmentsCss } from "../src/colorsAdjustment/colorAdjustmentCss.mjs";
+import { injectColorAdjustmentsBackgroundCss } from "../src/colorsAdjustment/colorAdjustmentBackground.js";
+import { injectColorAdjustmentsContentCss } from "../src/colorsAdjustment/colorAdjustmentContent.js";
+import mudaCorCabecalho, {
+  injectColorAdjustmentsHeadersCss,
+} from "../src/colorsAdjustment/colorAdjustmentHeaders.js";
 import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
 import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
 import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
@@ -182,6 +188,10 @@ export class Accessibility {
 
     // customTranslate.init();
     customTranslate(this);
+
+    // cor cabecalho
+    mudaCorCabecalho();
+
     common.injectFont(this.options.icon.fontFaceSrc, () => {
       this.build();
     });
@@ -191,6 +201,11 @@ export class Accessibility {
   injectCss() {
     let css =
       `
+
+      ${injectColorAdjustmentsCss}
+      ${injectColorAdjustmentsBackgroundCss}
+      ${injectColorAdjustmentsContentCss}
+      ${injectColorAdjustmentsHeadersCss}
 
       ${customTranslateCss}
       ${keyboardCss}
@@ -506,6 +521,161 @@ export class Accessibility {
     return menuElem;
   }
 
+  injectcolrAdjustments() {
+    const startingDiv = document.getElementById("color-adjustments");
+    startingDiv.innerHTML = `
+        <div class="btn_geral" id="btn_mudaCorCabecalho">
+      <div class="btn_particular">
+        <div class="info">
+          <span
+            data-tooltip="Esta funcionalidade permite que o utilizador mude a cor dos cabeçalhos"
+            data-tooltip-position="bottom"
+            ><i class="fas fa-info"></i
+          ></span>
+        </div>
+
+        <div class="check" id="mudaCorCabecalho">
+          
+        </div>
+      </div>
+
+      <div class="AdjustColorCabecalho" id="AdjustColorCabecalho">
+        <div class="input-color"></div>
+      </div>
+    </div>
+
+    <input
+      type="radio"
+      name="editaCor"
+      value="cabecalho"
+      class="editarCores"
+    />Cabeçalho
+    <input
+      type="radio"
+      name="editaCor"
+      value="fundo"
+      class="editarCores"
+    />Fundo
+    <input
+      type="radio"
+      name="editaCor"
+      value="conteudo"
+      class="editarCores"
+    />Conteudo
+
+    <br />
+    <div class="RadioCores">
+      <input
+        type="radio"
+        name="Cor"
+        id="corBranco"
+        value="white"
+        class="cores"
+      />
+      <label for="corBranco"></label>
+
+      <input
+        type="radio"
+        name="Cor"
+        id="corPreto"
+        value="black"
+        class="cores"
+      />
+      <label for="corPreto"></label>
+
+      <input
+        type="radio"
+        name="Cor"
+        id="corVerde"
+        value="green"
+        class="cores"
+      />
+      <label for="corVerde"></label>
+
+      <input
+        type="radio"
+        name="Cor"
+        id="corRoxo"
+        value="purple"
+        class="cores"
+      />
+      <label for="corRoxo"></label>
+
+      <input
+        type="radio"
+        name="Cor"
+        id="corVermelho"
+        value="red"
+        class="cores"
+      />
+      <label for="corVermelho"></label>
+
+      <input
+        type="radio"
+        name="Cor"
+        value="yellow"
+        id="corAmarelo"
+        class="cores"
+      />
+      <label for="corAmarelo"></label>
+
+      <input type="radio" name="Cor" id="corAzul" value="blue" class="cores" />
+      <label for="corAzul"></label>
+
+      <input type="radio" name="Cor" value="pink" id="corRosa" class="cores" />
+      <label for="corRosa"></label>
+    </div>
+
+    <div class="btn_geral" id="btn_mudaCorFundo">
+      <div class="btn_particular">
+        <div class="info">
+          <span
+            data-tooltip="Esta funcionalidade permite que o utilizador mude a cor dos fundos"
+            data-tooltip-position="bottom"
+            ><i class="fas fa-info"></i
+          ></span>
+        </div>
+
+        <div class="check" id="mudaCorFundo">
+          
+        </div>
+      </div>
+
+      <div id="AdjustColorFundo">
+        <p style="font-size: 10px">Fundo</p>
+      </div>
+
+      <div class="input-color">
+        <div class="color-box" style="background-color: #ff850a"></div>
+      </div>
+    </div>
+
+    <div class="btn_geral" id="btn_mudaCorConteudo">
+      <div class="btn_particular">
+        <div class="info">
+          <span
+            data-tooltip="Esta funcionalidade permite que o utilizador mude a cor do Conteudo"
+            data-tooltip-position="bottom"
+            ><i class="fas fa-info"></i
+          ></span>
+        </div>
+
+        <div class="check" id="mudaCorConteudo">
+          
+        </div>
+      </div>
+
+      <div id="AdjustColorConteudo">
+        <p style="font-size: 10px">Conteudo</p>
+      </div>
+
+      <div class="input-color">
+        <div class="color-box" style="background-color: #ff850a"></div>
+      </div>
+    </div>
+    `;
+  }
+
   injectMenu() {
     let menuElem = common.jsonToHtml({
       type: "div",
@@ -714,6 +884,13 @@ export class Accessibility {
               text: "Mostrar original",
             },
           ],
+        },
+        {
+          type: "div",
+          attrs: {
+            class: "d-block",
+            id: "color-adjustments",
+          },
         },
         {
           type: "ul",
@@ -1146,6 +1323,7 @@ export class Accessibility {
     this.injectTooltipBox();
     this.icon = this.injectIcon();
     this.menu = this.injectMenu();
+    this.injectcolrAdjustments();
     addListeners(this);
     disableUnsupportedModules(this);
 
