@@ -1,3 +1,5 @@
+var number;
+
 $("#btn_mudaCorFundo").click(function (e) {
   //window.alert("Aqui estou eu");
 
@@ -128,9 +130,21 @@ $(".cores").on("change", function () {
       $("body").removeClass("FundoRoxo");
       $("body").removeClass("FundoPreto");
       $("body").addClass("FundoRosa");
+      //document.getElementById("lipsum").style.opacity = "0.5";
+      document.querySelector("#lipsum").textContent = number;
+      console.log("O numero é" + this.number);
     }
   }
 });
+
+/*Range*/
+
+document.querySelector("#r").addEventListener("change", (e) => {
+  let number = parseInt(e.currentTarget.value);
+  console.log(number);
+  document.querySelector("#saturation_percent").textContent = number;
+});
+
 
 export const injectColorAdjustmentsBackgroundCss = `
 
@@ -175,3 +189,6 @@ export const injectColorAdjustmentsBackgroundCss = `
 }
 
 `;
+
+
+

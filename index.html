@@ -36,6 +36,8 @@
     <meta http-equiv="Expires" content="0" />
     <link rel="shortcut icon" href="favicon.ico" />
 
+      
+
     <!-- CSS INIT -->
     <!-- CLEAN, REBOOT, NORMALIZE HTML -->
     <!-- Este css MAIN serve para resolver alguns conflitos de HTML com as animações, também para fazer desaparecer as barras de scroll, fazer um reset simples a alguns estilos, tamanho de letra inicial, torna as animações mais suaves, etc etc - não apagar -->
@@ -48,7 +50,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"
         integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--
 
 
@@ -77,7 +81,7 @@
     JOAO SECTION BEGIN
 -->
 
-
+<link rel="stylesheet" href="src/AmpliadorDeTexto/style.css">
 
 
 
@@ -312,42 +316,53 @@
                             </div>
                         </div>
 
-
-                    </div>
-                    <h2 class="mt-4 ">Transcrição</h2>
-                    <div class="p-3" style="border: 1px solid gray; height: 300px; border-radius: 8px;">
-                        <span id="final"></span>
-                        <span id="interim" class="text-secondary"></span>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <button type="button" class="btn btn-success btn-sm" id="start">Iniciar</button>
-                        </div>
-                        <div class="col-sm-2"><button type="button" class="btn btn-danger" id="stop">Parar</button>
-                        </div>
-                        <div class="col-sm-2"><button type="button" class="btn btn-primary" id="limpar">Limpar</button>
-                        </div>
-
-                    </div>
-
-
-
-                    <p id="status" class="lead mt-3 text-light" style="display: none">A vouvir ...</p>
+<div class="VoicetoText">
+    <H2>formulario de texto Para Voz</H2>
+        <div class="mt-4" id="div_language">
+                <h2 class="mb-3">Idioma</h2>
+            <div class="row">
+                <div class="col-sm-4">
+                    <select class="form-select bg-secondary text-light" id="select_language" ></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <select class="form-select bg-secondary text-light mt-2" id="select_dialect"></select>
                 </div>
 
             </div>
-            <!--'Botão funcionalidade-> navegação por teclado '-->
-            <div class="btn_geral" id="btn_keyboardnav">
-                <div class="btn_particular">
-                    <!--Mensagem que aparece no icon de informação-->
-                    <div class="info">
+          
+                <div class="row">
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-success btn-sm" id="start">Iniciar</button> </div>
+                        <div class="col-sm-2"><button type="button" class="btn btn-danger" id="stop">Parar</button></div>
+                        <div class="col-sm-2"><button type="button"  class="btn btn-primary" id="limpar">Limpar</button></div>
+                   
+                   </div>
+           
+                
+                
+                <p id="status" class="lead mt-3 text-light" style="display: none">A vouvir ...</p>
+</div>
+<br>
+<div id="hoverText">
+    <div id="results"></div>
+    <h2>Ampliador do Texto</h2>
+    <p>
+        <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum, velit, ipsa eos et distinctio veritatis, at a quaerat qui sapiente omnis suscipit assumenda vero vel dolores! Id pariatur aspernatur consequuntur!</span>
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam animi, in consequatur maxime cupiditate asperiores quam iusto quaerat autem consequuntur quae ipsum assumenda at rem minima veniam, libero minus amet!</span>
+    </p>
+</div>
+        
+ </div>
+<!--'Botão funcionalidade-> navegação por teclado '-->
+   <div class="btn_geral" id="btn_keyboardnav">
+    <div class="btn_particular">
+        <!--Mensagem que aparece no icon de informação-->
+    <div class="info">
 
-                        <span
-                            data-tooltip="Esta funcionalidade permite que o utilizador navegue na página através de teclado"
-                            data-tooltip-position="bottom"><i class="fas fa-info"></i></span>
-                    </div>
-                    <!--Fim de mensagem que aparece no icon de informação-->
+         <span data-tooltip="Esta funcionalidade permite que o utilizador navegue na página através de teclado" data-tooltip-position="bottom"><i class="fas fa-info"></i></span>
+    </div>
 
                     <!--Visto a verde que aparece quando a funcionalidade está ativa-->
                     <div class="check" id="keyboardNavCheck">
@@ -433,10 +448,16 @@
 
 
 
-                    <!--Novos menus de cabeçalho, fundo, conteudo-->
-                    <input type="radio" name="editaCor" value="cabecalho" class="editarCores" />Cabeçalho
-                    <input type="radio" name="editaCor" value="fundo" class="editarCores" />Fundo
-                    <input type="radio" name="editaCor" value="conteudo" class="editarCores" />Conteudo
+<!--Novos menus de cabeçalho, fundo, conteudo-->
+<div class="RadioCoresSeccao">
+<input type="radio" name="editaCor" value="cabecalho" id="cabecalho" class="editarCores"/>
+<label for="cabecalho">Cabeçalho</label>
+
+<input type="radio" name="editaCor" value="fundo" id="fundo" class="editarCores"/>
+<label for="fundo">Fundo</label>
+<input type="radio" name="editaCor" value="conteudo" id="conteudo" class="editarCores"/>
+<label for="conteudo">Conteudo</label>
+</div>
 
                     </br>
                     <div class="RadioCores">
@@ -467,7 +488,28 @@
                     </div>
                     <!--Fim dos novos menus de cabeçalho, fundo, conteudo-->
 
+<!--Inicio do slider de saturação-->
+      <div class="col-12 d-flex justify-content-center flex-wrap flex-row mb-3">
+            <div class="col-12 sub_titulo_nav mb-3">Saturação (<span id="saturation_percent">0</span>%)</div>
+            <div class="col-12 d-flex justify-content-between flex-wrap flex-row align-items-center lh-1">
+              <div class="trazzo col-10 col-md-10 col-lg-auto mx-auto"></div>
+              <div class="col-1 col-md-1 col-lg-auto lh-1 sat_less easy_basic_color d-flex justify-content-start align-items-center">-</div>
+              <div id="slider_saturation" class="lh-1 d-flex justify-content-center align-items-center col-10 col-md-10 col-lg-auto">
+                <!-- <div class="test"><br><br><br><br><br></div> -->
+                <input id="r" type="range" />
+              </div>
+              <div class="col-1 col-md-1 col-lg-auto text-end lh-1 sat_plus easy_basic_color d-flex justify-content-end align-items-center">+</div>
+            </div>
+          </div>
+<!--Fim do slider de saturação-->
 
+
+
+<!--Início do reset das cores-->
+<div class="ResetCores" id="ResetCores">
+  <p>Redefinir Cores</p>
+</div>
+<!--Fim do reset das cores-->
 
 
 
@@ -773,30 +815,50 @@
                                 tratados científicos, a humanidade lê e escreve textos. Mas, de fato, o que é um texto?
                             </span>
                         </div>
+                    </div>
+                </div>
+                <div id="google_translate_element" class="d-none"></div>
+            </div>
+            <!-- DICIONÁRIO -->
+            <div class="col-12 d-flex justify-content-center">
+                <a class="btn btn-outline-primary btn-lg" id="btnDicio" role="button">Ativar dicionário</a>
+            </div>
+            <h2 class="hasText">Texto para teste do dicionário</h2>
+            <div class="col-12 d-flex justify-content-center mt-3 ">
+                
+                <span class="hasText">
+                    A pergunta parece ingênua, mas você sabe o que é um texto? Passamos boa parte de nossos dias lendo
+                    os mais
+                    diversos textos, interpretando-os e reagindo a eles por meio de novos textos. Desde os textos mais
+                    corriqueiros, como placas de trânsito ou cumprimentos, até os mais elaborados, como as obras de arte
+                    ou
+                    tratados científicos, a humanidade lê e escreve textos. Mas, de fato, o que é um texto?
+                </span>
+            
+            </div>
 
-                        <div class="col-12 d-flex justify-content-center">
-                            <a class="btn btn-outline-primary btn-lg" id="btnTextSpeaker" role="button">Ativar
-                                reprodutor de texto</a>
-                        </div>
-                        <h2 class="hasText">Texto para teste do dicionário e reprodutor</h2>
-                        <div class="col-12 d-flex justify-content-center mt-3 ">
-                            <span class="hasText">
-                                A pergunta parece ingênua, mas você sabe o que é um texto? Passamos boa parte de nossos
-                                dias
-                                lendo
-                                os mais
-                                diversos textos, interpretando-os e reagindo a eles por meio de novos textos. Desde os
-                                textos mais
-                                corriqueiros, como placas de trânsito ou cumprimentos, até os mais elaborados, como as
-                                obras
-                                de arte
-                                ou
-                                tratados científicos, a humanidade lê e escreve textos. Mas, de fato, o que é um texto?
-                            </span>
-                        </div>
-
-                        <hr class="my-5">
-                        <!--
+            <div class="col-12 d-flex justify-content-center">
+                <a class="btn btn-outline-primary btn-lg" id="btnTextSpeaker" role="button">Ativar reprodutor de texto</a>
+            </div>
+            <h2 class="hasText">Texto para teste do dicionário e reprodutor</h2>
+            <div class="col-12 d-flex justify-content-center mt-3 ">
+                
+                <span class="hasText">
+                    A pergunta parece ingênua, mas você sabe o que é um texto? Passamos boa parte de nossos dias
+                    lendo
+                    os mais
+                    diversos textos, interpretando-os e reagindo a eles por meio de novos textos. Desde os
+                    textos mais
+                    corriqueiros, como placas de trânsito ou cumprimentos, até os mais elaborados, como as obras
+                    de arte
+                    ou
+                    tratados científicos, a humanidade lê e escreve textos. Mas, de fato, o que é um texto?
+                </span>
+            
+            </div>
+                    
+            <hr class="my-5">
+            <!--
     ANDERSON PLAYGROUND END
 -->
                         <!--
@@ -1399,6 +1461,7 @@ on our API rather than parse the HTML below, we have XML and JSON available.
                 <script src="src/colorsAdjustment/colorAdjustmentHeaders.js?v=1.0"></script>
                 <script src="src/colorsAdjustment/colorAdjustmentBackground.js?v=1.0"></script>
                 <script src="src/colorsAdjustment/colorAdjustmentContent.js?v=1.0"></script>
+                <script src="src/colorsAdjustment/colorAdjustmentResetColors.js?v=1.0"></script>
 
 
 
@@ -1436,8 +1499,11 @@ on our API rather than parse the HTML below, we have XML and JSON available.
                 <script type="module" src="src/VoiceTotext/VoiceToText.js"></script>
                 <script type="module" src="src/VoiceTotext/language.js"></script>
 
-                <!-- THE END -->
-                <!--
+<!---Script Ampliador de Texto-->
+<script type="module" src="src/AmpliadorDeTexto/ampliadottexto.js"></script>
+
+    <!-- THE END -->
+    <!--
 
     SE TIVEREM ALGUM COMENTÁRIO ADICIONAL QUE GOSTASSEM DE PARTILHAR, PFV ACEITEM ESTA ZONA COMO FORMA DE DIÁLOGO ENTRE NÓS, RELATIVAMENTE AO QUE VAI SENDO PRODUZIDO. POR VEZES HÁ COISAS, DÚVIDAS, SITUAÇÕES, QUE ENCONTRAMOS ENQUANTO ESTAMOS A PRODUZIR E PARA NÃO ESCAPAR NO MOMENTO TOMAMOS NOTA, EM VEZ DE CHATEAR O COLEGA DO LADO.
 
