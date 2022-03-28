@@ -137,14 +137,15 @@ $(".cores").on("change", function () {
   }
 });
 
-/*Range*/
+setTimeout(() => {
+  /*Range*/
 
-document.querySelector("#r").addEventListener("change", (e) => {
-  let number = parseInt(e.currentTarget.value);
-  console.log(number);
-  document.querySelector("#saturation_percent").textContent = number;
-});
-
+  document.querySelector("#r").addEventListener("change", (e) => {
+    let number = parseInt(e.currentTarget.value);
+    console.log(number);
+    document.querySelector("#saturation_percent").textContent = number;
+  });
+}, 5000);
 
 export const injectColorAdjustmentsBackgroundCss = `
 
@@ -189,6 +190,3 @@ export const injectColorAdjustmentsBackgroundCss = `
 }
 
 `;
-
-
-

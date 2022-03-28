@@ -42,9 +42,7 @@ import addListeners from "../src/utils/addListeners/addListeners.mjs";
 import { injectColorAdjustmentsCss } from "../src/colorsAdjustment/colorAdjustmentCss.mjs";
 import { injectColorAdjustmentsBackgroundCss } from "../src/colorsAdjustment/colorAdjustmentBackground.js";
 import { injectColorAdjustmentsContentCss } from "../src/colorsAdjustment/colorAdjustmentContent.js";
-import mudaCorCabecalho, {
-  injectColorAdjustmentsHeadersCss,
-} from "../src/colorsAdjustment/colorAdjustmentHeaders.js";
+import { injectColorAdjustmentsHeadersCss } from "../src/colorsAdjustment/colorAdjustmentHeaders.js";
 import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
 import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
 import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
@@ -189,8 +187,8 @@ export class Accessibility {
     // customTranslate.init();
     customTranslate(this);
 
-    // cor cabecalho
-    mudaCorCabecalho();
+    // // cor cabecalho
+    // mudaCorCabecalho();
 
     common.injectFont(this.options.icon.fontFaceSrc, () => {
       this.build();
@@ -672,6 +670,20 @@ export class Accessibility {
       <div class="input-color">
         <div class="color-box" style="background-color: #ff850a"></div>
       </div>
+      <!--Inicio do slider de saturação-->
+      <div class="col-12 d-flex justify-content-center flex-wrap flex-row mb-3">
+            <div class="col-12 sub_titulo_nav mb-3">Saturação (<span id="saturation_percent">0</span>%)</div>
+            <div class="col-12 d-flex justify-content-between flex-wrap flex-row align-items-center lh-1">
+              <div class="trazzo col-10 col-md-10 col-lg-auto mx-auto"></div>
+              <div class="col-1 col-md-1 col-lg-auto lh-1 sat_less easy_basic_color d-flex justify-content-start align-items-center">-</div>
+              <div id="slider_saturation" class="lh-1 d-flex justify-content-center align-items-center col-10 col-md-10 col-lg-auto">
+                <!-- <div class="test"><br><br><br><br><br></div> -->
+                <input id="r" type="range" />
+              </div>
+              <div class="col-1 col-md-1 col-lg-auto text-end lh-1 sat_plus easy_basic_color d-flex justify-content-end align-items-center">+</div>
+            </div>
+          </div>
+<!--Fim do slider de saturação-->
     </div>
     `;
   }
