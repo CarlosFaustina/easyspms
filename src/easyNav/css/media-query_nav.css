@@ -28,7 +28,6 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     left: 0px;
-    /*margin-left: 0px;*/
     margin-left: -314px;
     top: 0px !important;
     min-height: -webkit-fill-available;
@@ -39,6 +38,11 @@
   #icone_easy:hover {
     margin-left: 0px;
   }
+  #check_fora {
+    margin-top: 24px;
+    margin-right: -122px;
+    z-index: 1;
+  }
   #botao_fechar_easy {
     margin-right: 18px;
   }
@@ -47,7 +51,6 @@
     margin-top: 0.9em;
   }
   [type="range"]::-moz-range-track {
-    /* width: 250px; */
     width: auto;
   }
   .sat_plus,
