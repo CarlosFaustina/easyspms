@@ -21,8 +21,8 @@ import {
 import customTranslate, {
   customTranslateCss,
 } from "../src/customTranslate/customTranslate.mjs";
-import addHasText from "../src/addHasText/addHasText.mjs";
 import dicionario from "../src/dicionario/dicionario.mjs";
+import addHasText from "../src/addHasText/addHasText.mjs";
 import bigCursorWhite from "../src/bigCursorWhite/bigCursorWhite.mjs";
 import bigCursorBlack from "../src/bigCursorBlack/bigCursorBlack.mjs";
 import readingGuide from "../src/readingGuide/readingGuide.mjs";
@@ -152,9 +152,6 @@ let _options = {
 let self = null;
 export class Accessibility {
   constructor(options = {}) {
-    //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
-    addHasText(false);
-
     self = this;
     this.options = _options;
 
@@ -1401,12 +1398,12 @@ export class Accessibility {
       },
       dicionario: (destroy) => {
         //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
-        // addHasText(destroy);
+        addHasText(destroy);
         dicionario(this, destroy);
       },
       imageSpeaker: (destroy) => {
         //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
-        // addHasText(destroy);
+        addHasText(destroy);
         toogleImageSpeaker(this, destroy);
       },
       grayHues: (destroy) => {
