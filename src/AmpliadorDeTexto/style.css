@@ -1,32 +1,22 @@
-/*.tooltip{
-	position:absolute;
-	background-color:#eeeefe;
-	border: 1px solid #aaaaca;
-	font-size:larger;
-	padding:4px;
-	width: 160px;
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-	-moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
-	-webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);	
-}*/
+
+
+
 
 .tool-tip[title-new]:hover:after {
     content: attr(title-new);
     position:absolute;
-    display: inline;
-    top:-25 ;
-    
-    text-align: center;
-    max-width: auto;
+    display: inline-block;
+   
+  max-width: auto;
 	background-color:#262626;
 	border: 2px solid #ccc;
-/*	text-transform: uppercase;*/
+
     font-family: Arial;
-    font-size: 20px;
+    font-size: 26px;
     color: #fff;
     border-radius: 7.5px;
     max-height: auto;
-    z-index: 100;
+    z-index: 1;
     overflow: auto;
     padding: 10px 15px;
   }

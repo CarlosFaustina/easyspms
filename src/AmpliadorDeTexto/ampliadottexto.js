@@ -35,39 +35,61 @@ $(function () {
             end;
 
         //Fdeterminar o inicio da frase
-        while (i > 0 && data[i] !== ",") { --i; };
-        begin = i;
-
-        //determinar o fim da frase
-        i = offset;
-        while (i < data.length && data[i] !== ",") { ++i; };
-        end = i;
-
-       
-        return data.substring(begin, end);
+        //console.log(data);
+        try {
+          while (i > 0  && (data[i] !== " " && data[i] !== "." )) { --i; };
+          begin = i;
+  
+          //determinar o fim da frase
+          i = offset;
+          while (i < data.length && (data[i] !=="," && data[i] !== "."  )  ) { ++i; };
+          end = i;
+  
+         
+          return data.substring(begin, end);
+          
+        } catch (error) {
+          
+        }
+      
     }
 
     
-    var $hoverText = $("body").find('*');
+    var $hoverText = $("body").find('#hoverText');
     $hoverText.mousemove(function (e) {
         var word = getWordUnderCursor(e);
       //  var $this = $(this)[0].lastElementChild;
      /// elimarn virgulas e pontos nas frases
       var regex = /[.,\s]/g;
 
+     /*try {
       word = word.replace(regex,' ');
+     } catch (error) {
+       
+     }*/
   
        
         
       
         if (word !== "") 
+        
           
             if( $(this).find('span').length > 0 ){
+              //remover as classes nos filhos de span
+             if($(this).find('span').children().length>0){
+              $(this).find('span').children().each(function(i,el){
+               // $(el).removeClass('tool-tip');
+                //$(el).parent().addClass('tool-tip');
+              })
+             }else{
+              // console.log($(this));
               $(this).find('span').addClass('tool-tip');
+             }
+              
               //$('.tool-tip').attr('title-new',word)
               //console.log($(this));
             }else{
-              // se for a colleçao 
+              // se for uma colleçao 
               try {
               if($(this).length >1 ){
 
@@ -83,7 +105,7 @@ $(function () {
                       
                      
                     }else{
-                     
+                     // adicionar o elemento a classe mais proximo
                       $(item).closest().addClass('tool-tip');
                     }
                     
@@ -92,13 +114,15 @@ $(function () {
                  // $(this).addClass('tool-tip');
                  
                 }else{
+                  //se for elemento com filho
                   if($(this).children().length > 0 ){
                     $(this).children().each(function(index,item){
                     $(this).parent(item).removeClass('tool-tip');
-                       console.log($(this.children().length > 0));
+                      // console.log($(this.children().length > 0));
                     })
 
                   }else{
+                    //console.log('esta aqui');
                     $(this).addClass('tool-tip');
                   }
                 //  console.log(this);
