@@ -52,7 +52,7 @@ function _dicioHandleMouseLeave(event) {
 
 function _fetchMeaning(wordText) {
   fetch(
-    `https://significado.herokuapp.com/v2/${wordText
+    `http://167.99.12.227:3333/v2/${wordText
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase()}`,
