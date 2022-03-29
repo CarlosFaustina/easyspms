@@ -56,7 +56,11 @@ let dicio = {
       `https://significado.herokuapp.com/v2/${wordText
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()}`
+        .toLowerCase()}`,
+        {
+          method:'GET',
+          mode:"no-cors"
+        }
     ).then((response) => {
       response
         .json()

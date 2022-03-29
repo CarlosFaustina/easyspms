@@ -137,10 +137,56 @@ $(".cores").on("change", function () {
   }
 });
 
-/*Range*/
+setTimeout(() => {
+  /*Range*/
 
-document.querySelector("#r").addEventListener("change", (e) => {
-  let number = parseInt(e.currentTarget.value);
-  console.log(number);
-  document.querySelector("#saturation_percent").textContent = number;
-});
+  document.querySelector("#r").addEventListener("change", (e) => {
+    let number = parseInt(e.currentTarget.value);
+    console.log(number);
+    document.querySelector("#saturation_percent").textContent = number;
+  });
+}, 5000);
+
+export const injectColorAdjustmentsBackgroundCss = `
+
+.FundoVermelho span,
+.FundoVermelho div {
+  background-color: #e4111c;
+}
+
+.FundoAzul span,
+.FundoAzul div {
+  background-color: #06a1dd;
+}
+
+.FundoAmarelo span,
+.FundoAmarelo div {
+  background-color: #feef16;
+}
+
+.FundoRosa span,
+.FundoRosa div {
+  background-color: #e40d7d;
+}
+
+.FundoPreto span,
+.FundoPreto div {
+  background-color: #000000;
+}
+
+.FundoVerde span,
+.FundoVerde div {
+  background-color: #17963e;
+}
+
+.FundoRoxo span,
+.FundoRoxo div {
+  background-color: #312582;
+}
+
+.FundoBranco span,
+.FundoBranco div {
+  background-color: #ffffff;
+}
+
+`;

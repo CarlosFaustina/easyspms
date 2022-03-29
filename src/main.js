@@ -39,6 +39,10 @@ import alterTextSize from "../src/fontAdjustment/alternateTextSize.mjs";
 import linkHighlight from "../src/linkHighlight/linkHighlight.mjs";
 import textToSpeech from "../src/textToSpeech/textToSpeech.mjs";
 import addListeners from "../src/utils/addListeners/addListeners.mjs";
+import { injectColorAdjustmentsCss } from "../src/colorsAdjustment/colorAdjustmentCss.mjs";
+import { injectColorAdjustmentsBackgroundCss } from "../src/colorsAdjustment/colorAdjustmentBackground.js";
+import { injectColorAdjustmentsContentCss } from "../src/colorsAdjustment/colorAdjustmentContent.js";
+import { injectColorAdjustmentsHeadersCss } from "../src/colorsAdjustment/colorAdjustmentHeaders.js";
 import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
 import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
 import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
@@ -182,6 +186,10 @@ export class Accessibility {
 
     // customTranslate.init();
     customTranslate(this);
+
+    // // cor cabecalho
+    // mudaCorCabecalho();
+
     common.injectFont(this.options.icon.fontFaceSrc, () => {
       this.build();
     });
@@ -191,6 +199,11 @@ export class Accessibility {
   injectCss() {
     let css =
       `
+
+      ${injectColorAdjustmentsCss}
+      ${injectColorAdjustmentsBackgroundCss}
+      ${injectColorAdjustmentsContentCss}
+      ${injectColorAdjustmentsHeadersCss}
 
       ${customTranslateCss}
       ${keyboardCss}
@@ -272,14 +285,12 @@ export class Accessibility {
             -ms-user-select: none;
             user-select: none;
             position: fixed;
-            width: ${
-              this.options.menu.dimensions.width.size +
-              this.options.menu.dimensions.width.units
-            };
-            height: ${
-              this.options.menu.dimensions.height.size +
-              this.options.menu.dimensions.height.units
-            };
+            width: ${this.options.menu.dimensions.width.size +
+      this.options.menu.dimensions.width.units
+      };
+            height: ${this.options.menu.dimensions.height.size +
+      this.options.menu.dimensions.height.units
+      };
             transition-duration: .5s;
             z-index: ${this.options.icon.zIndex + 1};
             opacity: 1;
@@ -292,11 +303,10 @@ export class Accessibility {
             box-shadow: 0px 0px 1px #aaa;
             max-height: 100vh;
             overflow: auto;
-            ${
-              getComputedStyle(this.body).direction == "rtl"
-                ? "text-indent: -5px"
-                : ""
-            }
+            ${getComputedStyle(this.body).direction == "rtl"
+        ? "text-indent: -5px"
+        : ""
+      }
         }
         ._access-menu.close {
             z-index: -1;
@@ -314,19 +324,17 @@ export class Accessibility {
             left: 0;
         }
         ._access-menu.close.left {
-            left: -${
-              this.options.menu.dimensions.width.size +
-              this.options.menu.dimensions.width.units
-            };
+            left: -${this.options.menu.dimensions.width.size +
+      this.options.menu.dimensions.width.units
+      };
         }
         ._access-menu.right {
             right: 0;
         }
         ._access-menu.close.right {
-            right: -${
-              this.options.menu.dimensions.width.size +
-              this.options.menu.dimensions.width.units
-            };
+            right: -${this.options.menu.dimensions.width.size +
+      this.options.menu.dimensions.width.units
+      };
         }
         ._access-menu ._text-center {
             text-align: center;
@@ -349,11 +357,10 @@ export class Accessibility {
             transform: rotate(0deg);
         }
         ._access-menu ._menu-reset-btn:hover,._access-menu ._menu-close-btn:hover {
-            ${
-              this.options.animations.buttons
-                ? "transform: rotate(180deg);"
-                : ""
-            }
+            ${this.options.animations.buttons
+        ? "transform: rotate(180deg);"
+        : ""
+      }
         }
         ._access-menu ._menu-reset-btn {
             right: 5px;
@@ -404,9 +411,8 @@ export class Accessibility {
             text-align: center;
             transition-duration: .5s;
             transition-timing-function: ease-in-out;
-            font-size: ${
-              this.options.buttons.font.size + this.options.buttons.font.units
-            } !important;
+            font-size: ${this.options.buttons.font.size + this.options.buttons.font.units
+      } !important;
             
             text-indent: 5px;
             background: #f9f9f9;
@@ -504,6 +510,175 @@ export class Accessibility {
     this.body.appendChild(menuElem);
 
     return menuElem;
+  }
+
+  injectcolrAdjustments() {
+    const startingDiv = document.getElementById("color-adjustments");
+    startingDiv.innerHTML = `
+        <div class="btn_geral" id="btn_mudaCorCabecalho">
+      <div class="btn_particular">
+        <div class="info">
+          <span
+            data-tooltip="Esta funcionalidade permite que o utilizador mude a cor dos cabeçalhos"
+            data-tooltip-position="bottom"
+            ><i class="fas fa-info"></i
+          ></span>
+        </div>
+
+        <div class="check" id="mudaCorCabecalho">
+          
+        </div>
+      </div>
+
+      <div class="AdjustColorCabecalho" id="AdjustColorCabecalho">
+        <div class="input-color"></div>
+      </div>
+    </div>
+
+    <input
+      type="radio"
+      name="editaCor"
+      value="cabecalho"
+      class="editarCores"
+    />Cabeçalho
+    <input
+      type="radio"
+      name="editaCor"
+      value="fundo"
+      class="editarCores"
+    />Fundo
+    <input
+      type="radio"
+      name="editaCor"
+      value="conteudo"
+      class="editarCores"
+    />Conteudo
+
+    <br />
+    <div class="RadioCores">
+      <input
+        type="radio"
+        name="Cor"
+        id="corBranco"
+        value="white"
+        class="cores"
+      />
+      <label for="corBranco"></label>
+
+      <input
+        type="radio"
+        name="Cor"
+        id="corPreto"
+        value="black"
+        class="cores"
+      />
+      <label for="corPreto"></label>
+
+      <input
+        type="radio"
+        name="Cor"
+        id="corVerde"
+        value="green"
+        class="cores"
+      />
+      <label for="corVerde"></label>
+
+      <input
+        type="radio"
+        name="Cor"
+        id="corRoxo"
+        value="purple"
+        class="cores"
+      />
+      <label for="corRoxo"></label>
+
+      <input
+        type="radio"
+        name="Cor"
+        id="corVermelho"
+        value="red"
+        class="cores"
+      />
+      <label for="corVermelho"></label>
+
+      <input
+        type="radio"
+        name="Cor"
+        value="yellow"
+        id="corAmarelo"
+        class="cores"
+      />
+      <label for="corAmarelo"></label>
+
+      <input type="radio" name="Cor" id="corAzul" value="blue" class="cores" />
+      <label for="corAzul"></label>
+
+      <input type="radio" name="Cor" value="pink" id="corRosa" class="cores" />
+      <label for="corRosa"></label>
+    </div>
+
+    <div class="btn_geral" id="btn_mudaCorFundo">
+      <div class="btn_particular">
+        <div class="info">
+          <span
+            data-tooltip="Esta funcionalidade permite que o utilizador mude a cor dos fundos"
+            data-tooltip-position="bottom"
+            ><i class="fas fa-info"></i
+          ></span>
+        </div>
+
+        <div class="check" id="mudaCorFundo">
+          
+        </div>
+      </div>
+
+      <div id="AdjustColorFundo">
+        <p style="font-size: 10px">Fundo</p>
+      </div>
+
+      <div class="input-color">
+        <div class="color-box" style="background-color: #ff850a"></div>
+      </div>
+    </div>
+
+    <div class="btn_geral" id="btn_mudaCorConteudo">
+      <div class="btn_particular">
+        <div class="info">
+          <span
+            data-tooltip="Esta funcionalidade permite que o utilizador mude a cor do Conteudo"
+            data-tooltip-position="bottom"
+            ><i class="fas fa-info"></i
+          ></span>
+        </div>
+
+        <div class="check" id="mudaCorConteudo">
+          
+        </div>
+      </div>
+
+      <div id="AdjustColorConteudo">
+        <p style="font-size: 10px">Conteudo</p>
+      </div>
+
+      <div class="input-color">
+        <div class="color-box" style="background-color: #ff850a"></div>
+      </div>
+      <!--Inicio do slider de saturação-->
+      <div class="col-12 d-flex justify-content-center flex-wrap flex-row mb-3">
+            <div class="col-12 sub_titulo_nav mb-3">Saturação (<span id="saturation_percent">0</span>%)</div>
+            <div class="col-12 d-flex justify-content-between flex-wrap flex-row align-items-center lh-1">
+              <div class="trazzo col-10 col-md-10 col-lg-auto mx-auto"></div>
+              <div class="col-1 col-md-1 col-lg-auto lh-1 sat_less easy_basic_color d-flex justify-content-start align-items-center">-</div>
+              <div id="slider_saturation" class="lh-1 d-flex justify-content-center align-items-center col-10 col-md-10 col-lg-auto">
+                <!-- <div class="test"><br><br><br><br><br></div> -->
+                <input id="r" type="range" />
+              </div>
+              <div class="col-1 col-md-1 col-lg-auto text-end lh-1 sat_plus easy_basic_color d-flex justify-content-end align-items-center">+</div>
+            </div>
+          </div>
+<!--Fim do slider de saturação-->
+    </div>
+    `;
   }
 
   injectMenu() {
@@ -714,6 +889,13 @@ export class Accessibility {
               text: "Mostrar original",
             },
           ],
+        },
+        {
+          type: "div",
+          attrs: {
+            class: "d-block",
+            id: "color-adjustments",
+          },
         },
         {
           type: "ul",
@@ -1146,6 +1328,7 @@ export class Accessibility {
     this.injectTooltipBox();
     this.icon = this.injectIcon();
     this.menu = this.injectMenu();
+    this.injectcolrAdjustments();
     addListeners(this);
     disableUnsupportedModules(this);
 

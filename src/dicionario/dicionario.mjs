@@ -58,7 +58,11 @@ export default function dicionario(self, destroy) {
       `https://significado.herokuapp.com/v2/${wordText
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
-        .toLowerCase()}`
+        .toLowerCase()}`,
+      {
+        method: "GET",
+        mode: "no-cors",
+      }
     )
       .then((response) => response.json())
       .then((jsonResponse) => {
@@ -68,15 +72,14 @@ export default function dicionario(self, destroy) {
         console.log(accessibilityTootipBox[0]);
         accessibilityTootipBox[0].innerHTML = meanings;
         // o codoco a baixo, falha ===>>>
-        // let currentTopValue = parseInt(
-        //   accessibilityTootipBox.element.style.top
-        // );
-        // _setCustomStyleTootip({
-        //   top: `${
-        //     currentTopValue -
-        //     (accessibilityTootipBox.element.offsetHeight - 50)
-        //   }px`,
-        // });
+        let currentTopValue = parseInt(
+          accessibilityTootipBox[0].element.style.top
+        );
+        _setCustomStyleTootip({
+          top: `${currentTopValue -
+            (accessibilityTootipBox[0].element.offsetHeight - 50)
+            }px`,
+        });
       })
       .catch(() => {
         _setTootipText("Siginificado não foi localizado.!");
@@ -94,9 +97,8 @@ export default function dicionario(self, destroy) {
       accessibilityTootipBox[0].style.left = `${event.x + 20}px`;
       accessibilityTootipBox[0].style.right = "auto";
     } else {
-      accessibilityTootipBox[0].style.right = `${
-        window.innerWidth - event.x + 20
-      }px`;
+      accessibilityTootipBox[0].style.right = `${window.innerWidth - event.x + 20
+        }px`;
       accessibilityTootipBox[0].style.left = "auto";
     }
   }
@@ -163,8 +165,6 @@ export default function dicionario(self, destroy) {
       );
 
       for (const text of allTexts) {
-        console.log(allTexts);
-
         text.removeEventListener("mouseenter", _diciohandleMouseEnter);
         text.removeEventListener("mouseleave", _dicioHandleMouseLeave);
       }
