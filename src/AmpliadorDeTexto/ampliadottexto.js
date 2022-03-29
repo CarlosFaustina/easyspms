@@ -78,8 +78,8 @@ $(function () {
               //remover as classes nos filhos de span
              if($(this).find('span').children().length>0){
               $(this).find('span').children().each(function(i,el){
-               // $(el).removeClass('tool-tip');
-                //$(el).parent().addClass('tool-tip');
+                $(el).removeClass('tool-tip');
+                $(el).parent().addClass('tool-tip');
               })
              }else{
               // console.log($(this));
