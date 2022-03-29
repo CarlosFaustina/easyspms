@@ -52,29 +52,29 @@ function _dicioHandleMouseLeave(event) {
 
 function _fetchMeaning(wordText) {
   fetch(
-    `http://167.99.12.227:3333/v2/${wordText
+    `//167.99.12.227:3333/v2/${wordText
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()}`,
-    {
-      method: "GET",
-      mode: "no-cors",
-    }
+      .toLowerCase()}`
   )
-    .then((response) => response.json())
-    .then((jsonResponse) => {
-      console.log(jsonResponse);
-      let meanings = jsonResponse[0].meanings.slice(0, 3).join("<br>");
-      console.log(meanings);
-      console.log(accessibilityTootipBox[0]);
-      accessibilityTootipBox[0].innerHTML = meanings;
-      let currentTopValue = parseInt(
-        accessibilityTootipBox[0].element.style.top
-      );
-      _setCustomStyleTootip({
-        top: `${currentTopValue -
-          (accessibilityTootipBox[0].element.offsetHeight - 50)
-          }px`,
+    .then((response) => {
+      response.json().then((jsonResponse) => {
+
+        if (!!jsonResponse.length) {
+          let meanings = jsonResponse[0].meanings.slice(0, 3).join("<br>");
+          _setTootipText(meanings)
+          let currentTopValue = parseInt(
+            accessibilityTootipBox[0].style.top
+          );
+          _setCustomStyleTootip({
+            top: `${currentTopValue -
+              (accessibilityTootipBox[0].offsetHeight - 50)
+              }px`,
+          });
+        } else {
+          _setTootipText("Siginificado não foi localizado.!");
+        }
+
       });
     })
     .catch(() => {
@@ -120,11 +120,13 @@ function _setCustomStyleTootip(styles) {
 
 export default function dicionario(self, destroy) {
   const allTexts = document.querySelectorAll(".hasText");
+  const btnDicio = document
+    .querySelector('._access-menu [data-access-action="dicionario"]');
 
   if (destroy) {
-    document
-      .querySelector('._access-menu [data-access-action="dicionario"]')
-      .classList.remove("active");
+
+    btnDicio.classList.remove("active");
+    btnDicio.innerHTML = "Ativar Dicionário";
 
     self.initialValues.dicionario = false;
     self.sessionState.dicionario = false;
@@ -142,9 +144,8 @@ export default function dicionario(self, destroy) {
 
     return;
   } else {
-    document
-      .querySelector('._access-menu [data-access-action="dicionario"]')
-      .classList.toggle("active");
+    btnDicio.classList.toggle("active");
+
     self.initialValues.dicionario = !self.initialValues.dicionario;
     self.sessionState.dicionario = self.initialValues.dicionario;
     // self.onChange(true);
@@ -162,7 +163,7 @@ export default function dicionario(self, destroy) {
       console.log(
         "============>>>>>>>>>>>>>>>>>>>>>>>>OFF<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<======================="
       );
-
+      btnDicio.innerHTML = "Ativar Dicionário";
       for (const text of allTexts) {
         text.removeEventListener("mouseenter", _diciohandleMouseEnter);
         text.removeEventListener("mouseleave", _dicioHandleMouseLeave);
