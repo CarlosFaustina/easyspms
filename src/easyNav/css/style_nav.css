@@ -415,7 +415,6 @@ BEGIN RANGE
 [type="range"]::-moz-range-track {
   box-sizing: border-box;
   border: none;
-  /* width: 381px; */
   width: auto;
   height: 2px;
   background: #ccc;
@@ -568,7 +567,6 @@ BEGIN DESATIVA
   line-height: 1;
   font-weight: 700;
   margin-top: 12px;
-  /* padding-bottom: 8px; */
 }
 .nav_fundo_copy span {
   font-size: 12px;
@@ -673,8 +671,8 @@ END DESATIVA
   background-repeat: no-repeat;
   background-size: contain;
   background-origin: border-box;
-  margin-top: 32px;
-  margin-right: -116px;
+  margin-top: 24px;
+  margin-right: -122px;
   z-index: 1;
 }
 /* END ANIMAÇÕES  */
