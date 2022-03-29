@@ -165,8 +165,6 @@ export default function dicionario(self, destroy) {
       );
 
       for (const text of allTexts) {
-        console.log(allTexts);
-
         text.removeEventListener("mouseenter", _diciohandleMouseEnter);
         text.removeEventListener("mouseleave", _dicioHandleMouseLeave);
       }

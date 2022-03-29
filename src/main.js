@@ -21,8 +21,8 @@ import {
 import customTranslate, {
   customTranslateCss,
 } from "../src/customTranslate/customTranslate.mjs";
-import dicionario from "../src/dicionario/dicionario.mjs";
 import addHasText from "../src/addHasText/addHasText.mjs";
+import dicionario from "../src/dicionario/dicionario.mjs";
 import bigCursorWhite from "../src/bigCursorWhite/bigCursorWhite.mjs";
 import bigCursorBlack from "../src/bigCursorBlack/bigCursorBlack.mjs";
 import readingGuide from "../src/readingGuide/readingGuide.mjs";
@@ -152,6 +152,9 @@ let _options = {
 let self = null;
 export class Accessibility {
   constructor(options = {}) {
+    //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
+    addHasText(false);
+
     self = this;
     this.options = _options;
 
@@ -285,14 +288,12 @@ export class Accessibility {
             -ms-user-select: none;
             user-select: none;
             position: fixed;
-            width: ${
-              this.options.menu.dimensions.width.size +
-              this.options.menu.dimensions.width.units
-            };
-            height: ${
-              this.options.menu.dimensions.height.size +
-              this.options.menu.dimensions.height.units
-            };
+            width: ${this.options.menu.dimensions.width.size +
+      this.options.menu.dimensions.width.units
+      };
+            height: ${this.options.menu.dimensions.height.size +
+      this.options.menu.dimensions.height.units
+      };
             transition-duration: .5s;
             z-index: ${this.options.icon.zIndex + 1};
             opacity: 1;
@@ -305,11 +306,10 @@ export class Accessibility {
             box-shadow: 0px 0px 1px #aaa;
             max-height: 100vh;
             overflow: auto;
-            ${
-              getComputedStyle(this.body).direction == "rtl"
-                ? "text-indent: -5px"
-                : ""
-            }
+            ${getComputedStyle(this.body).direction == "rtl"
+        ? "text-indent: -5px"
+        : ""
+      }
         }
         ._access-menu.close {
             z-index: -1;
@@ -327,19 +327,17 @@ export class Accessibility {
             left: 0;
         }
         ._access-menu.close.left {
-            left: -${
-              this.options.menu.dimensions.width.size +
-              this.options.menu.dimensions.width.units
-            };
+            left: -${this.options.menu.dimensions.width.size +
+      this.options.menu.dimensions.width.units
+      };
         }
         ._access-menu.right {
             right: 0;
         }
         ._access-menu.close.right {
-            right: -${
-              this.options.menu.dimensions.width.size +
-              this.options.menu.dimensions.width.units
-            };
+            right: -${this.options.menu.dimensions.width.size +
+      this.options.menu.dimensions.width.units
+      };
         }
         ._access-menu ._text-center {
             text-align: center;
@@ -362,11 +360,10 @@ export class Accessibility {
             transform: rotate(0deg);
         }
         ._access-menu ._menu-reset-btn:hover,._access-menu ._menu-close-btn:hover {
-            ${
-              this.options.animations.buttons
-                ? "transform: rotate(180deg);"
-                : ""
-            }
+            ${this.options.animations.buttons
+        ? "transform: rotate(180deg);"
+        : ""
+      }
         }
         ._access-menu ._menu-reset-btn {
             right: 5px;
@@ -417,9 +414,8 @@ export class Accessibility {
             text-align: center;
             transition-duration: .5s;
             transition-timing-function: ease-in-out;
-            font-size: ${
-              this.options.buttons.font.size + this.options.buttons.font.units
-            } !important;
+            font-size: ${this.options.buttons.font.size + this.options.buttons.font.units
+      } !important;
             
             text-indent: 5px;
             background: #f9f9f9;
@@ -1405,12 +1401,12 @@ export class Accessibility {
       },
       dicionario: (destroy) => {
         //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
-        addHasText(destroy);
+        // addHasText(destroy);
         dicionario(this, destroy);
       },
       imageSpeaker: (destroy) => {
         //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
-        addHasText(destroy);
+        // addHasText(destroy);
         toogleImageSpeaker(this, destroy);
       },
       grayHues: (destroy) => {
