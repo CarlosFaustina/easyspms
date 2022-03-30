@@ -40,10 +40,16 @@ import alterTextSize from "../src/fontAdjustment/alternateTextSize.mjs";
 import linkHighlight from "../src/linkHighlight/linkHighlight.mjs";
 import textToSpeech from "../src/textToSpeech/textToSpeech.mjs";
 import addListeners from "../src/utils/addListeners/addListeners.mjs";
-// import { injectColorAdjustmentsCss } from "../src/colorsAdjustment/colorAdjustmentCss.mjs";
-// import { injectColorAdjustmentsBackgroundCss } from "../src/colorsAdjustment/colorAdjustmentBackground.js";
-// import { injectColorAdjustmentsContentCss } from "../src/colorsAdjustment/colorAdjustmentContent.js";
-// import { injectColorAdjustmentsHeadersCss } from "../src/colorsAdjustment/colorAdjustmentHeaders.js";
+import { injectColorAdjustmentsCss } from "./colorAdjustments/colorAdjustmentCss.mjs";
+import mudaCorFundo, {
+  injectColorAdjustmentsBackgroundCss,
+} from "./colorAdjustments/colorAdjustmentBackground.mjs";
+import mudaCorConteudo, {
+  injectColorAdjustmentsContentCss,
+} from "./colorAdjustments/colorAdjustmentContent.mjs";
+import mudaCorCabecalho, {
+  injectColorAdjustmentsHeadersCss,
+} from "./colorAdjustments/colorAdjustmentHeaders.mjs";
 import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
 import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
 import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
@@ -191,23 +197,20 @@ export class Accessibility {
     // customTranslate.init();
     customTranslate(this);
 
-    // // cor cabecalho
-    // mudaCorCabecalho();
-
     common.injectFont(this.options.icon.fontFaceSrc, () => {
       this.build();
     });
   }
 
-  // ${injectColorAdjustmentsCss}
-  // ${injectColorAdjustmentsBackgroundCss}
-  // ${injectColorAdjustmentsContentCss}
-  // ${injectColorAdjustmentsHeadersCss}
   //injetar estilos
   injectCss() {
     let css =
       `
-
+    
+    ${injectColorAdjustmentsCss}
+    ${injectColorAdjustmentsBackgroundCss}
+    ${injectColorAdjustmentsContentCss}
+    ${injectColorAdjustmentsHeadersCss}
 
       ${customTranslateCss}
       ${keyboardCss}
@@ -1215,7 +1218,7 @@ export class Accessibility {
 
   resetAll() {
     //window.location.reload();
-    this.menuInterface.leiaFocus(true);
+    // this.menuInterface.leiaFocus(true);
     this.menuInterface.textToSpeech(true);
     this.menuInterface.speechToText(true);
     this.menuInterface.linkHighlight(true);
@@ -1228,6 +1231,14 @@ export class Accessibility {
     resetLineHeight(this);
     resetTextSize(this);
     resetTextSpace(this);
+    // cor cabecalho
+    mudaCorCabecalho(this, true);
+
+    // cor mudaCorFundo
+    mudaCorFundo(this, true);
+
+    // cor mudaCorConteudo
+    mudaCorConteudo(this, true);
     for (let i of document.querySelectorAll("._access-menu ul li.active")) {
       i.classList.remove("active");
     }
@@ -1358,6 +1369,15 @@ export class Accessibility {
     this.injectcolrAdjustments();
     addListeners(this);
     disableUnsupportedModules(this);
+
+    // cor cabecalho
+    mudaCorCabecalho();
+
+    // cor mudaCorFundo
+    mudaCorFundo();
+
+    // cor mudaCorConteudo
+    mudaCorConteudo();
 
     if (this.options.hotkeys.enabled) {
       document.onkeydown = function (e) {

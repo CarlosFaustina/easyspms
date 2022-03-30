@@ -80,7 +80,7 @@ export default function leiaFocus(self, destroy) {
 
     document.getElementById("divMascara").style.visibility = "hidden";
     document.getElementById("divMascara2").style.visibility = "hidden";
-    window.removeEventListener("mousemove");
+    window.removeEventListener("mousemove"); //gere o erro. falta segundo argumento. Em principio a funcao quale foi chamada para addEventListener
     return;
   }
 
