@@ -1,6 +1,8 @@
 const path = require("path");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+var webpack = require("webpack");
+
 module.exports = {
   entry: "./src/accessibility.js",
   mode: "production",
@@ -10,7 +12,13 @@ module.exports = {
     libraryTarget: "umd",
     auxiliaryComment: "accessibility output",
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+  })
+  ],
   module: {
     rules: [
       {
