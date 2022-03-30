@@ -132,52 +132,51 @@ $(".cores").on("change", function () {
   }
 });
 
-export const injectColorAdjustmentsContentCss = `
-.ConteudoAmarelo p,
-.ConteudoAmarelo span,
-.ConteudoAmarelo li {
-  color: #feef16;
-}
+// export const injectColorAdjustmentsContentCss = `
+// .ConteudoAmarelo p,
+// .ConteudoAmarelo span,
+// .ConteudoAmarelo li {
+//   color: #feef16;
+// }
 
-.ConteudoVermelho p,
-.ConteudoVermelho span,
-.ConteudoVermelho li {
-  color: #e4111c;
-}
-.ConteudoRosa p,
-.ConteudoRosa span,
-.ConteudoRosa li {
-  color: #e40d7d;
-}
-.ConteudoAzul p,
-.ConteudoAzul span,
-.ConteudoAzul li {
-  color: #06a1dd;
-}
+// .ConteudoVermelho p,
+// .ConteudoVermelho span,
+// .ConteudoVermelho li {
+//   color: #e4111c;
+// }
+// .ConteudoRosa p,
+// .ConteudoRosa span,
+// .ConteudoRosa li {
+//   color: #e40d7d;
+// }
+// .ConteudoAzul p,
+// .ConteudoAzul span,
+// .ConteudoAzul li {
+//   color: #06a1dd;
+// }
 
-.ConteudoPreto p,
-.ConteudoPreto span,
-.ConteudoPreto li {
-  color: #000000;
-}
+// .ConteudoPreto p,
+// .ConteudoPreto span,
+// .ConteudoPreto li {
+//   color: #000000;
+// }
 
-.ConteudoVerde p,
-.ConteudoVerde span,
-.ConteudoVerde li {
-  color: #17963e;
-}
+// .ConteudoVerde p,
+// .ConteudoVerde span,
+// .ConteudoVerde li {
+//   color: #17963e;
+// }
 
-.ConteudoRoxo p,
-.ConteudoRoxo span,
-.ConteudoRoxo li {
-  color: #312582;
-}
+// .ConteudoRoxo p,
+// .ConteudoRoxo span,
+// .ConteudoRoxo li {
+//   color: #312582;
+// }
 
-.ConteudoBranco p,
-.ConteudoBranco span,
-.ConteudoBranco li {
-  color: #ffffff;
-}
+// .ConteudoBranco p,
+// .ConteudoBranco span,
+// .ConteudoBranco li {
+//   color: #ffffff;
+// }
 
-
-`;
+// `;

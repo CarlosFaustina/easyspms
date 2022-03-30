@@ -147,46 +147,46 @@ setTimeout(() => {
   });
 }, 5000);
 
-export const injectColorAdjustmentsBackgroundCss = `
+// export const injectColorAdjustmentsBackgroundCss = `
 
-.FundoVermelho span,
-.FundoVermelho div {
-  background-color: #e4111c;
-}
+// .FundoVermelho span,
+// .FundoVermelho div {
+//   background-color: #e4111c;
+// }
 
-.FundoAzul span,
-.FundoAzul div {
-  background-color: #06a1dd;
-}
+// .FundoAzul span,
+// .FundoAzul div {
+//   background-color: #06a1dd;
+// }
 
-.FundoAmarelo span,
-.FundoAmarelo div {
-  background-color: #feef16;
-}
+// .FundoAmarelo span,
+// .FundoAmarelo div {
+//   background-color: #feef16;
+// }
 
-.FundoRosa span,
-.FundoRosa div {
-  background-color: #e40d7d;
-}
+// .FundoRosa span,
+// .FundoRosa div {
+//   background-color: #e40d7d;
+// }
 
-.FundoPreto span,
-.FundoPreto div {
-  background-color: #000000;
-}
+// .FundoPreto span,
+// .FundoPreto div {
+//   background-color: #000000;
+// }
 
-.FundoVerde span,
-.FundoVerde div {
-  background-color: #17963e;
-}
+// .FundoVerde span,
+// .FundoVerde div {
+//   background-color: #17963e;
+// }
 
-.FundoRoxo span,
-.FundoRoxo div {
-  background-color: #312582;
-}
+// .FundoRoxo span,
+// .FundoRoxo div {
+//   background-color: #312582;
+// }
 
-.FundoBranco span,
-.FundoBranco div {
-  background-color: #ffffff;
-}
+// .FundoBranco span,
+// .FundoBranco div {
+//   background-color: #ffffff;
+// }
 
-`;
+// `;

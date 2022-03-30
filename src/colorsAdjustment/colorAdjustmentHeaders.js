@@ -132,79 +132,79 @@ $(".cores").on("change", function () {
   }
 });
 
-export const injectColorAdjustmentsHeadersCss = `
-/*
-.AdjustColorCabecalho h1,
-.AdjustColorCabecalho h2,
-.AdjustColorCabecalho h3,
-.AdjustColorCabecalho h4,
-.AdjustColorCabecalho h5 {
-  background-color: orange;
-}
-*/
+// export const injectColorAdjustmentsHeadersCss = `
+// /*
+// .AdjustColorCabecalho h1,
+// .AdjustColorCabecalho h2,
+// .AdjustColorCabecalho h3,
+// .AdjustColorCabecalho h4,
+// .AdjustColorCabecalho h5 {
+//   background-color: orange;
+// }
+// */
 
-.HeaderVermelho h1,
-.HeaderVermelho h2,
-.HeaderVermelho h3,
-.HeaderVermelho h4,
-.HeaderVermelho h5 {
-  color: #e4111c;
-}
+// .HeaderVermelho h1,
+// .HeaderVermelho h2,
+// .HeaderVermelho h3,
+// .HeaderVermelho h4,
+// .HeaderVermelho h5 {
+//   color: #e4111c;
+// }
 
-.HeaderAzul h1,
-.HeaderAzul h2,
-.HeaderAzul h3,
-.HeaderAzul h4,
-.HeaderAzul h5 {
-  color: #06a1dd;
-}
+// .HeaderAzul h1,
+// .HeaderAzul h2,
+// .HeaderAzul h3,
+// .HeaderAzul h4,
+// .HeaderAzul h5 {
+//   color: #06a1dd;
+// }
 
-.HeaderAmarelo h1,
-.HeaderAmarelo h2,
-.HeaderAmarelo h3,
-.HeaderAmarelo h4,
-.HeaderAmarelo h5 {
-  color: #feef16;
-}
+// .HeaderAmarelo h1,
+// .HeaderAmarelo h2,
+// .HeaderAmarelo h3,
+// .HeaderAmarelo h4,
+// .HeaderAmarelo h5 {
+//   color: #feef16;
+// }
 
-.HeaderRosa h1,
-.HeaderRosa h2,
-.HeaderRosa h3,
-.HeaderRosa h4,
-.HeaderRosa h5 {
-  color: #e40d7d;
-}
+// .HeaderRosa h1,
+// .HeaderRosa h2,
+// .HeaderRosa h3,
+// .HeaderRosa h4,
+// .HeaderRosa h5 {
+//   color: #e40d7d;
+// }
 
-.HeaderPreto h1,
-.HeaderPreto h2,
-.HeaderPreto h3,
-.HeaderPreto h4,
-.HeaderPreto h5 {
-  color: #000000;
-}
+// .HeaderPreto h1,
+// .HeaderPreto h2,
+// .HeaderPreto h3,
+// .HeaderPreto h4,
+// .HeaderPreto h5 {
+//   color: #000000;
+// }
 
-.HeaderVerde h1,
-.HeaderVerde h2,
-.HeaderVerde h3,
-.HeaderVerde h4,
-.HeaderVerde h5 {
-  color: #17963e;
-}
+// .HeaderVerde h1,
+// .HeaderVerde h2,
+// .HeaderVerde h3,
+// .HeaderVerde h4,
+// .HeaderVerde h5 {
+//   color: #17963e;
+// }
 
-.HeaderRoxo h1,
-.HeaderRoxo h2,
-.HeaderRoxo h3,
-.HeaderRoxo h4,
-.HeaderRoxo h5 {
-  color: #312582;
-}
+// .HeaderRoxo h1,
+// .HeaderRoxo h2,
+// .HeaderRoxo h3,
+// .HeaderRoxo h4,
+// .HeaderRoxo h5 {
+//   color: #312582;
+// }
 
-.HeaderBranco h1,
-.HeaderBranco h2,
-.HeaderBranco h3,
-.HeaderBranco h4,
-.HeaderBranco h5 {
-  color: #ffffff;
-}
+// .HeaderBranco h1,
+// .HeaderBranco h2,
+// .HeaderBranco h3,
+// .HeaderBranco h4,
+// .HeaderBranco h5 {
+//   color: #ffffff;
+// }
 
-`;
+// `;
