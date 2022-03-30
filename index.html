@@ -320,14 +320,24 @@
                                             id="select_dialect"></select>
                                     </div>
 
+                                </div >
+            <div class="row"> <!-- Alertas-->
+                <div class="col-sm-6">
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+                            <span class="show_info"></span>
+                      </div>
+                </div>
+               
             </div>
-            <h2 class="mt-4 text-light">Transcriçao</h2>
+          
+            <h2 class="mt-4">Transcriçao</h2>
             <div class="row">
                 <div class="col-sm-6">
                     
                         <div class="p-3" style="border: 1px solid gray; height: 300px; border-radius: 8px;">
-                            <span id="final" ></span>
-                            <span id="interim"></span>
+                            <p id="final" ></p>
+                            <p id="interim"></p>
                 
                 </div>
 
@@ -339,12 +349,12 @@
                         <div class="col-sm-2"><button type="button" class="btn btn-danger" id="stop">Parar</button></div>
                         <div class="col-sm-2"><button type="button"  class="btn btn-primary" id="limpar">Limpar</button></div>
                    
-                   </div>
+                    </div>
            
                 
                 
-                <p id="status" class="lead mt-3 text-light" style="display: none">A vouvir ...</p>
-</div>
+                    <p id="status" class="lead mt-3 text-light" style="display: none">A vouvir ...</p>
+                </div>  
 <br>
 <div id="hoverText">
     <div id="results"></div>
@@ -365,34 +375,14 @@
          <span data-tooltip="Esta funcionalidade permite que o utilizador navegue na página através de teclado" data-tooltip-position="bottom"><i class="fas fa-info"></i></span>
     </div>
 
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <button type="button" class="btn btn-success btn-sm" id="start">Iniciar</button>
-                                    </div>
-                                    <div class="col-sm-2"><button type="button" class="btn btn-danger"
-                                            id="stop">Parar</button></div>
-                                    <div class="col-sm-2"><button type="button" class="btn btn-primary"
-                                            id="limpar">Limpar</button></div>
-
-                                </div>
+                              
 
 
 
-                                <p id="status" class="lead mt-3 text-light" style="display: none">A vouvir ...</p>
+                                
                             </div>
                             <br>
-                            <div id="hoverText">
-                                <div id="results"></div>
-                                <h2>Ampliador do Texto</h2>
-                                <p>
-                                    <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum, velit, ipsa
-                                        eos et distinctio veritatis, at a quaerat qui sapiente omnis suscipit assumenda
-                                        vero vel dolores! Id pariatur aspernatur consequuntur!</span>
-                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam animi, in
-                                        consequatur maxime cupiditate asperiores quam iusto quaerat autem consequuntur
-                                        quae ipsum assumenda at rem minima veniam, libero minus amet!</span>
-                                </p>
-                            </div>
+                          
 
                         </div>
                         <!--'Botão funcionalidade-> navegação por teclado '-->

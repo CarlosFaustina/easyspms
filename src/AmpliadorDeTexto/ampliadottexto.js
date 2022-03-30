@@ -24,6 +24,7 @@ $(function () {
             textNode = range.startContainer;
             offset = range.startOffset;
         }else{
+          alert('Browser nao suportado');
 
         }
 
@@ -49,7 +50,7 @@ $(function () {
           return data.substring(begin, end);
           
         } catch (error) {
-          
+          console.log('campo sem texto');
         }
       
     }
@@ -105,7 +106,7 @@ $(function () {
                       
                      
                     }else{
-                     // adicionar o elemento a classe mais proximo
+                     // adicionar o elemento na classe mais proximo
                       $(item).closest().addClass('tool-tip');
                     }
                     

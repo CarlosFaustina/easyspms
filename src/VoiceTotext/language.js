@@ -88,3 +88,4 @@ function updateCountry() {
   }
   select_dialect.style.visibility = list[1].length == 1 ? "hidden" : "visible";
 }
+document.querySelector('#select_language').addEventListener('change',updateCountry);
