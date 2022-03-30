@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", function () {
   vai_buscar_uma_data_ano.innerHTML = vai_buscar_uma_data("vai_buscar_uma_data_ano");
 
   /* OPEN EASY W/ ANIMATION - JQUERY*/
-  $("#icone_easy").click(function () {
+  $("#botao_easy").click(function () {
     const _isItMobile = screen.width <= 960;
     if (!_isItMobile) {
       desktop();
@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded", function () {
       );
       $("#botao_easy").animate(
         {
-          left: "469px",
+          left: "389px",
         },
         250
       );
@@ -49,13 +49,13 @@ window.addEventListener("DOMContentLoaded", function () {
     function mobile() {
       $("#nav_easy").animate(
         {
-          left: "0px",
+          left: "314px",
         },
         500
       );
       $("#botao_easy").animate(
         {
-          left: "334px",
+          left: "-200px",
         },
         250
       );
@@ -82,7 +82,7 @@ window.addEventListener("DOMContentLoaded", function () {
       );
       $("#botao_easy").animate(
         {
-          left: "0",
+          left: "-81px",
         },
         100
       );
@@ -91,13 +91,14 @@ window.addEventListener("DOMContentLoaded", function () {
     function mobile() {
       $("#nav_easy").animate(
         {
-          left: "-350px",
+          left: "-314px",
         },
         500
       );
+
       $("#botao_easy").animate(
         {
-          left: "25px",
+          left: "-81px",
         },
         100
       );
