@@ -15,10 +15,13 @@ export default function leiaFocus(self, destroy) {
   document.getElementsByTagName("body")[0].appendChild(divFocus);
   document.getElementsByTagName("body")[0].appendChild(divMascara);
   document.getElementsByTagName("body")[0].appendChild(divMascara2);
+    document.getElementById("divMascara").style.opacity = "10%";
+  document.getElementById("divMascara2").style.opacity = "10%";
 
-  document.getElementById("divMascara").style.opacity = "75%";
-  document.getElementById("divMascara2").style.opacity = "75%";
 
+  document.getElementById("divMascara2").style.transitionDuration = "2s";
+  document.getElementById("divMascara").style.transitionDuration = "2s";
+  
   document.getElementById("divMascara").style.background = "rgb(95, 95, 95)";
   document.getElementById("divMascara2").style.background = "rgb(95, 95, 95)";
 
@@ -55,7 +58,8 @@ export default function leiaFocus(self, destroy) {
   document.getElementById("divMascara2").style.height = "100%";
 
   // const cursor = document.querySelector(".cursor");
-
+  document.getElementById("divMascara").style.opacity = "75%";
+  document.getElementById("divMascara2").style.opacity = "75%";
   window.addEventListener("mousemove", (e) => {
     // cursor.style.left = (e.x-100)+"px";// para poder mover no eixo X.
 
