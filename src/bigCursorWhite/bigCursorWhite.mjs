@@ -2,6 +2,7 @@ export default function bigCursorWhite(self, destroy) {
   if (self.sessionState.bigCursorBlack) {
     self.menuInterface.bigCursorBlack(true);
   }
+
   if (destroy) {
     self.html.classList.remove("_access_cursor_white");
     document

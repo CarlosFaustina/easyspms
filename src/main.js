@@ -21,6 +21,7 @@ import {
 import customTranslate, {
   customTranslateCss,
 } from "../src/customTranslate/customTranslate.mjs";
+import leiaFocus from "../src/leiaFocus/leiaFocus.mjs";
 import dicionario from "../src/dicionario/dicionario.mjs";
 import addHasText from "../src/addHasText/addHasText.mjs";
 import bigCursorWhite from "../src/bigCursorWhite/bigCursorWhite.mjs";
@@ -40,10 +41,16 @@ import linkHighlight from "../src/linkHighlight/linkHighlight.mjs";
 import textToSpeech from "../src/textToSpeech/textToSpeech.mjs";
 import ampliadorTexto from "../src/AmpliadorDeTexto/ampliadottexto";
 import addListeners from "../src/utils/addListeners/addListeners.mjs";
-import { injectColorAdjustmentsCss } from "../src/colorsAdjustment/colorAdjustmentCss.mjs";
-import { injectColorAdjustmentsBackgroundCss } from "../src/colorsAdjustment/colorAdjustmentBackground.js";
-import { injectColorAdjustmentsContentCss } from "../src/colorsAdjustment/colorAdjustmentContent.js";
-import { injectColorAdjustmentsHeadersCss } from "../src/colorsAdjustment/colorAdjustmentHeaders.js";
+import { injectColorAdjustmentsCss } from "./colorAdjustments/colorAdjustmentCss.mjs";
+import mudaCorFundo, {
+  injectColorAdjustmentsBackgroundCss,
+} from "./colorAdjustments/colorAdjustmentBackground.mjs";
+import mudaCorConteudo, {
+  injectColorAdjustmentsContentCss,
+} from "./colorAdjustments/colorAdjustmentContent.mjs";
+import mudaCorCabecalho, {
+  injectColorAdjustmentsHeadersCss,
+} from "./colorAdjustments/colorAdjustmentHeaders.mjs";
 import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
 import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
 import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
@@ -101,6 +108,7 @@ let _options = {
     fontFamily: "RobotoDraft, Roboto, sans-serif, Arial",
   },
   labels: {
+    leiaFocus: "leiaFocus",
     resetTitle: "Redefinir",
     closeTitle: "Fechar",
     menuTitle: "Opções de accessibilidade",
@@ -128,6 +136,7 @@ let _options = {
     buttons: true,
   },
   modules: {
+    leiaFocus: true,
     dicionario: true,
     customTranslate: true,
     keyboardNav: true,
@@ -170,6 +179,7 @@ export class Accessibility {
 
     disabledUnsupportedFeatures(this);
     this.sessionState = {
+      leiaFocus: false,
       dicionario: false,
       customTranslate: false,
       keyboardNav: false,
@@ -191,9 +201,6 @@ export class Accessibility {
     // customTranslate.init();
     customTranslate(this);
 
-    // // cor cabecalho
-    // mudaCorCabecalho();
-
     common.injectFont(this.options.icon.fontFaceSrc, () => {
       this.build();
     });
@@ -203,11 +210,11 @@ export class Accessibility {
   injectCss() {
     let css =
       `
-
-      ${injectColorAdjustmentsCss}
-      ${injectColorAdjustmentsBackgroundCss}
-      ${injectColorAdjustmentsContentCss}
-      ${injectColorAdjustmentsHeadersCss}
+    
+    ${injectColorAdjustmentsCss}
+    ${injectColorAdjustmentsBackgroundCss}
+    ${injectColorAdjustmentsContentCss}
+    ${injectColorAdjustmentsHeadersCss}
 
       ${customTranslateCss}
       ${keyboardCss}
@@ -289,12 +296,14 @@ export class Accessibility {
             -ms-user-select: none;
             user-select: none;
             position: fixed;
-            width: ${this.options.menu.dimensions.width.size +
-      this.options.menu.dimensions.width.units
-      };
-            height: ${this.options.menu.dimensions.height.size +
-      this.options.menu.dimensions.height.units
-      };
+            width: ${
+              this.options.menu.dimensions.width.size +
+              this.options.menu.dimensions.width.units
+            };
+            height: ${
+              this.options.menu.dimensions.height.size +
+              this.options.menu.dimensions.height.units
+            };
             transition-duration: .5s;
             z-index: ${this.options.icon.zIndex + 1};
             opacity: 1;
@@ -307,10 +316,11 @@ export class Accessibility {
             box-shadow: 0px 0px 1px #aaa;
             max-height: 100vh;
             overflow: auto;
-            ${getComputedStyle(this.body).direction == "rtl"
-        ? "text-indent: -5px"
-        : ""
-      }
+            ${
+              getComputedStyle(this.body).direction == "rtl"
+                ? "text-indent: -5px"
+                : ""
+            }
         }
         ._access-menu.close {
             z-index: -1;
@@ -328,17 +338,19 @@ export class Accessibility {
             left: 0;
         }
         ._access-menu.close.left {
-            left: -${this.options.menu.dimensions.width.size +
-      this.options.menu.dimensions.width.units
-      };
+            left: -${
+              this.options.menu.dimensions.width.size +
+              this.options.menu.dimensions.width.units
+            };
         }
         ._access-menu.right {
             right: 0;
         }
         ._access-menu.close.right {
-            right: -${this.options.menu.dimensions.width.size +
-      this.options.menu.dimensions.width.units
-      };
+            right: -${
+              this.options.menu.dimensions.width.size +
+              this.options.menu.dimensions.width.units
+            };
         }
         ._access-menu ._text-center {
             text-align: center;
@@ -361,10 +373,11 @@ export class Accessibility {
             transform: rotate(0deg);
         }
         ._access-menu ._menu-reset-btn:hover,._access-menu ._menu-close-btn:hover {
-            ${this.options.animations.buttons
-        ? "transform: rotate(180deg);"
-        : ""
-      }
+            ${
+              this.options.animations.buttons
+                ? "transform: rotate(180deg);"
+                : ""
+            }
         }
         ._access-menu ._menu-reset-btn {
             right: 5px;
@@ -415,8 +428,9 @@ export class Accessibility {
             text-align: center;
             transition-duration: .5s;
             transition-timing-function: ease-in-out;
-            font-size: ${this.options.buttons.font.size + this.options.buttons.font.units
-      } !important;
+            font-size: ${
+              this.options.buttons.font.size + this.options.buttons.font.units
+            } !important;
             
             text-indent: 5px;
             background: #f9f9f9;
@@ -912,6 +926,20 @@ export class Accessibility {
             {
               type: "li",
               attrs: {
+                "data-access-action": "leiaFocus",
+                class: "btn_geral",
+                tabindex: "0",
+              },
+              children: [
+                {
+                  type: "#text",
+                  text: "Leia Focus",
+                },
+              ],
+            },
+            {
+              type: "li",
+              attrs: {
                 "data-access-action": "dicionario",
                 class: "btn_geral",
                 tabindex: "0",
@@ -1207,6 +1235,7 @@ export class Accessibility {
 
   resetAll() {
     //window.location.reload();
+    // this.menuInterface.leiaFocus(true);
     this.menuInterface.textToSpeech(true);
     this.menuInterface.speechToText(true);
     this.menuInterface.linkHighlight(true);
@@ -1219,6 +1248,14 @@ export class Accessibility {
     resetLineHeight(this);
     resetTextSize(this);
     resetTextSpace(this);
+    // cor cabecalho
+    mudaCorCabecalho(this, true);
+
+    // cor mudaCorFundo
+    mudaCorFundo(this, true);
+
+    // cor mudaCorConteudo
+    mudaCorConteudo(this, true);
     for (let i of document.querySelectorAll("._access-menu ul li.active")) {
       i.classList.remove("active");
     }
@@ -1326,6 +1363,7 @@ export class Accessibility {
 
   build() {
     this.initialValues = {
+      leiaFocus: false,
       dicionario: false,
       linkHighlight: false,
       textToSpeech: false,
@@ -1348,6 +1386,15 @@ export class Accessibility {
     this.injectcolrAdjustments();
     addListeners(this);
     disableUnsupportedModules(this);
+
+    // cor cabecalho
+    mudaCorCabecalho();
+
+    // cor mudaCorFundo
+    mudaCorFundo();
+
+    // cor mudaCorConteudo
+    mudaCorConteudo();
 
     if (this.options.hotkeys.enabled) {
       document.onkeydown = function (e) {
@@ -1386,6 +1433,9 @@ export class Accessibility {
     }, 10);
 
     this.menuInterface = {
+      leiaFocus: (destroy) => {
+        leiaFocus(this, destroy);
+      },
       increaselineHeight: () => {
         alterLineHeight(this, true);
       },
