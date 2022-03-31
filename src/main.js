@@ -38,6 +38,7 @@ import alterTextSpace from "../src/fontAdjustment/alternateTextSpace.mjs";
 import alterTextSize from "../src/fontAdjustment/alternateTextSize.mjs";
 import linkHighlight from "../src/linkHighlight/linkHighlight.mjs";
 import textToSpeech from "../src/textToSpeech/textToSpeech.mjs";
+import ampliadorTexto from "../src/AmpliadorDeTexto/ampliadottexto";
 import addListeners from "../src/utils/addListeners/addListeners.mjs";
 import { injectColorAdjustmentsCss } from "../src/colorsAdjustment/colorAdjustmentCss.mjs";
 import { injectColorAdjustmentsBackgroundCss } from "../src/colorsAdjustment/colorAdjustmentBackground.js";
@@ -117,6 +118,7 @@ let _options = {
     linkHighlight: "Destaque e inks",
     textToSpeech: "Leia Texto",
     speechToText: "Voz para Texto",
+    ampliadorTexto:"Ampliador do texto"
   },
   textToSpeechLang: "pt-PT",
   speechToTextLang: "pt-PT",
@@ -143,6 +145,8 @@ let _options = {
     linkHighlight: true,
     textToSpeech: true,
     speechToText: true,
+    ampliadorTexto:true,
+
   },
   session: {
     persistent: true,
@@ -1156,6 +1160,19 @@ export class Accessibility {
                 },
               ],
             },
+            {
+              type: "li",
+              attrs: {
+                "data-access-action": "ampliadortexto",
+                tabindex: "0",
+              },
+              children: [
+                {
+                  type: "#text",
+                  text: this.options.labels.ampliadorTexto,
+                },
+              ],
+            },
           ],
         },
       ],
@@ -1421,6 +1438,9 @@ export class Accessibility {
       textToSpeech: (destroy) => {
         textToSpeech(this, destroy);
       },
+      ampliadortexto:(destroy)=>{
+        ampliadorTexto(this,destroy);
+      },     
       speechToText: (destroy) => {
         // this.sessionState.speechToText = typeof destroy === 'undefined' ? true : false;
         this.onChange(false);

@@ -1,76 +1,23 @@
+
+export default function ampliadorTexto(self,destroy){
 $(function () {
-    function getWordUnderCursor(event) {
-        var range, textNode, offset;
 
-        if (document.body.createTextRange) {           // Internet Explorer
-            try {
-                range = document.body.createTextRange();
-                range.moveToPoint(event.clientX, event.clientY);
-                range.select();
-                range = getTextRangeBoundaryPosition(range, true);
-  
-                textNode = range.node;
-                offset = range.offset;
-            } catch(e) {
-                return "";
-            }
-        }
-        else if (document.caretPositionFromPoint) {    // Firefox
-            range = document.caretPositionFromPoint(event.clientX, event.clientY);
-            textNode = range.offsetNode;
-            offset = range.offset;
-        } else if (document.caretRangeFromPoint) {     // Chrome
-            range = document.caretRangeFromPoint(event.clientX, event.clientY);
-            textNode = range.startContainer;
-            offset = range.startOffset;
-        }else{
-          alert('Browser nao suportado');
 
-        }
+  if(destroy){
+    var tool = document.querySelectorAll('.tool-tip');
+     tool.forEach(el=>{
+       el.remove();
+     });
+     return;
+  }
 
-        //data contem a frase completa
-        //offset representa a posiçao do cursor
-        var data = textNode.data,
-            i = offset,
-            begin,
-            end;
-
-        //Fdeterminar o inicio da frase
-        //console.log(data);
-        try {
-          while (i > 0  && (data[i] !== " " && data[i] !== "." )) { --i; };
-          begin = i;
-  
-          //determinar o fim da frase
-          i = offset;
-          while (i < data.length && (data[i] !=="," && data[i] !== "."  )  ) { ++i; };
-          end = i;
-  
-         
-          return data.substring(begin, end);
-          
-        } catch (error) {
-          console.log('campo sem texto');
-        }
-      
-    }
-
-    
-    var $hoverText = $("body").find('#hoverText');
+    var $hoverText = $("body").find('*');
     $hoverText.mousemove(function (e) {
         var word = getWordUnderCursor(e);
       //  var $this = $(this)[0].lastElementChild;
      /// elimarn virgulas e pontos nas frases
-      var regex = /[.,\s]/g;
+      //var regex = /[.,\s]/g;
 
-     /*try {
-      word = word.replace(regex,' ');
-     } catch (error) {
-       
-     }*/
-  
-       
-        
       
         if (word !== "") 
         
@@ -145,6 +92,61 @@ $(function () {
             
     });
 });
+function getWordUnderCursor(event) {
+  var range, textNode, offset;
+
+  if (document.body.createTextRange) {           // Internet Explorer
+      try {
+          range = document.body.createTextRange();
+          range.moveToPoint(event.clientX, event.clientY);
+          range.select();
+          range = getTextRangeBoundaryPosition(range, true);
+
+          textNode = range.node;
+          offset = range.offset;
+      } catch(e) {
+          return "";
+      }
+  }
+  else if (document.caretPositionFromPoint) {    // Firefox
+      range = document.caretPositionFromPoint(event.clientX, event.clientY);
+      textNode = range.offsetNode;
+      offset = range.offset;
+  } else if (document.caretRangeFromPoint) {     // Chrome
+      range = document.caretRangeFromPoint(event.clientX, event.clientY);
+      textNode = range.startContainer;
+      offset = range.startOffset;
+  }else{
+    alert('Browser nao suportado');
+
+  }
+
+  //data contem a frase completa
+  //offset representa a posiçao do cursor
+  var data = textNode.data,
+      i = offset,
+      begin,
+      end;
+
+  //Fdeterminar o inicio da frase
+  //console.log(data);
+  try {
+    while (i > 0  && (data[i] !== " " && data[i] !== "." )) { --i; };
+    begin = i;
+
+    //determinar o fim da frase
+    i = offset;
+    while (i < data.length && (data[i] !=="," && data[i] !== "."  )  ) { ++i; };
+    end = i;
+
+   
+    return data.substring(begin, end);
+    
+  } catch (error) {
+    console.log('campo sem texto');
+  }
+
+}
 
 // Para Internet explorer 
 //
@@ -186,4 +188,6 @@ function getTextRangeBoundaryPosition(textRange, isStart) {
   workingNode.parentNode.removeChild(workingNode);
 
   return boundaryPosition;
+}
+
 }
