@@ -39,7 +39,7 @@ import alterTextSpace from "../src/fontAdjustment/alternateTextSpace.mjs";
 import alterTextSize from "../src/fontAdjustment/alternateTextSize.mjs";
 import linkHighlight from "../src/linkHighlight/linkHighlight.mjs";
 import textToSpeech from "../src/textToSpeech/textToSpeech.mjs";
-import ampliadorTexto from "../src/AmpliadorDeTexto/ampliadottexto";
+import ampliadorTexto from "./AmpliadorDeTexto/ampliadottexto.mjs";
 import addListeners from "../src/utils/addListeners/addListeners.mjs";
 import { injectColorAdjustmentsCss } from "./colorAdjustments/colorAdjustmentCss.mjs";
 import mudaCorFundo, {
@@ -126,7 +126,7 @@ let _options = {
     linkHighlight: "Destaque e inks",
     textToSpeech: "Leia Texto",
     speechToText: "Voz para Texto",
-    ampliadorTexto:"Ampliador do texto"
+    ampliadorTexto: "Ampliador do texto",
   },
   textToSpeechLang: "pt-PT",
   speechToTextLang: "pt-PT",
@@ -154,8 +154,7 @@ let _options = {
     linkHighlight: true,
     textToSpeech: true,
     speechToText: true,
-    ampliadorTexto:true,
-
+    ampliadorTexto: true,
   },
   session: {
     persistent: true,
@@ -1191,7 +1190,7 @@ export class Accessibility {
             {
               type: "li",
               attrs: {
-                "data-access-action": "ampliadortexto",
+                "data-access-action": "ampliadorTexto",
                 tabindex: "0",
               },
               children: [
@@ -1235,7 +1234,8 @@ export class Accessibility {
 
   resetAll() {
     //window.location.reload();
-    // this.menuInterface.leiaFocus(true);
+    this.menuInterface.ampliadorTexto(true);
+    this.menuInterface.leiaFocus(true);
     this.menuInterface.textToSpeech(true);
     this.menuInterface.speechToText(true);
     this.menuInterface.linkHighlight(true);
@@ -1488,9 +1488,9 @@ export class Accessibility {
       textToSpeech: (destroy) => {
         textToSpeech(this, destroy);
       },
-      ampliadortexto:(destroy)=>{
-        ampliadorTexto(this,destroy);
-      },     
+      ampliadorTexto: (destroy) => {
+        ampliadorTexto(this, destroy);
+      },
       speechToText: (destroy) => {
         // this.sessionState.speechToText = typeof destroy === 'undefined' ? true : false;
         this.onChange(false);
