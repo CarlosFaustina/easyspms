@@ -1,4 +1,6 @@
-
+"use strict";
+import common from "../utils/common.js";
+import read from "./read.mjs";
 export default function ampliadorTexto(self,destroy){
 $(function () {
 
@@ -8,8 +10,57 @@ $(function () {
      tool.forEach(el=>{
        el.remove();
      });
-     return;
+     document
+     .querySelector('._access-menu [data-access-action="ampliadorTexto"]')
+     .classList.remove("active");
+   self.initialValues.ampliadorTexto = false;
+   self.sessionState.ampliadorTexto = false;
+   self.onChange(true);
+   return;
+    
   }
+
+  document
+    .querySelector('._access-menu [data-access-action="ampliadorTexto"]')
+    .classList.toggle("active");
+    self.initialValues.ampliadorTexto = !self.initialValues.ampliadorTexto;
+    self.sessionState.ampliadorTexto = self.initialValues.ampliadorTexto;
+    self.onChange(true);
+
+
+
+  if (!self.initialValues.ampliadorTexto) {
+    document
+      .querySelector('._access-menu [data-access-action="ampliadorTexto"]')
+      .classList.remove("active");
+    self.initialValues.ampliadorTexto = false;
+    self.sessionState.ampliadorTexto = false;
+    self.onChange(true);
+    return;
+  }
+  self.onChange(true);
+  
+
+ let css = ` .tool-tip[title-new]:hover:after {
+  content: attr(title-new);
+  position:absolute;
+  display: inline-block;
+ 
+max-width: auto;
+background-color:#262626;
+border: 2px solid #ccc;
+
+  font-family: Arial;
+  font-size: 26px;
+  color: #fff;
+  border-radius: 7.5px;
+  max-height: auto;
+  z-index: 1;
+  overflow: auto;
+  padding: 10px 15px;
+}`;
+
+common.injectStyle(css);
 
     var $hoverText = $("body").find('*');
     $hoverText.mousemove(function (e) {
