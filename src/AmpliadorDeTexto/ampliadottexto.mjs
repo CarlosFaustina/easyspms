@@ -1,6 +1,5 @@
 "use strict";
 import common from "../utils/common.js";
-import read from "./read.mjs";
 export default function ampliadorTexto(self,destroy){
 $(function () {
 
@@ -8,7 +7,7 @@ $(function () {
   if(destroy){
     var tool = document.querySelectorAll('.tool-tip');
      tool.forEach(el=>{
-       el.remove();
+       el.removeClass();
      });
      document
      .querySelector('._access-menu [data-access-action="ampliadorTexto"]')
@@ -36,6 +35,10 @@ $(function () {
     self.initialValues.ampliadorTexto = false;
     self.sessionState.ampliadorTexto = false;
     self.onChange(true);
+    var tool = document.querySelectorAll('.tool-tip');
+     tool.forEach(el=>{
+       el.remove();
+     });
     return;
   }
   self.onChange(true);
