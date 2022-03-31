@@ -1,6 +1,5 @@
 "use strict";
 import common from "../utils/common.js";
-import read from "./read.mjs";
 export default function ampliadorTexto(self,destroy){
 $(function () {
 
