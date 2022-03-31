@@ -118,7 +118,7 @@ let _options = {
     linkHighlight: "Destaque e inks",
     textToSpeech: "Leia Texto",
     speechToText: "Voz para Texto",
-    ampliadorTexto:"Ampliador do texto"
+    ampliadorTexto: "Ampliador do texto",
   },
   textToSpeechLang: "pt-PT",
   speechToTextLang: "pt-PT",
@@ -145,8 +145,7 @@ let _options = {
     linkHighlight: true,
     textToSpeech: true,
     speechToText: true,
-    ampliadorTexto:true,
-
+    ampliadorTexto: true,
   },
   session: {
     persistent: true,
@@ -1441,9 +1440,9 @@ export class Accessibility {
       textToSpeech: (destroy) => {
         textToSpeech(this, destroy);
       },
-      ampliadortexto:(destroy)=>{
-        ampliadorTexto(this,destroy);
-      },     
+      ampliadorTexto: (destroy) => {
+        ampliadorTexto(this, destroy);
+      },
       speechToText: (destroy) => {
         // this.sessionState.speechToText = typeof destroy === 'undefined' ? true : false;
         this.onChange(false);
