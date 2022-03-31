@@ -186,9 +186,10 @@ export const injectColorAdjustmentsBackgroundCss = `
 }
 
 .FundoAzul span,
-.FundoAzul div {
+.FundoAzul div{
   background-color: #06a1dd;
 }
+
 
 .FundoAmarelo span,
 .FundoAmarelo div {
