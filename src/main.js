@@ -1489,6 +1489,7 @@ export class Accessibility {
         textToSpeech(this, destroy);
       },
       ampliadorTexto: (destroy) => {
+        addHasText(destroy);
         ampliadorTexto(this, destroy);
       },
       speechToText: (destroy) => {

@@ -3,6 +3,7 @@ import common from "../utils/common.js";
 export default function ampliadorTexto(self,destroy){
 $(function () {
 
+  var $hoverText = $(".hasText");
 
   if(destroy){
     var tool = document.querySelectorAll('.tool-tip');
@@ -16,6 +17,8 @@ $(function () {
    self.sessionState.ampliadorTexto = false;
    self.onChange(true);
    return;
+
+
     
   }
 
@@ -37,9 +40,24 @@ $(function () {
     self.onChange(true);
     var tool = document.querySelectorAll('.tool-tip');
      tool.forEach(el=>{
-       el.remove();
+      $(el).removeClass('tool-tip');
+    
      });
-    return;
+     //$hoverText.removeEventListener()
+     $hoverText.off('mousemove');
+     for (const text of $hoverText) {
+        text.removeEventListener('mousemove',_mouseMove);
+        text.classList.remove('hasText');
+        text.removeAttribute('title-new');
+        //console.log(text);
+      }   
+      console.log('desactivado'); 
+      return;
+  }else{
+    console.log('activado');
+    for(const list of $hoverText){
+      list.addEventListener('mousemove',_mouseMove,false);
+    }
   }
   self.onChange(true);
   
@@ -65,87 +83,95 @@ border: 2px solid #ccc;
 
 common.injectStyle(css);
 
-    var $hoverText = $("body").find('*');
-    $hoverText.mousemove(function (e) {
-        var word = getWordUnderCursor(e);
-      //  var $this = $(this)[0].lastElementChild;
-     /// elimarn virgulas e pontos nas frases
-      //var regex = /[.,\s]/g;
+    
+   
+});
+function _mouseMove(e){
 
+ 
+   
+  //  var $this = $(this)[0].lastElementChild;
+ /// elimarn virgulas e pontos nas frases
+  //var regex = /[.,\s]/g;
+
+  if (!self.initialValues.ampliadorTexto){
+    e.stopPropagation();
+   
+  }else{
+
+    var word = getWordUnderCursor(e);
+    if (word !== "") 
+    
       
-        if (word !== "") 
-        
+        if( $(this).find('span').length > 0 ){
+          //remover as classes nos filhos de span
+         if($(this).find('span').children().length>0){
+          $(this).find('span').children().each(function(i,el){
+            $(el).removeClass('tool-tip');
+            $(el).parent().addClass('tool-tip');
+          })
+         }else{
+          // console.log($(this));
+          $(this).find('span').addClass('tool-tip');
+         }
           
-            if( $(this).find('span').length > 0 ){
-              //remover as classes nos filhos de span
-             if($(this).find('span').children().length>0){
-              $(this).find('span').children().each(function(i,el){
-                $(el).removeClass('tool-tip');
-                $(el).parent().addClass('tool-tip');
-              })
-             }else{
-              // console.log($(this));
-              $(this).find('span').addClass('tool-tip');
-             }
-              
-              //$('.tool-tip').attr('title-new',word)
-              //console.log($(this));
-            }else{
-              // se for uma colleçao 
-              try {
-              if($(this).length >1 ){
+          //$('.tool-tip').attr('title-new',word)
+          //console.log($(this));
+        }else{
+          // se for uma colleçao 
+          try {
+          if($(this).length >1 ){
 
-               
-                  $(this).each(function(index,item){
-                    if( $(item).parent()){
-                      $(item).parent().each(function(index,el){
-                        $(item).parent(el).removeClass('tool-tip');
-                        //console.log(el);
-                      });
-                      // se o elemento tiver parent adicionar classe nos filhos
-                      $(item).children().addClass('tool-tip');
-                      
-                     
-                    }else{
-                     // adicionar o elemento na classe mais proximo
-                      $(item).closest().addClass('tool-tip');
-                    }
-                    
-                   
-                  })
-                 // $(this).addClass('tool-tip');
+           
+              $(this).each(function(index,item){
+                if( $(item).parent()){
+                  $(item).parent().each(function(index,el){
+                    $(item).parent(el).removeClass('tool-tip');
+                    //console.log(el);
+                  });
+                  // se o elemento tiver parent adicionar classe nos filhos
+                  $(item).children().addClass('tool-tip');
+                  
                  
                 }else{
-                  //se for elemento com filho
-                  if($(this).children().length > 0 ){
-                    $(this).children().each(function(index,item){
-                    $(this).parent(item).removeClass('tool-tip');
-                      // console.log($(this.children().length > 0));
-                    })
+                 // adicionar o elemento na classe mais proximo
+                  $(item).closest().addClass('tool-tip');
+                }
+                
+               
+              })
+             // $(this).addClass('tool-tip');
+             
+            }else{
+              //se for elemento com filho
+              if($(this).children().length > 0 ){
+                $(this).children().each(function(index,item){
+                $(this).parent(item).removeClass('tool-tip');
+                  // console.log($(this.children().length > 0));
+                })
 
-                  }else{
-                    //console.log('esta aqui');
-                    $(this).addClass('tool-tip');
-                  }
-                //  console.log(this);
-                  
-                  
-                  
-                
-                }
-                  
-                } catch (error) {
-                  
-                }
-                
-              //$(this).addClass('tool-tip');
-           
-            }
-            $('.tool-tip').attr('title-new',word);
-       
+              }else{
+                //console.log('esta aqui');
+                $(this).addClass('tool-tip');
+              }
+            //  console.log(this);
+              
+              
+              
             
-    });
-});
+            }
+              
+            } catch (error) {
+              
+            }
+            
+          //$(this).addClass('tool-tip');
+       
+        }
+        $('.tool-tip').attr('title-new',word);
+        e.stopPropagation();
+      }
+}
 function getWordUnderCursor(event) {
   var range, textNode, offset;
 
