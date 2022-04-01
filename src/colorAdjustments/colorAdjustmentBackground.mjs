@@ -197,7 +197,7 @@ export const injectColorAdjustmentsBackgroundCss = `
 }
 
 .FundoRosa span,
-.FundoRosa div {
+.FundoRosa div, {
   background-color: #e40d7d;
 }
 
@@ -221,4 +221,13 @@ export const injectColorAdjustmentsBackgroundCss = `
   background-color: #ffffff;
 }
 
-`;
+
+  
+  
+  ._access-menu._access,
+  ._access-menu._access div,
+  ._access-menu._access span{ 
+    background-color: #FFFFFF;
+  } 
+  
+  `;
