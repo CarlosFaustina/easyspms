@@ -15,8 +15,8 @@ export default function leiaFocus(self, destroy) {
   document.getElementsByTagName("body")[0].appendChild(divFocus);
   document.getElementsByTagName("body")[0].appendChild(divMascara);
   document.getElementsByTagName("body")[0].appendChild(divMascara2);
-    document.getElementById("divMascara").style.opacity = "10%";
-  document.getElementById("divMascara2").style.opacity = "10%";
+    document.getElementById("divMascara").style.opacity = "15%";
+  document.getElementById("divMascara2").style.opacity = "15%";
 
 
   document.getElementById("divMascara2").style.transitionDuration = "2s";
@@ -63,8 +63,8 @@ export default function leiaFocus(self, destroy) {
   window.addEventListener("mousemove", (e) => {
     // cursor.style.left = (e.x-100)+"px";// para poder mover no eixo X.
 
-    // document.getElementById("divMascara").style.transition = "200ms";
-    // document.getElementById("divMascara2").style.transition = "200ms";
+     document.getElementById("divMascara").style.transition = "50ms";
+     document.getElementById("divMascara2").style.transition = "100ms";
 
     //cursor.style.top = (e.y-50)+"px";
 
@@ -84,7 +84,7 @@ export default function leiaFocus(self, destroy) {
 
     document.getElementById("divMascara").style.visibility = "hidden";
     document.getElementById("divMascara2").style.visibility = "hidden";
-    window.removeEventListener("mousemove"); //gere o erro. falta segundo argumento. Em principio a funcao quale foi chamada para addEventListener
+    window.removeEventListener("mousemove",addEventListener); //gere o erro.
     return;
   }
 
@@ -107,7 +107,7 @@ export default function leiaFocus(self, destroy) {
 
     document.getElementById("divMascara").style.visibility = "hidden";
     document.getElementById("divMascara2").style.visibility = "hidden";
-    window.removeEventListener("mousemove");
+    window.removeEventListener("mousemove",addEventListener);
     return;
   }
   self.onChange(true);
