@@ -1,6 +1,7 @@
 "use strict";
 import common from "../utils/common.js";
 import read from "./read.mjs";
+import { toogleAudioPlayer } from "../audioPlayer";
 
 export default function textToSpeech(self, destroy) {
   self.sessionState.textToSpeech =
@@ -15,7 +16,7 @@ export default function textToSpeech(self, destroy) {
       common.deployedObjects.remove("." + className);
     }
   };
-
+  ;
   if (destroy) {
     document
       .querySelector('._access-menu [data-access-action="textToSpeech"]')
@@ -40,12 +41,13 @@ export default function textToSpeech(self, destroy) {
     common.injectStyle(css, { className: className });
     common.deployedObjects.set("." + className, true);
     document.addEventListener("click", read, false);
-
+    toogleAudioPlayer(true);
     // injectReaderBtns(self);
   } else {
     console.log("parar leitura");
     // window.speechSynthesis.pause();
     window.speechSynthesis.cancel();
+    toogleAudioPlayer(false);
     remove();
   }
 }
