@@ -98,10 +98,10 @@ export const audioPlayerHtml = `
  * @param {boolean} isShow
  */
 export const toogleAudioPlayer = (isShow) => {
-  if (isShow) {
-    document.body.insertAdjacentHTML("beforeend", audioPlayerHtml);
-  } else {
-   document.getElementById("accessibilityAudioPlayer").remove();
-  }
+    if (isShow) {
+        document.body.insertAdjacentHTML("beforeend", audioPlayerHtml);
+    } else {
+        document.getElementById("accessibilityAudioPlayer").remove();
+    }
 
 };

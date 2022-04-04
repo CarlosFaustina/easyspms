@@ -1,7 +1,7 @@
 "use strict";
 import common from "../utils/common.js";
 import read from "./read.mjs";
-import { toogleAudioPlayer } from "../audioPlayer";
+import { toogleAudioPlayer } from "../audioPlayer/index.mjs";
 
 export default function textToSpeech(self, destroy) {
   self.sessionState.textToSpeech =

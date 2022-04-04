@@ -51,7 +51,7 @@ import mudaCorConteudo, {
 import mudaCorCabecalho, {
   injectColorAdjustmentsHeadersCss,
 } from "./colorAdjustments/colorAdjustmentHeaders.mjs";
-import { audioPlayerSyles } from "../src/audioPlayer/styles";
+import { audioPlayerSyles } from "./audioPlayer/styles.mjs";
 import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
 import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
 import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
