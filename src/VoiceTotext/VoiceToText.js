@@ -100,7 +100,10 @@ function show_info_erro(tipo){
   document.querySelector(".alert").style.display="block";
 msg.innerHTML ="permiçao para usar o microfone foi bloqueda";
 }else if( tipo == "info_denied"){
-  mas.innerText = "Permissao para usar o microfone esta bloqueda. para mudar vai no chrome://settings/contentExceptions#media-stream";
+  msg.innerText = "Permissao para usar o microfone esta bloqueda. para mudar vai no chrome://settings/contentExceptions#media-stream";
+}else if(tipo =="no_browser_support"){
+  document.querySelector(".alert").style.display="block";
+  msg.innerHTML ="Este Browser nao suporta esta funcionalidade. pvf instale o <a href='//www.google.com/chrome'>Chrome</a>";
 }
 
 }
