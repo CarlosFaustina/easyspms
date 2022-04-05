@@ -304,57 +304,6 @@
 
                 
 
-                        <div class="VoicetoText">
-                            <H2>formulario de texto Para Voz</H2>
-                            <div class="mt-4" id="div_language">
-                                <h2 class="mb-3">Idioma</h2>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <select class="form-select bg-secondary text-light"
-                                            id="select_language"></select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <select class="form-select bg-secondary text-light mt-2"
-                                            id="select_dialect"></select>
-                                    </div>
-
-                                </div >
-            <div class="row"> <!-- Alertas-->
-                <div class="col-sm-6">
-                    <div class="alert alert-warning alert-dismissible" role="alert">
-                        <span type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></span>
-                            <span class="show_info"></span>
-                      </div>
-                </div>
-               
-            </div>
-          
-            <h2 class="mt-4">Transcriçao</h2>
-            <div class="row">
-                <div class="col-sm-6">
-                    
-                        <div class="p-3" style="border: 1px solid gray; height: 300px; border-radius: 8px;">
-                            <p id="final" ></p>
-                            <p id="interim"></p>
-                
-                </div>
-
-            </div>
-          
-                <div class="row">
-                    <div class="col-sm-2">
-                        <button type="button" class="btn btn-success btn-sm" id="start">Iniciar</button> </div>
-                        <div class="col-sm-2"><button type="button" class="btn btn-danger" id="stop">Parar</button></div>
-                        <div class="col-sm-2"><button type="button"  class="btn btn-primary" id="limpar">Limpar</button></div>
-                   
-                    </div>
-           
-                
-                
-                    <p id="status" class="lead mt-3 text-light" style="display: none">A vouvir ...</p>
-                </div>  
 <br>
 <div id="hoverText">
     <div id="results"></div>
@@ -1533,7 +1482,7 @@ on our API rather than parse the HTML below, we have XML and JSON available.
                 <!---script Voice to Text -->
 
                 <script type="module" src="src/VoiceTotext/VoiceToText.js"></script>
-                <script type="module" src="src/VoiceTotext/language.js"></script>
+               
 
                 <!---Script Ampliador de Texto-->
                 <script type="module" src="src/AmpliadorDeTexto/ampliadottexto.js"></script>
@@ -1563,5 +1512,5 @@ on our API rather than parse the HTML below, we have XML and JSON available.
     THE END
 -->
 </body>
-
+<!--  <script type="module" src="src/VoiceTotext/language.js"></script>-->
 </html>

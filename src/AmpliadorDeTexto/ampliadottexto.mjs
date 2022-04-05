@@ -96,7 +96,8 @@ function _mouseMove(e){
 
   if (!self.initialValues.ampliadorTexto){
     e.stopPropagation();
-   
+   //window.removeEventListener('mousemove',addEventListener);
+   //console.log(e.target);
   }else{
 
     var word = getWordUnderCursor(e);
