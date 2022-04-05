@@ -407,10 +407,10 @@ export class Accessibility {
           overflow: auto;
         }
         html._access_cursor_white * {
-            cursor: url(./api/White.cur),auto!important;
+            cursor: url(https://slimeasy.pt/api/White.cur),auto!important;
         }
         html._access_cursor_black * {
-            cursor: url(./api/Black.cur),auto!important;
+            cursor: url(https://slimeasy.pt/api/api/Black.cur),auto!important;
         }
         ._access-menu ul li {
           display:inline;
