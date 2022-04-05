@@ -21,6 +21,7 @@ import {
 import customTranslate, {
   customTranslateCss,
 } from "../src/customTranslate/customTranslate.mjs";
+import voiceTotext from "./VoiceTotext/VoiceToText.mjs"
 import leiaFocus from "../src/leiaFocus/leiaFocus.mjs";
 import dicionario from "../src/dicionario/dicionario.mjs";
 import addHasText from "../src/addHasText/addHasText.mjs";
@@ -127,6 +128,7 @@ let _options = {
     textToSpeech: "Leia Texto",
     speechToText: "Voz para Texto",
     ampliadorTexto: "Ampliador do texto",
+    voiceTotext:"Voice to Text",
   },
   textToSpeechLang: "pt-PT",
   speechToTextLang: "pt-PT",
@@ -155,6 +157,7 @@ let _options = {
     textToSpeech: true,
     speechToText: true,
     ampliadorTexto: true,
+    voiceTotext:true,
   },
   session: {
     persistent: true,
@@ -192,6 +195,7 @@ export class Accessibility {
       bigCursorWhite: false,
       bigCursorBlack: false,
       readingGuide: false,
+      voiceTotext:false,
     };
     //inicialize Virtual Keyboard
     vai_buscar_todos_campos_texto();
@@ -1200,6 +1204,20 @@ export class Accessibility {
                 },
               ],
             },
+           
+            {
+              type: "li",
+              attrs: {
+                "data-access-action": "voiceTotext",
+                tabindex: "0",
+              },
+              children: [
+                {
+                  type: "#text",
+                  text: this.options.labels.voiceTotext,
+                },
+              ],
+            },
           ],
         },
       ],
@@ -1245,6 +1263,8 @@ export class Accessibility {
     this.menuInterface.bigCursorWhite(true);
     this.menuInterface.bigCursorBlack(true);
     this.menuInterface.readingGuide(true);
+    this.menuInterface.voiceTotext(true);
+    
     resetLineHeight(this);
     resetTextSize(this);
     resetTextSpace(this);
@@ -1370,6 +1390,8 @@ export class Accessibility {
       bigCursorWhite: false,
       bigCursorBlack: false,
       readingGuide: false,
+      ampliadorTexto:false,
+      voiceTotext:false,
       body: {},
       html: {},
     };
@@ -1492,6 +1514,11 @@ export class Accessibility {
         addHasText(destroy);
         ampliadorTexto(this, destroy);
       },
+      
+      voiceTotext:(destroy)=>{
+        voiceTotext(this,destroy);
+      },
+      
       speechToText: (destroy) => {
         // this.sessionState.speechToText = typeof destroy === 'undefined' ? true : false;
         this.onChange(false);
