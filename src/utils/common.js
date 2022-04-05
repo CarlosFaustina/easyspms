@@ -100,6 +100,32 @@ let common = {
       console.log(`injectFonts Error: ${error}`);
     }
   },
+  injectScript(urls, callback) {
+    try {
+      if (urls && urls.length) {
+        let body = document.getElementsByTagName("body")[0];
+        let counter = 0;
+        let onload = () => {
+          if (!--counter && callback !== undefined) {
+            return callback();
+          }
+        };
+        urls.forEach((url) => {
+          let script = document.createElement("script");
+          script.src = url;
+          script.className = `_access-Script-${counter++}`;
+          script.onload = onload;
+          common.deployedObjects.set("." + script.className, true);
+          body.appendChild(script);
+          console.log(script);
+        });
+      } else {
+        console.log("first");
+      }
+    } catch (error) {
+      console.log(`injectFonts Error: ${error}`);
+    }
+  },
   isFontLoaded(fontFamily, callback) {
     try {
       const onReady = () => {
