@@ -22,17 +22,23 @@ function _diciohandleMouseEnter(event) {
 
   let onMouseEnterWord = (wordEvent) => {
     wordEvent.target.style.backgroundColor = "red";
-    _setTootipText("Procurando siginificado...");
-
-    fetchMeaningTimeOut = setTimeout(() => {
-      _fetchMeaning(wordEvent.target.innerText);
-    }, 1000);
+    wordEvent.target.style.cursor = "help";
   };
 
   for (const word of words) {
     word.addEventListener("mouseenter", onMouseEnterWord);
+    word.addEventListener("click", () => {
+      let palavra = word.innerText;
 
-    word.addEventListener("mousemove", onMouseMoveWord);
+      window.open(
+        `https://www.dicio.com.br/${palavra
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()}/`,
+        null,
+        "height=600,width=600'"
+      );
+    });
 
     word.addEventListener("mouseout", (wordEvent) => {
       _hideTootip();
@@ -40,6 +46,7 @@ function _diciohandleMouseEnter(event) {
         clearTimeout(fetchMeaningTimeOut);
       }
       wordEvent.target.style.backgroundColor = "";
+      wordEvent.target.style.cursor = "default";
     });
   }
 }
@@ -47,42 +54,6 @@ function _diciohandleMouseEnter(event) {
 function _dicioHandleMouseLeave(event) {
   event.target.innerHTML = event.target.innerText;
 }
-
-///
-
-function _fetchMeaning(wordText) {
-  fetch(
-    `http://167.99.12.227:3333/v2/${wordText
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()}`
-  )
-    .then((response) => {
-      response.json().then((jsonResponse) => {
-
-        if (!!jsonResponse.length) {
-          let meanings = jsonResponse[0].meanings.slice(0, 3).join("<br>");
-          _setTootipText(meanings)
-          let currentTopValue = parseInt(
-            accessibilityTootipBox[0].style.top
-          );
-          _setCustomStyleTootip({
-            top: `${currentTopValue -
-              (accessibilityTootipBox[0].offsetHeight - 50)
-              }px`,
-          });
-        } else {
-          _setTootipText("Siginificado não foi localizado.!");
-        }
-
-      });
-    })
-    .catch(() => {
-      _setTootipText("Siginificado não foi localizado.!");
-    });
-}
-
-
 
 function _setTootipText(text) {
   accessibilityTootipBox[0].innerHTML = text;
@@ -120,11 +91,11 @@ function _setCustomStyleTootip(styles) {
 
 export default function dicionario(self, destroy) {
   const allTexts = document.querySelectorAll(".hasText");
-  const btnDicio = document
-    .querySelector('._access-menu [data-access-action="dicionario"]');
+  const btnDicio = document.querySelector(
+    '._access-menu [data-access-action="dicionario"]'
+  );
 
   if (destroy) {
-
     btnDicio.classList.remove("active");
     btnDicio.innerHTML = "Ativar Dicionário";
 
