@@ -405,10 +405,10 @@ export class Accessibility {
           overflow: auto;
         }
         html._access_cursor_white * {
-            cursor: url(https://firebasestorage.googleapis.com/v0/b/fir-react-upload-bc250.appspot.com/o/images%2Fbigcursorwhite.cur?alt=media&token=d9201ab7-e37f-41a8-ac96-f82543d4cdee),auto!important;
+            cursor: url(./api/White.cur),auto!important;
         }
         html._access_cursor_black * {
-            cursor: url(https://firebasestorage.googleapis.com/v0/b/fir-react-upload-bc250.appspot.com/o/images%2Fbigcursorblack.cur?alt=media&token=16386120-f2a1-4fa9-b7e2-a7a94f46a543),auto!important;
+            cursor: url(./api/Black.cur),auto!important;
         }
         ._access-menu ul li {
           display:inline;
@@ -543,7 +543,6 @@ export class Accessibility {
         </div>
 
         <div class="check" id="mudaCorCabecalho">
-          
         </div>
       </div>
 
