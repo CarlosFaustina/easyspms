@@ -410,7 +410,7 @@ export class Accessibility {
             cursor: url(https://slimeasy.pt/api/White.cur),auto!important;
         }
         html._access_cursor_black * {
-            cursor: url(https://slimeasy.pt/api/api/Black.cur),auto!important;
+            cursor: url(https://slimeasy.pt/api/Black.cur),auto!important;
         }
         ._access-menu ul li {
           display:inline;
