@@ -1,6 +1,7 @@
 "use strict";
 import common from "./utils/common.js";
 import storage from "./utils/storage.js";
+import { easyNavCss } from "./utils/easyNavCss.mjs";
 import {
   keyboardCss,
   virtualKeyboard,
@@ -21,13 +22,16 @@ import {
 import customTranslate, {
   customTranslateCss,
 } from "../src/customTranslate/customTranslate.mjs";
-import voiceTotext from "./VoiceTotext/VoiceToText.mjs"
+import voiceTotext from "./VoiceTotext/VoiceToText.mjs";
 import leiaFocus from "../src/leiaFocus/leiaFocus.mjs";
 import dicionario from "../src/dicionario/dicionario.mjs";
 import addHasText from "../src/addHasText/addHasText.mjs";
 import bigCursorWhite from "../src/bigCursorWhite/bigCursorWhite.mjs";
 import bigCursorBlack from "../src/bigCursorBlack/bigCursorBlack.mjs";
 import readingGuide from "../src/readingGuide/readingGuide.mjs";
+import protanopia from "../src/protanopia/protanopia.mjs";
+import deutanopia from "../src/deutanopia/deutanopia.mjs";
+import tritanopia from "../src/tritanopia/tritanopia.mjs";
 import grayHues from "../src/grayHues/grayHues.mjs";
 import parseKeys from "../src/utils/parseKeys/parseKeys.mjs";
 import runHotkey from "../src/utils/parseKeys/runHotkey.mjs";
@@ -91,7 +95,7 @@ let _options = {
       bigCursorBlack: ["ctrlKey", "altKey", 68], // Big Cursor	CTRL + ALT + C
       readingGuide: ["ctrlKey", "altKey", 82], // Reading Guide	CTRL + ALT + R
       textToSpeech: ["ctrlKey", "altKey", 84], // Text To Speech	CTRL + ALT + T
-      speechToText: ["ctrlKey", "altKey", 83], // Speech To Text	CTRL + ALT + S
+      // speechToText: ["ctrlKey", "altKey", 83], // Speech To Text	CTRL + ALT + S
     },
   },
   buttons: {
@@ -127,12 +131,11 @@ let _options = {
     readingGuide: "Guia de leitura",
     linkHighlight: "Destaque e inks",
     textToSpeech: "Leia Texto",
-    speechToText: "Voz para Texto",
     ampliadorTexto: "Ampliador do texto",
-    voiceTotext:"Voice to Text",
+    voiceTotext: "Voice to Text",
   },
   textToSpeechLang: "pt-PT",
-  speechToTextLang: "pt-PT",
+  // speechToTextLang: "pt-PT",
   textPixelMode: false,
   textEmlMode: true,
   animations: {
@@ -151,14 +154,16 @@ let _options = {
     increaseTextSpacing: true,
     decreaseTextSpacing: true,
     grayHues: true,
+    deutanopia: true,
+    tritanopia: true,
+    protanopia: true,
     bigCursorWhite: true,
     bigCursorBlack: true,
     readingGuide: true,
     linkHighlight: true,
     textToSpeech: true,
-    speechToText: true,
     ampliadorTexto: true,
-    voiceTotext:true,
+    voiceTotext: true,
   },
   session: {
     persistent: true,
@@ -191,12 +196,15 @@ export class Accessibility {
       textSize: 0,
       lineHeight: 0,
       textSpace: 0,
+      deutanopia: false,
+      tritanopia: false,
+      protanopia: false,
       grayHues: false,
       linkHighlight: false,
       bigCursorWhite: false,
       bigCursorBlack: false,
       readingGuide: false,
-      voiceTotext:false,
+      voiceTotext: false,
     };
     //inicialize Virtual Keyboard
     vai_buscar_todos_campos_texto();
@@ -214,6 +222,8 @@ export class Accessibility {
   injectCss() {
     let css =
       `
+      ${easyNavCss}
+
     
     ${injectColorAdjustmentsCss}
     ${injectColorAdjustmentsBackgroundCss}
@@ -469,6 +479,7 @@ export class Accessibility {
         ._access-menu ul li.active svg path {
             fill: #fff;
         }
+
         
         `;
     let className = "_access-main-css";
@@ -535,6 +546,57 @@ export class Accessibility {
     return menuElem;
   }
 
+  injectDatltonosmoProtanopia() {
+    const startingPoint = document.getElementById("protanopia");
+    startingPoint.innerHTML = `
+        <div class="col-12  grid_big_2 d-flex justify-content-center flex-wrap flex-row mt-7" >
+          <div id="modo_protanopia_dk" class="col-12 d-flex justify-content-between flex-wrap flex-row">
+            <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="-------------------">&nbsp;</abbr></div>
+            <div class="check_show"></div>
+            <div class="col-12 easy_inside_btns_big" >
+              <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
+<svg class="mb-3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Daltonismo protanopia</title><defs><polygon id="a" points="0 0 18.12 0 18.12 18.074 0 18.074"></polygon></defs><g fill="none" fill-rule="evenodd"><mask id="b" fill="white"><use xlink:href="#a"></use></mask><path d="m9.0256 0.0018c1.674 1e-3 3.348 1e-3 5.021 1e-3 1.778-1e-3 3.061 0.792 3.748 2.437 0.653 1.567 0.3 3.013-0.852 4.185-3.409 3.466-6.846 6.907-10.316 10.312-1.18 1.157-2.66 1.449-4.202 0.794-1.53-0.65-2.368-1.875-2.384-3.548-0.034-3.427-0.076-6.856 8e-3 -10.282 0.059-2.386 1.564-3.77 3.956-3.899 0.079-4e-3 0.159-1e-3 0.238-1e-3 1.595 0 3.188 0 4.783 1e-3" fill="#0F4E64" mask="url(#b)"></path></g></svg>
+                <span class="_access-menu-temp text-center d-flex align-items-center" data-access-action="protanopia">Daltonismo<br>
+                Protanopia</span></div>
+            </div>
+          </div>
+        </div>
+    `;
+  }
+  injectDatltonosmoDeutanopia() {
+    const startingPoint = document.getElementById("deutanopia");
+    startingPoint.innerHTML = `
+        <div class="col-12  grid_big_2 d-flex justify-content-center flex-wrap flex-row mt-7" >
+          <div id="modo_deutanopia_dk" class="col-12 d-flex justify-content-between flex-wrap flex-row">
+            <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="-------------------">&nbsp;</abbr></div>
+            <div class="check_show"></div>
+            <div class="col-12 easy_inside_btns_big">
+              <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
+<svg class="mb-3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>Daltonismo deutanopia</title><g fill="none" fill-rule="evenodd"><g transform="translate(-9.3e-5 -.000116)" fill="#0F4E64"><path d="m32.088 3.1807c0.014 1.121-0.284 1.932-0.894 2.614-0.426 0.476-0.887 0.921-1.339 1.373-7.577 7.58-15.154 15.159-22.737 22.733-0.563 0.563-1.118 1.162-1.774 1.599-1.319 0.88-3.084 0.678-4.207-0.374-1.243-1.162-1.511-2.912-0.583-4.364 0.382-0.598 0.909-1.112 1.416-1.619 7.742-7.753 15.491-15.501 23.243-23.244 0.451-0.45 0.904-0.917 1.426-1.274 1.159-0.792 2.428-0.811 3.639-0.17 1.137 0.602 1.698 1.646 1.81 2.726"></path><path d="m22.897 31.986c-1.68 0-3.36 5e-3 -5.04-1e-3 -1.687-7e-3 -2.913-0.766-3.599-2.312-0.69-1.556-0.414-3.028 0.745-4.212 3.415-3.486 6.88-6.922 10.343-10.359 1.204-1.195 2.683-1.408 4.219-0.838 1.494 0.554 2.34 1.784 2.38 3.319 0.095 3.595 0.155 7.201-0.014 10.791-0.108 2.308-1.649 3.533-3.994 3.602-1.679 0.05-3.36 0.01-5.04 0.01"></path></g></g></svg>
+                <span class="_access-menu-temp text-center d-flex align-items-center" data-access-action="deutanopia">Daltonismo<br>
+                Deutanopia</span></div>
+            </div>
+          </div>
+        </div>
+    `;
+  }
+  injectDatltonosmoTritanopia() {
+    const startingPoint = document.getElementById("tritanopia");
+    startingPoint.innerHTML = `
+        <div class="col-12  grid_big_2 d-flex justify-content-center flex-wrap flex-row mt-7">
+          <div id="modo_tritanopia_dk" class="col-12 d-flex justify-content-between flex-wrap flex-row">
+            <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="-------------------">&nbsp;</abbr></div>
+            <div class="check_show"></div>
+            <div class="col-12 easy_inside_btns_big">
+              <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
+<svg class="mb-3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>Daltonismo tritanopia</title><g fill="none" fill-rule="evenodd"><g transform="translate(13.885 13.962)" fill="#0F4E64"><path d="m9.0125 18.024c-1.68 0-3.36 5e-3 -5.04-1e-3 -1.687-7e-3 -2.913-0.766-3.599-2.312-0.69-1.556-0.414-3.028 0.745-4.212 3.415-3.486 6.88-6.922 10.343-10.359 1.204-1.195 2.683-1.408 4.219-0.838 1.494 0.554 2.34 1.784 2.38 3.319 0.095 3.595 0.155 7.201-0.014 10.791-0.108 2.308-1.649 3.533-3.994 3.602-1.679 0.05-3.36 0.01-5.04 0.01"></path></g></g></svg>
+                <span class="_access-menu-temp text-center d-flex align-items-center" data-access-action="tritanopia">Daltonismo<br>
+                Tritanopia</span></div>
+            </div>
+          </div>
+        </div>
+    `;
+  }
   injectcolrAdjustments() {
     const startingDiv = document.getElementById("color-adjustments");
     startingDiv.innerHTML = `
@@ -928,6 +990,30 @@ export class Accessibility {
           },
           children: [
             {
+              type: "div",
+              attrs: {
+                id: "protanopia",
+                class: "btn_geral",
+                tabindex: "0",
+              },
+            },
+            {
+              type: "div",
+              attrs: {
+                id: "deutanopia",
+                class: "btn_geral",
+                tabindex: "0",
+              },
+            },
+            {
+              type: "div",
+              attrs: {
+                id: "tritanopia",
+                class: "btn_geral",
+                tabindex: "0",
+              },
+            },
+            {
               type: "li",
               attrs: {
                 "data-access-action": "leiaFocus",
@@ -1182,19 +1268,6 @@ export class Accessibility {
             {
               type: "li",
               attrs: {
-                "data-access-action": "speechToText",
-                tabindex: "0",
-              },
-              children: [
-                {
-                  type: "#text",
-                  text: this.options.labels.speechToText,
-                },
-              ],
-            },
-            {
-              type: "li",
-              attrs: {
                 "data-access-action": "ampliadorTexto",
                 tabindex: "0",
               },
@@ -1205,7 +1278,7 @@ export class Accessibility {
                 },
               ],
             },
-           
+
             {
               type: "li",
               attrs: {
@@ -1256,8 +1329,10 @@ export class Accessibility {
     this.menuInterface.ampliadorTexto(true);
     this.menuInterface.leiaFocus(true);
     this.menuInterface.textToSpeech(true);
-    this.menuInterface.speechToText(true);
     this.menuInterface.linkHighlight(true);
+    this.menuInterface.deutanopia(true);
+    this.menuInterface.tritanopia(true);
+    this.menuInterface.protanopia(true);
     this.menuInterface.grayHues(true);
     this.menuInterface.imageSpeaker(true);
     this.menuInterface.dicionario(true);
@@ -1265,7 +1340,7 @@ export class Accessibility {
     this.menuInterface.bigCursorBlack(true);
     this.menuInterface.readingGuide(true);
     this.menuInterface.voiceTotext(true);
-    
+
     resetLineHeight(this);
     resetTextSize(this);
     resetTextSpace(this);
@@ -1289,74 +1364,6 @@ export class Accessibility {
   }
   callKeyboardNav() {
     keyboardNavigation(this);
-  }
-
-  speechToText() {
-    if ("webkitSpeechRecognition" in window) {
-      this.recognition = new webkitSpeechRecognition();
-      this.recognition.continuous = true;
-      this.recognition.interimResults = true;
-      this.recognition.onstart = () => {
-        // TODO red color on mic icon
-        console.log("listening . . .");
-        if (this.speechToTextTarget)
-          this.speechToTextTarget.parentElement.classList.add(
-            "_access-listening"
-          );
-        this.body.classList.add("_access-listening");
-      };
-
-      this.recognition.onend = () => {
-        this.body.classList.remove("_access-listening");
-        console.log("onend listening");
-      };
-
-      this.recognition.onresult = (event) => {
-        ///console.log('onresult listening');
-        let finalTranscript = "";
-        if (typeof event.results == "undefined") {
-          return;
-        }
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-          if (event.results[i].isFinal) {
-            finalTranscript += event.results[i][0].transcript;
-          } else {
-            interim_transcript += event.results[i][0].transcript;
-          }
-        }
-        if (finalTranscript && this.speechToTextTarget) {
-          this.speechToTextTarget.parentElement.classList.remove(
-            "_access-listening"
-          );
-          if (
-            this.speechToTextTarget.tagName.toLowerCase() == "input" ||
-            this.speechToTextTarget.tagName.toLowerCase() == "textarea"
-          ) {
-            this.speechToTextTarget.value = finalTranscript;
-          } else if (
-            this.speechToTextTarget.getAttribute("contenteditable") != null
-          ) {
-            this.speechToTextTarget.innerText = finalTranscript;
-          }
-        }
-      };
-      this.recognition.lang = this.options.speechToTextLang;
-
-      this.recognition.start();
-    }
-  }
-  listen() {
-    // let className = "_access-speech-to-text";
-    // window.event.preventDefault();
-    // window.event.stopPropagation();
-    if (
-      typeof self.recognition === "object" &&
-      typeof self.recognition.stop === "function"
-    )
-      self.recognition.stop();
-
-    self.speechToTextTarget = window.event.target;
-    self.speechToText(window.event.target.innerText);
   }
 
   toggleMenu() {
@@ -1391,8 +1398,8 @@ export class Accessibility {
       bigCursorWhite: false,
       bigCursorBlack: false,
       readingGuide: false,
-      ampliadorTexto:false,
-      voiceTotext:false,
+      ampliadorTexto: false,
+      voiceTotext: false,
       body: {},
       html: {},
     };
@@ -1407,6 +1414,9 @@ export class Accessibility {
     this.icon = this.injectIcon();
     this.menu = this.injectMenu();
     this.injectcolrAdjustments();
+    this.injectDatltonosmoProtanopia();
+    this.injectDatltonosmoDeutanopia();
+    this.injectDatltonosmoTritanopia();
     addListeners(this);
     disableUnsupportedModules(this);
 
@@ -1499,6 +1509,15 @@ export class Accessibility {
       grayHues: (destroy) => {
         grayHues(this, destroy);
       },
+      tritanopia: (destroy) => {
+        tritanopia(this, destroy);
+      },
+      deutanopia: (destroy) => {
+        deutanopia(this, destroy);
+      },
+      protanopia: (destroy) => {
+        protanopia(this, destroy);
+      },
       bigCursorWhite: (destroy) => {
         bigCursorWhite(this, destroy);
       },
@@ -1515,96 +1534,9 @@ export class Accessibility {
         addHasText(destroy);
         ampliadorTexto(this, destroy);
       },
-      
-      voiceTotext:(destroy)=>{
-        voiceTotext(this,destroy);
-      },
-      
-      speechToText: (destroy) => {
-        // this.sessionState.speechToText = typeof destroy === 'undefined' ? true : false;
-        this.onChange(false);
-        let className = "_access-speech-to-text";
-        let remove = () => {
-          if (this.recognition) {
-            this.recognition.stop();
-            this.body.classList.remove("_access-listening");
-          }
-          let style = document.querySelector("." + className);
-          if (style) {
-            style.parentElement.removeChild(style);
-            common.deployedObjects.remove("." + className);
-          }
-          let inputs = document.querySelectorAll("._access-mic");
-          for (let i = 0; i < inputs.length; i++) {
-            inputs[i].removeEventListener("focus", this.listen, false);
-            inputs[i].classList.remove("_access-mic");
-          }
-        };
 
-        if (destroy) {
-          document
-            .querySelector('._access-menu [data-access-action="speechToText"]')
-            .classList.remove("active");
-          this.initialValues.speechToText = false;
-          return remove();
-        }
-
-        document
-          .querySelector('._access-menu [data-access-action="speechToText"]')
-          .classList.toggle("active");
-
-        this.initialValues.speechToText = !this.initialValues.speechToText;
-        if (this.initialValues.speechToText) {
-          let css = `
-                        body:after {
-                            content: "🎤";
-                            position: fixed;
-                            z-index: 1100;
-                            top: 1vw;
-                            right: 1vw;
-                            width: 36px;
-                            height: 36px;
-                            font-size: 30px;
-                            line-height: 36px;
-                            border-radius: 50%;
-                            background: rgba(255,255,255,0.7);
-                            display: flex;
-                            justify-content: center;
-                            aling-items: center;
-                        }
-
-                        body._access-listening:after {
-                            animation: _access-listening-animation 2s infinite ease;
-                        }
-
-                        @keyframes _access-listening-animation {
-                            0%  {background-color: transparent;}
-                            50%  {background-color: #EF9A9A;}
-                        }
-                    `;
-          common.injectStyle(css, { className: className });
-          common.deployedObjects.set("." + className, true);
-          let inputs = document.querySelectorAll(
-            'input[type="text"], input[type="search"], textarea, [contenteditable]'
-          );
-          for (let i = 0; i < inputs.length; i++) {
-            inputs[i].addEventListener(
-              "blur",
-              () => {
-                if (
-                  typeof this.recognition === "object" &&
-                  typeof this.recognition.stop === "function"
-                )
-                  this.recognition.stop();
-              },
-              false
-            );
-            inputs[i].addEventListener("focus", this.listen, false);
-            inputs[i].parentElement.classList.add("_access-mic");
-          }
-        } else {
-          remove();
-        }
+      voiceTotext: (destroy) => {
+        voiceTotext(this, destroy);
       },
     };
 
