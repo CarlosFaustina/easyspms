@@ -1,8 +1,4 @@
 export default function leiaFocus(self, destroy) {
-  ///
-  var divFocus = document.createElement("DIV");
-  divFocus.id = "cursor";
-  divFocus.className = "cursor";
 
   var divMascara = document.createElement("DIV");
   divMascara.id = "divMascara";
@@ -56,16 +52,14 @@ export default function leiaFocus(self, destroy) {
   document.getElementById("divMascara2").style.top = "58%";
   document.getElementById("divMascara2").style.height = "100%";
 
-  // const cursor = document.querySelector(".cursor");
+  // const cursor = document.querySelector(".divMascara");
   document.getElementById("divMascara").style.opacity = "75%";
   document.getElementById("divMascara2").style.opacity = "75%";
   window.addEventListener("mousemove", (e) => {
-    // cursor.style.left = (e.x-100)+"px";// para poder mover no eixo X.
 
      document.getElementById("divMascara").style.transition = "50ms";
-     document.getElementById("divMascara2").style.transition = "100ms";
+     document.getElementById("divMascara2").style.transition = "20ms";
 
-    //cursor.style.top = (e.y-50)+"px";
 
     document.getElementById("divMascara").style.height = e.y - 60 + "px";
     document.getElementById("divMascara2").style.top = e.y + 75 + "px";
@@ -89,6 +83,14 @@ export default function leiaFocus(self, destroy) {
     document.getElementById("divMascara").style.visibility = "hidden";
     document.getElementById("divMascara2").style.visibility = "hidden";
     window.removeEventListener("mousemove",addEventListener); //gere o erro. 
+    
+    document.getElementById("divMascara").remove(); 
+    document.getElementById("divMascara2").remove(); 
+
+    divMascara.parentElement.removeChild(divMascara);
+    divMascara2.parentElement.removeChild(divMascara2);
+    
+    
     window.removeEventListener("mousemove",e); //gere o erro. 
     return;
      
@@ -116,10 +118,12 @@ export default function leiaFocus(self, destroy) {
 
     document.getElementById("divMascara").style.visibility = "hidden";
     document.getElementById("divMascara2").style.visibility = "hidden";
+    
+    document.getElementById("divMascara").remove(); 
+    document.getElementById("divMascara2").remove(); 
 
-    window.setTimeout((e)=> {
-          window.removeEventListener("mousemove",e);
-    }, 1000);
+    divMascara.parentElement.removeChild(divMascara);
+    divMascara2.parentElement.removeChild(divMascara2);
 
 
     
