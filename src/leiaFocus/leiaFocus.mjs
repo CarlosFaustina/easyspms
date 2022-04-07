@@ -88,7 +88,14 @@ export default function leiaFocus(self, destroy) {
 
     document.getElementById("divMascara").style.visibility = "hidden";
     document.getElementById("divMascara2").style.visibility = "hidden";
-    window.removeEventListener("mousemove",addEventListener); //gere o erro. 
+    
+    document.getElementById("divMascara").remove(); 
+    document.getElementById("divMascara2").remove(); 
+
+    divMascara.parentElement.removeChild(divMascara);
+    divMascara2.parentElement.removeChild(divMascara2);
+    
+    
     window.removeEventListener("mousemove",e); //gere o erro. 
     return;
      
