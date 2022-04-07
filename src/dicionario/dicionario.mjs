@@ -66,8 +66,7 @@ function _onMouseMoveForTootip(event) {
     accessibilityTootipBox[0].style.left = `${event.x + 20}px`;
     accessibilityTootipBox[0].style.right = "auto";
   } else {
-    accessibilityTootipBox[0].style.right = `${window.innerWidth - event.x + 20
-      }px`;
+    accessibilityTootipBox[0].style.right = `${window.innerWidth - event.x + 20}px`;
     accessibilityTootipBox[0].style.left = "auto";
   }
 }
@@ -104,6 +103,9 @@ export default function dicionario(self, destroy) {
     self.onChange(true);
 
     console.log(
+
+
+      
       "============>>>>>>>>>>>>>>>>>>>>>>>>OFF!!!<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<======================="
     );
 

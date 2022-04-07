@@ -1,7 +1,18 @@
 "use strict";
 import common from "../utils/common.js";
 export default function ampliadorTexto(self,destroy){
+var div_toltip = document.createElement("div");
+div_toltip.id ="tool-tip";
+div_toltip.className ="tool-tip";
+div_toltip.style.width = "500px";
+div_toltip.style.height = "auto";
+div_toltip.style.display ="none";
+
+//var word="";
+
 $(function () {
+
+  
 
   var $hoverText = $(".hasText");
 
@@ -51,10 +62,31 @@ $(function () {
         text.removeAttribute('title-new');
         //console.log(text);
       }   
-      console.log('desactivado'); 
+       var removeTol = document.getElementById('tool-tip');
+       removeTol.remove();
       return;
   }else{
-    console.log('activado');
+    console.log('####Activado#####');
+  $('<div id="tool-tip" class="tool-tip"></div>').appendTo('body');
+  $('.tool-tip').css({
+    "display":"block",
+    "border" :"1px solid #ccc",
+    "background-color":"blue",
+    "position":"absolute",
+    "max-width": "auto",
+    "background-color":"#262626",
+    "border": "2px solid #ccc",
+    "font-family": "Arial",
+    "font-size": "26px",
+    "color": "#fff",
+    "border-radius": "7.5px",
+    "max-height": "auto",
+    "z-index": "1000003",
+    "overflow": "auto",
+    "padding": "10px 15px",
+    "transition": "bottom 1s linear 0s",
+
+  });
     for(const list of $hoverText){
       list.addEventListener('mousemove',_mouseMove,false);
     }
@@ -62,26 +94,9 @@ $(function () {
   self.onChange(true);
   
 
- let css = ` .tool-tip[title-new]:hover:after {
-  content: attr(title-new);
-  position:absolute;
-  display: inline-block;
- 
-max-width: auto;
-background-color:#262626;
-border: 2px solid #ccc;
 
-  font-family: Arial;
-  font-size: 26px;
-  color: #fff;
-  border-radius: 7.5px;
-  max-height: auto;
-  z-index: 1;
-  overflow: auto;
-  padding: 10px 15px;
-}`;
 
-common.injectStyle(css);
+//common.injectStyle(css);
 
     
    
@@ -89,10 +104,6 @@ common.injectStyle(css);
 function _mouseMove(e){
 
  
-   
-  //  var $this = $(this)[0].lastElementChild;
- /// elimarn virgulas e pontos nas frases
-  //var regex = /[.,\s]/g;
 
   if (!self.initialValues.ampliadorTexto){
     e.stopPropagation();
@@ -100,79 +111,29 @@ function _mouseMove(e){
    //console.log(e.target);
   }else{
 
-    var word = getWordUnderCursor(e);
-    if (word !== "") 
-    
+   var word = getWordUnderCursor(e);
+    if (word !== ""){
+
+      mouseMoseTol(e,word);
       
-        if( $(this).find('span').length > 0 ){
-          //remover as classes nos filhos de span
-         if($(this).find('span').children().length>0){
-          $(this).find('span').children().each(function(i,el){
-            $(el).removeClass('tool-tip');
-            $(el).parent().addClass('tool-tip');
-          })
-         }else{
-          // console.log($(this));
-          $(this).find('span').addClass('tool-tip');
-         }
-          
-          //$('.tool-tip').attr('title-new',word)
-          //console.log($(this));
-        }else{
-          // se for uma colleçao 
-          try {
-          if($(this).length >1 ){
-
-           
-              $(this).each(function(index,item){
-                if( $(item).parent()){
-                  $(item).parent().each(function(index,el){
-                    $(item).parent(el).removeClass('tool-tip');
-                    //console.log(el);
-                  });
-                  // se o elemento tiver parent adicionar classe nos filhos
-                  $(item).children().addClass('tool-tip');
-                  
-                 
-                }else{
-                 // adicionar o elemento na classe mais proximo
-                  $(item).closest().addClass('tool-tip');
-                }
-                
-               
-              })
-             // $(this).addClass('tool-tip');
-             
-            }else{
-              //se for elemento com filho
-              if($(this).children().length > 0 ){
-                $(this).children().each(function(index,item){
-                $(this).parent(item).removeClass('tool-tip');
-                  // console.log($(this.children().length > 0));
-                })
-
-              }else{
-                //console.log('esta aqui');
-                $(this).addClass('tool-tip');
-              }
-            //  console.log(this);
-              
-              
-              
-            
-            }
-              
-            } catch (error) {
-              
-            }
-            
-          //$(this).addClass('tool-tip');
-       
-        }
-        $('.tool-tip').attr('title-new',word);
-        e.stopPropagation();
-      }
+     
+    }
+  }
 }
+function mouseMoseTol(event,word){
+
+ $(function(){
+  $('#tool-tip').css({
+    top:event.pageY -135 + "px" ,
+    left:event.pageX 
+  });
+  $('.tool-tip').text(word);
+ });
+
+}
+
+
+
 function getWordUnderCursor(event) {
   var range, textNode, offset;
 

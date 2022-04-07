@@ -2,8 +2,6 @@
 import common from '../utils/common.js';
 
 export default function voiceTotext(self, destroy){
-console.log(self.initialValues.voiceTotext);
-
 if(destroy){
   document
      .querySelector('._access-menu [data-access-action="voiceTotext"]')
@@ -21,8 +19,6 @@ document
     self.onChange(true);
  console.log(self.initialValues.voiceTotext);
   
-
-
 if(!self.initialValues.voiceTotext){
 
  var  doc = document.getElementsByClassName("voicetoText");
@@ -35,9 +31,12 @@ return;
 }else{
 
  CreateHtml();
- 
+ $(function(){
+  $('.voicetoText').hide();
+ });
+
  setTimeout( ()=>{
-   core()},4000);
+   core()},3000);
  setTimeout(()=>{
   languagues();
  },3000) 
