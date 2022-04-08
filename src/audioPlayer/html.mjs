@@ -1,4 +1,4 @@
-import { playerLanguages } from "./languages";
+import { playerLanguages } from "./languages.mjs";
 
 export const audioPlayerHtml = `
 <div class="accessibilityPlayerAudioContainer" id="accessibilityAudioPlayer">
@@ -18,8 +18,8 @@ export const audioPlayerHtml = `
     <div class="accessibilityPlayerAudioBody">
         <select style="width: 100%; height: 25px; vertical-align: top; font-size: 14px;" id="audioPlayerLanguage">
         ${playerLanguages.map(
-          (lang) => `<option value="${lang.value}">${lang.label}</option>`
-        ).join("")}
+    (lang) => `<option value="${lang.value}">${lang.label}</option>`
+).join("")}
        
         </select>
         <div style="display: flex; flex-direction: row; align-items: center; align-self: center; margin-top: 10px;">
