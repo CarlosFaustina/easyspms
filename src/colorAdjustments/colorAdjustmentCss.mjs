@@ -16,12 +16,30 @@ export const injectColorAdjustmentsCss = `
   top: 5px;
 }
 
+
+.RadioEditaCores input[type="radio"] {
+  display: none;
+}
+.RadioEditaCores input[type="radio"]:checked + label {
+  border-bottom: 2px solid;
+}
+
+.RadioEditaCores label {
+  display: inline-block;
+  padding: 4px 11px;
+  font-family: Arial;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .RadioCores input[type="radio"] {
   display: none;
 }
 .RadioCores input[type="radio"]:checked + label {
   border: 1px solid;
 }
+
+
 
 .RadioCores label {
   display: inline-block;

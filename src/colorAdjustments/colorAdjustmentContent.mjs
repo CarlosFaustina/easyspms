@@ -209,4 +209,13 @@ export const injectColorAdjustmentsContentCss = `
   color: #ffffff;
 }
 
+
+._access-menu._access p,
+._access-menu._access span,
+._access-menu._access li{
+  color:#000000;
+}
+
+
+
 `;

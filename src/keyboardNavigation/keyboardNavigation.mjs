@@ -1,4 +1,4 @@
-export function keyboardNavigation() {
+export function keyboardNavigation(self, destroy) {
   if ($("body").hasClass("KeyboardNavigation")) {
     $("body").removeClass("KeyboardNavigation");
     $("#keyboardNavCheck").removeClass("Ativa");
@@ -15,7 +15,20 @@ export function keyboardNavigation() {
       }
     };
   }
+
+  document.body.onkeyup(function (e) {
+    if (e.keyCode == 32) {
+      console.log("O TAB FOI pressionado ");
+    }
+  });
+
+  document.getElementById("MenuNavAmig").onclick = function () {
+    //console.log("João");
+    self.toggleMenu();
+    window.location.hash = "col-auto";
+  };
 }
+
 export let keyboardNavCss = `
 .KeyboardNavigation {
 }
