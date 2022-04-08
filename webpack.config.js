@@ -28,7 +28,37 @@ module.exports = {
           "css-loader",
           "sass-loader"
         ]
-      }
+      },
+      {
+        test: /jquery-mousewheel/,
+        use: [{
+                loader: "imports-loader",
+                options: {
+                    imports: {
+                        moduleName: "jquery",
+                        name: "$"
+                    },
+                    wrapper: "window",
+                    additionalCode:
+                        "var define = false;"
+                }
+            }]
+    },
+    {
+      test: /malihu-custom-scrollbar-plugin/, /* Not working */
+      use: [{
+              loader: "imports-loader",
+              options: {
+                  imports: {
+                      moduleName: "jquery",
+                      name: "$"
+                  },
+                  wrapper: "window",
+                  additionalCode:
+                      "var define = false;"
+              }
+          }]
+  }
     ]
   }
 };

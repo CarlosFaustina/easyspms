@@ -1,6 +1,11 @@
 #easyapp {
-    padding: 1.0rem !important;
+    position: absolute;
+	margin: 0;
+	padding: 1rem;
+	border: 0;
+	font-size: 1rem;
     @import "~bootstrap/scss/bootstrap-reboot";
     @import "~bootstrap/scss/bootstrap";
     @import 'easy';
+    @import 'easy-media-queries';
 }

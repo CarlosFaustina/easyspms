@@ -1,12 +1,15 @@
 "use strict";
 import common from "./utils/common.js";
 import storage from "./utils/storage.js";
-import builder from "./builder.mjs";
+import theme from "./theme/theme.mjs";
+import addListeners from './utils/addListeners/addListeners.mjs';
+import textToSpeech from "./textToSpeech/textToSpeech.mjs";
 
 let _options = {
   
   modules: {
-    builder: true
+    theme: true,
+    textToSpeech: true,
   },
   session: {
     persistent: true,
@@ -17,11 +20,11 @@ let self = null;
 export class Accessibility {
   
   constructor(options = {}) {
-    self = this;
-    this.options = _options;
-    builder();
-    //$('body').load('src/builder.html');
-    
+    self          = this;
+    this.options  = _options;
+
+    theme(); 
+    addListeners(this);
   }
 
 }
