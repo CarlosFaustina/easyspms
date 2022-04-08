@@ -1255,7 +1255,7 @@ export class Accessibility {
     virtualKeyboard();
   }
   callKeyboardNav() {
-    keyboardNavigation();
+    keyboardNavigation(this);
   }
 
   speechToText() {
