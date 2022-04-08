@@ -1,3 +1,5 @@
+import common from "../utils/common.js";
+
 export default function customTranslate(self, destroy) {
   var selectGoogleTranslate = null;
   var resetTranslate = null;
@@ -6,6 +8,10 @@ export default function customTranslate(self, destroy) {
   /**
    * Incia google tradutor
    */
+  const googleTranslateAPI = [
+    "https://translate.google.com/translate_a/element.js?cb=translateInit",
+  ];
+  common.injectScript(googleTranslateAPI);
 
   setTimeout(() => {
     new google.translate.TranslateElement(

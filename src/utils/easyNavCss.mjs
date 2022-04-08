@@ -1,47 +1,6 @@
-@charset "utf-8";
-/* BEGIN FONT */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-/* END FONT */
-/* BEGIN CORRIGIR O BODY */
-* {
-  -webkit-overflow-scrolling: touch;
-}
-body {
-  overflow-x: hidden !important;
-}
-.easy_aberto {
-  overflow-y: hidden !important;
-  overflow-x: hidden !important;
-}
-.easy_basic_color {
-  color: #0f4e64;
-  fill: #0f4e64;
-}
-.easy_disabled_color {
-  color: #cccccc !important;
-  fill: #cccccc !important;
-}
-.bg_easy {
-  background-color: #0f4e64 !important;
-  color: #fff;
-}
-.bg_easy svg {
-  filter: brightness(0) invert(1);
-  -webkit-filter: brightness(0) invert(1);
-  -moz-filter: brightness(0) invert(1);
-  -ms-filter: brightness(0) invert(1);
-  -o-filter: brightness(0) invert(1);
-}
-.margem_20 {
-  margin: 20px;
-}
-.mb_16 {
-  margin-bottom: 16px;
-}
-.mb_20 {
-  margin-bottom: 16px;
-}
-/* END CORRIGIR O BODY */
+export const easyNavCss = `
+       /* ////////////// */
+
 /* BEGIN EASY NAVIGATOR */
 #nav_easy::-webkit-scrollbar {
   display: none;
@@ -2149,3 +2108,6 @@ yx-axis
 /*
 END SCROLL 
 */
+
+
+`;
