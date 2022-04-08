@@ -852,19 +852,6 @@ export class Accessibility {
                 {
                   type: "option",
                   attrs: {
-                    value: "",
-                    selected: true,
-                  },
-                  children: [
-                    {
-                      type: "#text",
-                      text: "Selecione o idioma",
-                    },
-                  ],
-                },
-                {
-                  type: "option",
-                  attrs: {
                     value: "ar",
                   },
                   children: [
@@ -938,6 +925,7 @@ export class Accessibility {
                   type: "option",
                   attrs: {
                     value: "pt",
+                    selected: true,
                   },
                   children: [
                     {
