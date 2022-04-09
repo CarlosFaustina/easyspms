@@ -1,10 +1,9 @@
 import invoke from "./invoke.mjs";
 
 export default function addListeners(self) {
-  let funcionalidades = document.querySelectorAll("#easyapp");
-  //let funcionalidades = $('#easyapp');
-  console.log(funcionalidades);
-  //console.log(teste.text());
+  
+  let funcionalidades = $('._access_menu');
+  
   for (let i = 0; i < funcionalidades.length; i++) {
     funcionalidades[i].addEventListener(
       "click",
@@ -15,7 +14,7 @@ export default function addListeners(self) {
       },
       false
     );
-    functionalidades[i].addEventListener(
+    funcionalidades[i].addEventListener(
       "keypress",
       (e) => {
         let event = e || window.event;
