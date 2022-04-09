@@ -68,16 +68,15 @@ $(function () {
   }else{
     console.log('####Activado#####');
   $('<div id="tool-tip" class="tool-tip"></div>').appendTo('body');
-  $('.tool-tip').css({
+  $('div.tool-tip').css({
     "display":"block",
     "border" :"1px solid #ccc",
-    "background-color":"blue",
     "position":"absolute",
     "max-width": "auto",
     "background-color":"#262626",
     "border": "2px solid #ccc",
     "font-family": "Arial",
-    "font-size": "26px",
+    "font-size": "28px",
     "color": "#fff",
     "border-radius": "7.5px",
     "max-height": "auto",
@@ -85,8 +84,9 @@ $(function () {
     "overflow": "auto",
     "padding": "10px 15px",
     "transition": "bottom 1s linear 0s",
-
+   
   });
+  $('.tool-tip').hide();
     for(const list of $hoverText){
       list.addEventListener('mousemove',_mouseMove,false);
     }
@@ -110,21 +110,32 @@ function _mouseMove(e){
    //window.removeEventListener('mousemove',addEventListener);
    //console.log(e.target);
   }else{
+   if(e.target.className !=="hasText"){
+    $('#tool-tip').hide();
 
-   var word = getWordUnderCursor(e);
-    if (word !== ""){
+   }else{
+    var word = getWordUnderCursor(e);
+   }
+   
+    if (word !=""){
 
-      mouseMoseTol(e,word);
+      mouseEventTol(e,word);
       
      
+    }else{
+      $('#tool-tip').fadeOut('slow');
+      $('#tool-tip').hide();
+      console.log('sem texto');
+
     }
   }
 }
-function mouseMoseTol(event,word){
+function mouseEventTol(event,word){
 
  $(function(){
+  $('#tool-tip').fadeIn('slow');
   $('#tool-tip').css({
-    top:event.pageY -135 + "px" ,
+    top:event.pageY -25 +"px",
     left:event.pageX 
   });
   $('.tool-tip').text(word);
