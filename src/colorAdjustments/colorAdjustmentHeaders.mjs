@@ -278,4 +278,5 @@ export const injectColorAdjustmentsHeadersCss = `
   color: #ffffff;
 }
 
+
 `;

@@ -35,15 +35,6 @@ import { enableSpeechEvents } from "../audioPlayer/index.mjs";
 const speechInstance = new SpeechSynthesisUtterance();
 enableSpeechEvents(speechInstance);
 
-// /**
-//  * Ler texto
-//  * @param {MouseEvent} e
-//  * @param {number} textIndex
-//  */
-// export default function read(e,textIndex) {
-
-// }
-
 /**
  * Ler texto
  * @param {MouseEvent} e
@@ -57,12 +48,25 @@ export default function read(e) {
   }
 
   let text = window.event.target.innerText;
-  console.log(text);
+
   if (!!text) {
     speechSynthesis.cancel();
+    let voices = speechSynthesis.getVoices();
 
+    let inputVolume = document.getElementById("audioPlayerVolume");
+    let voiceRateElem = document.getElementById("audioPlayerRate");
+    let languageInput = document.getElementById("audioPlayerLanguage");
+    
     speechInstance.text = text;
-    speechInstance.lang = "pt-PT";
+    speechInstance.lang = languageInput.value;
+    speechInstance.volume = parseFloat(inputVolume.value);
+    speechInstance.rate = parseFloat(voiceRateElem.innerText);
+
+    for (let i = 0; i < voices.length; i++) {
+      if (voices[i].name === speechInstance.lang) {
+        utterThis.voice = voices[i];
+      }
+    }
 
     speechSynthesis.speak(speechInstance);
 

@@ -1,3 +1,5 @@
+import { playerLanguages } from "./languages.mjs";
+
 export const audioPlayerHtml = `
 <div class="accessibilityPlayerAudioContainer" id="accessibilityAudioPlayer">
     <!-- HEADER PLAYER -->
@@ -14,20 +16,22 @@ export const audioPlayerHtml = `
     <!-- FIM HEADER PLAYER -->
     <!-- CORPO PLAYER -->
     <div class="accessibilityPlayerAudioBody">
-        <select style="width: 100%; height: 25px; vertical-align: top; font-size: 14px;">
-            <option selected>Português (Portugal)</option>
-            <option value="1">Inglês (Americano)</option>
+        <select style="width: 100%; height: 25px; vertical-align: top; font-size: 14px;" id="audioPlayerLanguage">
+        ${playerLanguages.map(
+    (lang) => `<option value="${lang.value}">${lang.label}</option>`
+).join("")}
+       
         </select>
         <div style="display: flex; flex-direction: row; align-items: center; align-self: center; margin-top: 10px;">
-            <a href="#" style="color: inherit;" id="audioPlayerIncreaseRate">
+            <a href="#" style="color: inherit;" id="audioPlayerDecreaseRate">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                     class="bi bi-dash-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                     <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
                 </svg>
             </a>
-            <span style="font-size: 30px; margin: 0px 10px 0px 10px;">1x</span>
-            <a href="#" style="color: inherit;" id="audioPlayerDecreaseRate">
+            <span style="font-size: 30px; margin: 0px 10px 0px 10px;" id="audioPlayerRate">1x</span>
+            <a href="#" style="color: inherit;" id="audioPlayerIncreaseRate">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                     class="bi bi-plus-circle" viewBox="0 0 16 16">
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -51,7 +55,7 @@ export const audioPlayerHtml = `
                 <path
                     d="M8.707 11.182A4.486 4.486 0 0 0 10.025 8a4.486 4.486 0 0 0-1.318-3.182L8 5.525A3.489 3.489 0 0 1 9.025 8 3.49 3.49 0 0 1 8 10.475l.707.707zM6.717 3.55A.5.5 0 0 1 7 4v8a.5.5 0 0 1-.812.39L3.825 10.5H1.5A.5.5 0 0 1 1 10V6a.5.5 0 0 1 .5-.5h2.325l2.363-1.89a.5.5 0 0 1 .529-.06z" />
             </svg>
-            <input type="range" style="width:auto;" min="0" max="1" value="0.5" step="0.1" />
+            <input type="range" style="width:auto;" min="0" max="1" value="1" id="audioPlayerVolume" step="0.1" />
         </div>
         <div style="display: flex; flex-direction: row; align-items: center;">
             <a style="margin-right: 6px; color: inherit;" href="#" id="audioPlayerPrev">

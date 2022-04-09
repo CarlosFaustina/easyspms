@@ -615,26 +615,31 @@ export class Accessibility {
         <div class="input-color"></div>
       </div>
     </div>
-
+<div class="RadioEditaCores">
     <input
       type="radio"
       name="editaCor"
       value="cabecalho"
       class="editarCores"
-    />Cabeçalho
+      id="Cabecalho"
+    />
+     <label for="Cabecalho">Cabeçalho</label>
     <input
       type="radio"
       name="editaCor"
       value="fundo"
       class="editarCores"
-    />Fundo
+      id="Fundo"
+    /><label for="Fundo">Fundo</label>
     <input
       type="radio"
       name="editaCor"
       value="conteudo"
       class="editarCores"
-    />Conteudo
-
+      id="Conteudo"
+    />
+    <label for="Conteudo">Conteudo</label>
+</div>
     <br />
     <div class="RadioCores">
       <input
@@ -847,19 +852,6 @@ export class Accessibility {
                 {
                   type: "option",
                   attrs: {
-                    value: "",
-                    selected: true,
-                  },
-                  children: [
-                    {
-                      type: "#text",
-                      text: "Selecione o idioma",
-                    },
-                  ],
-                },
-                {
-                  type: "option",
-                  attrs: {
                     value: "ar",
                   },
                   children: [
@@ -933,6 +925,7 @@ export class Accessibility {
                   type: "option",
                   attrs: {
                     value: "pt",
+                    selected: true,
                   },
                   children: [
                     {
