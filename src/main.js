@@ -857,7 +857,7 @@ export class Accessibility {
                   children: [
                     {
                       type: "#text",
-                      text: "العربية",
+                      text: "árabe",
                     },
                   ],
                 },
@@ -869,31 +869,7 @@ export class Accessibility {
                   children: [
                     {
                       type: "#text",
-                      text: "bălgarski",
-                    },
-                  ],
-                },
-                {
-                  type: "option",
-                  attrs: {
-                    value: "ca",
-                  },
-                  children: [
-                    {
-                      type: "#text",
-                      text: "català",
-                    },
-                  ],
-                },
-                {
-                  type: "option",
-                  attrs: {
-                    value: "cs",
-                  },
-                  children: [
-                    {
-                      type: "#text",
-                      text: "čeština",
+                      text: "búlgaro",
                     },
                   ],
                 },
@@ -905,7 +881,7 @@ export class Accessibility {
                   children: [
                     {
                       type: "#text",
-                      text: "dansk",
+                      text: "dinamarques",
                     },
                   ],
                 },
@@ -917,7 +893,31 @@ export class Accessibility {
                   children: [
                     {
                       type: "#text",
-                      text: "Deutsch",
+                      text: "alemão",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "el",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "grego",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "en",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Ingles",
                     },
                   ],
                 },
@@ -942,7 +942,151 @@ export class Accessibility {
                   children: [
                     {
                       type: "#text",
-                      text: "Español",
+                      text: "Espanhol",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "fr",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Frances",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "it",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Italiano",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "ja",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "chinês",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "ko",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "coreano",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "nb",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "norueguês",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "pl",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "esloveno",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "sv",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "sueco",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "tr",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "turco",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "uk",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "ucraniano",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "zh",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "japones",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "ru",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Russo",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "bn",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Bengali",
                     },
                   ],
                 },
