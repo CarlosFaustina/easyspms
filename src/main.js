@@ -8,7 +8,10 @@ import textToSpeech from "./textToSpeech/textToSpeech.mjs";
 import bigCursorReset from "./bigCursorReset/bigCursorReset.mjs";
 import bigCursorWhite from "./bigCursorWhite/bigCursorWhite.mjs";
 import bigCursorBlack from "./bigCursorBlack/bigCursorBlack.mjs";
-import grayHues from "../src/grayHues/grayHues.mjs";
+import grayHues from "./grayHues/grayHues.mjs";
+import protanopia from "./protanopia/protanopia.mjs";
+import deuteranopia from "./deutanopia/deutanopia.mjs";
+import tritanopia from "./tritanopia/tritanopia.mjs";
 
 let _options = {
   
@@ -57,6 +60,15 @@ export class Accessibility {
     },
     grayHues: (destroy) => {
       grayHues(this, destroy);
+    },
+    protanopia: (destroy) => {
+      protanopia(this, destroy);
+    },
+    deuteranopia: (destroy) => {
+      deuteranopia(this, destroy);
+    },
+    tritanopia: (destroy) => {
+      tritanopia(this, destroy);
     },
   }
 
