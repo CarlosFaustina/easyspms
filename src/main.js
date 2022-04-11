@@ -1,6 +1,7 @@
 "use strict";
 import common from "./utils/common.js";
 import storage from "./utils/storage.js";
+import { easyNavCss } from "./utils/easyNavCss.mjs";
 import {
   keyboardCss,
   virtualKeyboard,
@@ -21,12 +22,16 @@ import {
 import customTranslate, {
   customTranslateCss,
 } from "../src/customTranslate/customTranslate.mjs";
+import voiceTotext from "./VoiceTotext/VoiceToText.mjs";
 import leiaFocus from "../src/leiaFocus/leiaFocus.mjs";
 import dicionario from "../src/dicionario/dicionario.mjs";
 import addHasText from "../src/addHasText/addHasText.mjs";
 import bigCursorWhite from "../src/bigCursorWhite/bigCursorWhite.mjs";
 import bigCursorBlack from "../src/bigCursorBlack/bigCursorBlack.mjs";
 import readingGuide from "../src/readingGuide/readingGuide.mjs";
+import protanopia from "../src/protanopia/protanopia.mjs";
+import deutanopia from "../src/deutanopia/deutanopia.mjs";
+import tritanopia from "../src/tritanopia/tritanopia.mjs";
 import grayHues from "../src/grayHues/grayHues.mjs";
 import parseKeys from "../src/utils/parseKeys/parseKeys.mjs";
 import runHotkey from "../src/utils/parseKeys/runHotkey.mjs";
@@ -51,6 +56,7 @@ import mudaCorConteudo, {
 import mudaCorCabecalho, {
   injectColorAdjustmentsHeadersCss,
 } from "./colorAdjustments/colorAdjustmentHeaders.mjs";
+import { audioPlayerSyles } from "./audioPlayer/styles.mjs";
 import resetIfDefined from "../src/utils/resetIfDefined/resetIfDefined.mjs";
 import destroyAll from "../src/utils/destroyAll/destroyAll.mjs";
 import fontFallback from "../src/fontAdjustment/fontFallback.mjs";
@@ -89,7 +95,7 @@ let _options = {
       bigCursorBlack: ["ctrlKey", "altKey", 68], // Big Cursor	CTRL + ALT + C
       readingGuide: ["ctrlKey", "altKey", 82], // Reading Guide	CTRL + ALT + R
       textToSpeech: ["ctrlKey", "altKey", 84], // Text To Speech	CTRL + ALT + T
-      speechToText: ["ctrlKey", "altKey", 83], // Speech To Text	CTRL + ALT + S
+      // speechToText: ["ctrlKey", "altKey", 83], // Speech To Text	CTRL + ALT + S
     },
   },
   buttons: {
@@ -125,11 +131,11 @@ let _options = {
     readingGuide: "Guia de leitura",
     linkHighlight: "Destaque e inks",
     textToSpeech: "Leia Texto",
-    speechToText: "Voz para Texto",
     ampliadorTexto: "Ampliador do texto",
+    voiceTotext: "Voice to Text",
   },
   textToSpeechLang: "pt-PT",
-  speechToTextLang: "pt-PT",
+  // speechToTextLang: "pt-PT",
   textPixelMode: false,
   textEmlMode: true,
   animations: {
@@ -148,13 +154,16 @@ let _options = {
     increaseTextSpacing: true,
     decreaseTextSpacing: true,
     grayHues: true,
+    deutanopia: true,
+    tritanopia: true,
+    protanopia: true,
     bigCursorWhite: true,
     bigCursorBlack: true,
     readingGuide: true,
     linkHighlight: true,
     textToSpeech: true,
-    speechToText: true,
     ampliadorTexto: true,
+    voiceTotext: true,
   },
   session: {
     persistent: true,
@@ -187,12 +196,20 @@ export class Accessibility {
       textSize: 0,
       lineHeight: 0,
       textSpace: 0,
+      deutanopia: false,
+      tritanopia: false,
+      protanopia: false,
       grayHues: false,
       linkHighlight: false,
       bigCursorWhite: false,
       bigCursorBlack: false,
       readingGuide: false,
+      voiceTotext: false,
     };
+
+    //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
+    addHasText(false);
+
     //inicialize Virtual Keyboard
     vai_buscar_todos_campos_texto();
     construtor_teclado_virtual._isMobile();
@@ -209,6 +226,8 @@ export class Accessibility {
   injectCss() {
     let css =
       `
+      ${easyNavCss}
+
     
     ${injectColorAdjustmentsCss}
     ${injectColorAdjustmentsBackgroundCss}
@@ -219,6 +238,7 @@ export class Accessibility {
       ${keyboardCss}
       ${keyboardNavCss}
       ${describeImgCss}
+      ${audioPlayerSyles}
         ._access-scrollbar::-webkit-scrollbar-track, .mat-autocomplete-panel::-webkit-scrollbar-track, .mat-tab-body-content::-webkit-scrollbar-track, .mat-select-panel:not([class*='mat-elevation-z'])::-webkit-scrollbar-track, .mat-menu-panel::-webkit-scrollbar-track {
             -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
             background-color: #F5F5F5;
@@ -295,14 +315,12 @@ export class Accessibility {
             -ms-user-select: none;
             user-select: none;
             position: fixed;
-            width: ${
-              this.options.menu.dimensions.width.size +
-              this.options.menu.dimensions.width.units
-            };
-            height: ${
-              this.options.menu.dimensions.height.size +
-              this.options.menu.dimensions.height.units
-            };
+            width: ${this.options.menu.dimensions.width.size +
+      this.options.menu.dimensions.width.units
+      };
+            height: ${this.options.menu.dimensions.height.size +
+      this.options.menu.dimensions.height.units
+      };
             transition-duration: .5s;
             z-index: ${this.options.icon.zIndex + 1};
             opacity: 1;
@@ -315,11 +333,10 @@ export class Accessibility {
             box-shadow: 0px 0px 1px #aaa;
             max-height: 100vh;
             overflow: auto;
-            ${
-              getComputedStyle(this.body).direction == "rtl"
-                ? "text-indent: -5px"
-                : ""
-            }
+            ${getComputedStyle(this.body).direction == "rtl"
+        ? "text-indent: -5px"
+        : ""
+      }
         }
         ._access-menu.close {
             z-index: -1;
@@ -337,19 +354,17 @@ export class Accessibility {
             left: 0;
         }
         ._access-menu.close.left {
-            left: -${
-              this.options.menu.dimensions.width.size +
-              this.options.menu.dimensions.width.units
-            };
+            left: -${this.options.menu.dimensions.width.size +
+      this.options.menu.dimensions.width.units
+      };
         }
         ._access-menu.right {
             right: 0;
         }
         ._access-menu.close.right {
-            right: -${
-              this.options.menu.dimensions.width.size +
-              this.options.menu.dimensions.width.units
-            };
+            right: -${this.options.menu.dimensions.width.size +
+      this.options.menu.dimensions.width.units
+      };
         }
         ._access-menu ._text-center {
             text-align: center;
@@ -372,11 +387,10 @@ export class Accessibility {
             transform: rotate(0deg);
         }
         ._access-menu ._menu-reset-btn:hover,._access-menu ._menu-close-btn:hover {
-            ${
-              this.options.animations.buttons
-                ? "transform: rotate(180deg);"
-                : ""
-            }
+            ${this.options.animations.buttons
+        ? "transform: rotate(180deg);"
+        : ""
+      }
         }
         ._access-menu ._menu-reset-btn {
             right: 5px;
@@ -405,10 +419,10 @@ export class Accessibility {
           overflow: auto;
         }
         html._access_cursor_white * {
-            cursor: url(https://firebasestorage.googleapis.com/v0/b/fir-react-upload-bc250.appspot.com/o/images%2Fbigcursorwhite.cur?alt=media&token=d9201ab7-e37f-41a8-ac96-f82543d4cdee),auto!important;
+            cursor: url(https://slimeasy.pt/api/White.cur),auto!important;
         }
         html._access_cursor_black * {
-            cursor: url(https://firebasestorage.googleapis.com/v0/b/fir-react-upload-bc250.appspot.com/o/images%2Fbigcursorblack.cur?alt=media&token=16386120-f2a1-4fa9-b7e2-a7a94f46a543),auto!important;
+            cursor: url(https://slimeasy.pt/api/Black.cur),auto!important;
         }
         ._access-menu ul li {
           display:inline;
@@ -427,9 +441,8 @@ export class Accessibility {
             text-align: center;
             transition-duration: .5s;
             transition-timing-function: ease-in-out;
-            font-size: ${
-              this.options.buttons.font.size + this.options.buttons.font.units
-            } !important;
+            font-size: ${this.options.buttons.font.size + this.options.buttons.font.units
+      } !important;
             
             text-indent: 5px;
             background: #f9f9f9;
@@ -463,6 +476,7 @@ export class Accessibility {
         ._access-menu ul li.active svg path {
             fill: #fff;
         }
+
         
         `;
     let className = "_access-main-css";
@@ -529,6 +543,57 @@ export class Accessibility {
     return menuElem;
   }
 
+  injectDatltonosmoProtanopia() {
+    const startingPoint = document.getElementById("protanopia");
+    startingPoint.innerHTML = `
+        <div class="col-12  grid_big_2 d-flex justify-content-center flex-wrap flex-row mt-7" >
+          <div id="modo_protanopia_dk" class="col-12 d-flex justify-content-between flex-wrap flex-row">
+            <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="-------------------">&nbsp;</abbr></div>
+            <div class="check_show"></div>
+            <div class="col-12 easy_inside_btns_big" >
+              <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
+<svg class="mb-3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><title>Daltonismo protanopia</title><defs><polygon id="a" points="0 0 18.12 0 18.12 18.074 0 18.074"></polygon></defs><g fill="none" fill-rule="evenodd"><mask id="b" fill="white"><use xlink:href="#a"></use></mask><path d="m9.0256 0.0018c1.674 1e-3 3.348 1e-3 5.021 1e-3 1.778-1e-3 3.061 0.792 3.748 2.437 0.653 1.567 0.3 3.013-0.852 4.185-3.409 3.466-6.846 6.907-10.316 10.312-1.18 1.157-2.66 1.449-4.202 0.794-1.53-0.65-2.368-1.875-2.384-3.548-0.034-3.427-0.076-6.856 8e-3 -10.282 0.059-2.386 1.564-3.77 3.956-3.899 0.079-4e-3 0.159-1e-3 0.238-1e-3 1.595 0 3.188 0 4.783 1e-3" fill="#0F4E64" mask="url(#b)"></path></g></svg>
+                <span class="_access-menu-temp text-center d-flex align-items-center" data-access-action="protanopia">Daltonismo<br>
+                Protanopia</span></div>
+            </div>
+          </div>
+        </div>
+    `;
+  }
+  injectDatltonosmoDeutanopia() {
+    const startingPoint = document.getElementById("deutanopia");
+    startingPoint.innerHTML = `
+        <div class="col-12  grid_big_2 d-flex justify-content-center flex-wrap flex-row mt-7" >
+          <div id="modo_deutanopia_dk" class="col-12 d-flex justify-content-between flex-wrap flex-row">
+            <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="-------------------">&nbsp;</abbr></div>
+            <div class="check_show"></div>
+            <div class="col-12 easy_inside_btns_big">
+              <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
+<svg class="mb-3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>Daltonismo deutanopia</title><g fill="none" fill-rule="evenodd"><g transform="translate(-9.3e-5 -.000116)" fill="#0F4E64"><path d="m32.088 3.1807c0.014 1.121-0.284 1.932-0.894 2.614-0.426 0.476-0.887 0.921-1.339 1.373-7.577 7.58-15.154 15.159-22.737 22.733-0.563 0.563-1.118 1.162-1.774 1.599-1.319 0.88-3.084 0.678-4.207-0.374-1.243-1.162-1.511-2.912-0.583-4.364 0.382-0.598 0.909-1.112 1.416-1.619 7.742-7.753 15.491-15.501 23.243-23.244 0.451-0.45 0.904-0.917 1.426-1.274 1.159-0.792 2.428-0.811 3.639-0.17 1.137 0.602 1.698 1.646 1.81 2.726"></path><path d="m22.897 31.986c-1.68 0-3.36 5e-3 -5.04-1e-3 -1.687-7e-3 -2.913-0.766-3.599-2.312-0.69-1.556-0.414-3.028 0.745-4.212 3.415-3.486 6.88-6.922 10.343-10.359 1.204-1.195 2.683-1.408 4.219-0.838 1.494 0.554 2.34 1.784 2.38 3.319 0.095 3.595 0.155 7.201-0.014 10.791-0.108 2.308-1.649 3.533-3.994 3.602-1.679 0.05-3.36 0.01-5.04 0.01"></path></g></g></svg>
+                <span class="_access-menu-temp text-center d-flex align-items-center" data-access-action="deutanopia">Daltonismo<br>
+                Deutanopia</span></div>
+            </div>
+          </div>
+        </div>
+    `;
+  }
+  injectDatltonosmoTritanopia() {
+    const startingPoint = document.getElementById("tritanopia");
+    startingPoint.innerHTML = `
+        <div class="col-12  grid_big_2 d-flex justify-content-center flex-wrap flex-row mt-7">
+          <div id="modo_tritanopia_dk" class="col-12 d-flex justify-content-between flex-wrap flex-row">
+            <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="-------------------">&nbsp;</abbr></div>
+            <div class="check_show"></div>
+            <div class="col-12 easy_inside_btns_big">
+              <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
+<svg class="mb-3" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><title>Daltonismo tritanopia</title><g fill="none" fill-rule="evenodd"><g transform="translate(13.885 13.962)" fill="#0F4E64"><path d="m9.0125 18.024c-1.68 0-3.36 5e-3 -5.04-1e-3 -1.687-7e-3 -2.913-0.766-3.599-2.312-0.69-1.556-0.414-3.028 0.745-4.212 3.415-3.486 6.88-6.922 10.343-10.359 1.204-1.195 2.683-1.408 4.219-0.838 1.494 0.554 2.34 1.784 2.38 3.319 0.095 3.595 0.155 7.201-0.014 10.791-0.108 2.308-1.649 3.533-3.994 3.602-1.679 0.05-3.36 0.01-5.04 0.01"></path></g></g></svg>
+                <span class="_access-menu-temp text-center d-flex align-items-center" data-access-action="tritanopia">Daltonismo<br>
+                Tritanopia</span></div>
+            </div>
+          </div>
+        </div>
+    `;
+  }
   injectcolrAdjustments() {
     const startingDiv = document.getElementById("color-adjustments");
     startingDiv.innerHTML = `
@@ -543,7 +608,6 @@ export class Accessibility {
         </div>
 
         <div class="check" id="mudaCorCabecalho">
-          
         </div>
       </div>
 
@@ -551,26 +615,31 @@ export class Accessibility {
         <div class="input-color"></div>
       </div>
     </div>
-
+<div class="RadioEditaCores">
     <input
       type="radio"
       name="editaCor"
       value="cabecalho"
       class="editarCores"
-    />Cabeçalho
+      id="Cabecalho"
+    />
+     <label for="Cabecalho">Cabeçalho</label>
     <input
       type="radio"
       name="editaCor"
       value="fundo"
       class="editarCores"
-    />Fundo
+      id="Fundo"
+    /><label for="Fundo">Fundo</label>
     <input
       type="radio"
       name="editaCor"
       value="conteudo"
       class="editarCores"
-    />Conteudo
-
+      id="Conteudo"
+    />
+    <label for="Conteudo">Conteudo</label>
+</div>
     <br />
     <div class="RadioCores">
       <input
@@ -783,25 +852,12 @@ export class Accessibility {
                 {
                   type: "option",
                   attrs: {
-                    value: "",
-                    selected: true,
-                  },
-                  children: [
-                    {
-                      type: "#text",
-                      text: "Selecione o idioma",
-                    },
-                  ],
-                },
-                {
-                  type: "option",
-                  attrs: {
                     value: "ar",
                   },
                   children: [
                     {
                       type: "#text",
-                      text: "العربية",
+                      text: "árabe",
                     },
                   ],
                 },
@@ -813,31 +869,7 @@ export class Accessibility {
                   children: [
                     {
                       type: "#text",
-                      text: "bălgarski",
-                    },
-                  ],
-                },
-                {
-                  type: "option",
-                  attrs: {
-                    value: "ca",
-                  },
-                  children: [
-                    {
-                      type: "#text",
-                      text: "català",
-                    },
-                  ],
-                },
-                {
-                  type: "option",
-                  attrs: {
-                    value: "cs",
-                  },
-                  children: [
-                    {
-                      type: "#text",
-                      text: "čeština",
+                      text: "búlgaro",
                     },
                   ],
                 },
@@ -849,7 +881,7 @@ export class Accessibility {
                   children: [
                     {
                       type: "#text",
-                      text: "dansk",
+                      text: "dinamarques",
                     },
                   ],
                 },
@@ -861,7 +893,31 @@ export class Accessibility {
                   children: [
                     {
                       type: "#text",
-                      text: "Deutsch",
+                      text: "alemão",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "el",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "grego",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "en",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Ingles",
                     },
                   ],
                 },
@@ -869,6 +925,7 @@ export class Accessibility {
                   type: "option",
                   attrs: {
                     value: "pt",
+                    selected: true,
                   },
                   children: [
                     {
@@ -885,7 +942,151 @@ export class Accessibility {
                   children: [
                     {
                       type: "#text",
-                      text: "Español",
+                      text: "Espanhol",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "fr",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Frances",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "it",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Italiano",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "ja",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "chinês",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "ko",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "coreano",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "nb",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "norueguês",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "pl",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "esloveno",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "sv",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "sueco",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "tr",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "turco",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "uk",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "ucraniano",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "zh",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "japones",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "ru",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Russo",
+                    },
+                  ],
+                },
+                {
+                  type: "option",
+                  attrs: {
+                    value: "bn",
+                  },
+                  children: [
+                    {
+                      type: "#text",
+                      text: "Bengali",
                     },
                   ],
                 },
@@ -922,6 +1123,30 @@ export class Accessibility {
               : "_access-scrollbar",
           },
           children: [
+            {
+              type: "div",
+              attrs: {
+                id: "protanopia",
+                class: "btn_geral",
+                tabindex: "0",
+              },
+            },
+            {
+              type: "div",
+              attrs: {
+                id: "deutanopia",
+                class: "btn_geral",
+                tabindex: "0",
+              },
+            },
+            {
+              type: "div",
+              attrs: {
+                id: "tritanopia",
+                class: "btn_geral",
+                tabindex: "0",
+              },
+            },
             {
               type: "li",
               attrs: {
@@ -1177,19 +1402,6 @@ export class Accessibility {
             {
               type: "li",
               attrs: {
-                "data-access-action": "speechToText",
-                tabindex: "0",
-              },
-              children: [
-                {
-                  type: "#text",
-                  text: this.options.labels.speechToText,
-                },
-              ],
-            },
-            {
-              type: "li",
-              attrs: {
                 "data-access-action": "ampliadorTexto",
                 tabindex: "0",
               },
@@ -1197,6 +1409,20 @@ export class Accessibility {
                 {
                   type: "#text",
                   text: this.options.labels.ampliadorTexto,
+                },
+              ],
+            },
+
+            {
+              type: "li",
+              attrs: {
+                "data-access-action": "voiceTotext",
+                tabindex: "0",
+              },
+              children: [
+                {
+                  type: "#text",
+                  text: this.options.labels.voiceTotext,
                 },
               ],
             },
@@ -1237,14 +1463,18 @@ export class Accessibility {
     this.menuInterface.ampliadorTexto(true);
     this.menuInterface.leiaFocus(true);
     this.menuInterface.textToSpeech(true);
-    this.menuInterface.speechToText(true);
     this.menuInterface.linkHighlight(true);
+    this.menuInterface.deutanopia(true);
+    this.menuInterface.tritanopia(true);
+    this.menuInterface.protanopia(true);
     this.menuInterface.grayHues(true);
     this.menuInterface.imageSpeaker(true);
     this.menuInterface.dicionario(true);
     this.menuInterface.bigCursorWhite(true);
     this.menuInterface.bigCursorBlack(true);
     this.menuInterface.readingGuide(true);
+    this.menuInterface.voiceTotext(true);
+
     resetLineHeight(this);
     resetTextSize(this);
     resetTextSpace(this);
@@ -1267,75 +1497,7 @@ export class Accessibility {
     virtualKeyboard();
   }
   callKeyboardNav() {
-    keyboardNavigation();
-  }
-
-  speechToText() {
-    if ("webkitSpeechRecognition" in window) {
-      this.recognition = new webkitSpeechRecognition();
-      this.recognition.continuous = true;
-      this.recognition.interimResults = true;
-      this.recognition.onstart = () => {
-        // TODO red color on mic icon
-        console.log("listening . . .");
-        if (this.speechToTextTarget)
-          this.speechToTextTarget.parentElement.classList.add(
-            "_access-listening"
-          );
-        this.body.classList.add("_access-listening");
-      };
-
-      this.recognition.onend = () => {
-        this.body.classList.remove("_access-listening");
-        console.log("onend listening");
-      };
-
-      this.recognition.onresult = (event) => {
-        ///console.log('onresult listening');
-        let finalTranscript = "";
-        if (typeof event.results == "undefined") {
-          return;
-        }
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-          if (event.results[i].isFinal) {
-            finalTranscript += event.results[i][0].transcript;
-          } else {
-            interim_transcript += event.results[i][0].transcript;
-          }
-        }
-        if (finalTranscript && this.speechToTextTarget) {
-          this.speechToTextTarget.parentElement.classList.remove(
-            "_access-listening"
-          );
-          if (
-            this.speechToTextTarget.tagName.toLowerCase() == "input" ||
-            this.speechToTextTarget.tagName.toLowerCase() == "textarea"
-          ) {
-            this.speechToTextTarget.value = finalTranscript;
-          } else if (
-            this.speechToTextTarget.getAttribute("contenteditable") != null
-          ) {
-            this.speechToTextTarget.innerText = finalTranscript;
-          }
-        }
-      };
-      this.recognition.lang = this.options.speechToTextLang;
-
-      this.recognition.start();
-    }
-  }
-  listen() {
-    // let className = "_access-speech-to-text";
-    // window.event.preventDefault();
-    // window.event.stopPropagation();
-    if (
-      typeof self.recognition === "object" &&
-      typeof self.recognition.stop === "function"
-    )
-      self.recognition.stop();
-
-    self.speechToTextTarget = window.event.target;
-    self.speechToText(window.event.target.innerText);
+    keyboardNavigation(this);
   }
 
   toggleMenu() {
@@ -1370,6 +1532,8 @@ export class Accessibility {
       bigCursorWhite: false,
       bigCursorBlack: false,
       readingGuide: false,
+      ampliadorTexto: false,
+      voiceTotext: false,
       body: {},
       html: {},
     };
@@ -1384,6 +1548,9 @@ export class Accessibility {
     this.icon = this.injectIcon();
     this.menu = this.injectMenu();
     this.injectcolrAdjustments();
+    this.injectDatltonosmoProtanopia();
+    this.injectDatltonosmoDeutanopia();
+    this.injectDatltonosmoTritanopia();
     addListeners(this);
     disableUnsupportedModules(this);
 
@@ -1464,17 +1631,22 @@ export class Accessibility {
         this.callTecladoVirtual();
       },
       dicionario: (destroy) => {
-        //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
-        addHasText(destroy);
         dicionario(this, destroy);
       },
       imageSpeaker: (destroy) => {
-        //Adiciona classe "hasText" em todos os elementos da pagina que contem texto
-        addHasText(destroy);
         toogleImageSpeaker(this, destroy);
       },
       grayHues: (destroy) => {
         grayHues(this, destroy);
+      },
+      tritanopia: (destroy) => {
+        tritanopia(this, destroy);
+      },
+      deutanopia: (destroy) => {
+        deutanopia(this, destroy);
+      },
+      protanopia: (destroy) => {
+        protanopia(this, destroy);
       },
       bigCursorWhite: (destroy) => {
         bigCursorWhite(this, destroy);
@@ -1492,91 +1664,9 @@ export class Accessibility {
         addHasText(destroy);
         ampliadorTexto(this, destroy);
       },
-      speechToText: (destroy) => {
-        // this.sessionState.speechToText = typeof destroy === 'undefined' ? true : false;
-        this.onChange(false);
-        let className = "_access-speech-to-text";
-        let remove = () => {
-          if (this.recognition) {
-            this.recognition.stop();
-            this.body.classList.remove("_access-listening");
-          }
-          let style = document.querySelector("." + className);
-          if (style) {
-            style.parentElement.removeChild(style);
-            common.deployedObjects.remove("." + className);
-          }
-          let inputs = document.querySelectorAll("._access-mic");
-          for (let i = 0; i < inputs.length; i++) {
-            inputs[i].removeEventListener("focus", this.listen, false);
-            inputs[i].classList.remove("_access-mic");
-          }
-        };
 
-        if (destroy) {
-          document
-            .querySelector('._access-menu [data-access-action="speechToText"]')
-            .classList.remove("active");
-          this.initialValues.speechToText = false;
-          return remove();
-        }
-
-        document
-          .querySelector('._access-menu [data-access-action="speechToText"]')
-          .classList.toggle("active");
-
-        this.initialValues.speechToText = !this.initialValues.speechToText;
-        if (this.initialValues.speechToText) {
-          let css = `
-                        body:after {
-                            content: "🎤";
-                            position: fixed;
-                            z-index: 1100;
-                            top: 1vw;
-                            right: 1vw;
-                            width: 36px;
-                            height: 36px;
-                            font-size: 30px;
-                            line-height: 36px;
-                            border-radius: 50%;
-                            background: rgba(255,255,255,0.7);
-                            display: flex;
-                            justify-content: center;
-                            aling-items: center;
-                        }
-
-                        body._access-listening:after {
-                            animation: _access-listening-animation 2s infinite ease;
-                        }
-
-                        @keyframes _access-listening-animation {
-                            0%  {background-color: transparent;}
-                            50%  {background-color: #EF9A9A;}
-                        }
-                    `;
-          common.injectStyle(css, { className: className });
-          common.deployedObjects.set("." + className, true);
-          let inputs = document.querySelectorAll(
-            'input[type="text"], input[type="search"], textarea, [contenteditable]'
-          );
-          for (let i = 0; i < inputs.length; i++) {
-            inputs[i].addEventListener(
-              "blur",
-              () => {
-                if (
-                  typeof this.recognition === "object" &&
-                  typeof this.recognition.stop === "function"
-                )
-                  this.recognition.stop();
-              },
-              false
-            );
-            inputs[i].addEventListener("focus", this.listen, false);
-            inputs[i].parentElement.classList.add("_access-mic");
-          }
-        } else {
-          remove();
-        }
+      voiceTotext: (destroy) => {
+        voiceTotext(this, destroy);
       },
     };
 

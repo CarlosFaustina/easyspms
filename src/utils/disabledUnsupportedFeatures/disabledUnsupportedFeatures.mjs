@@ -1,7 +1,7 @@
 import common from "../common.js";
 
 export default function disabledUnsupportedFeatures(self) {
-  if (!("webkitSpeechRecognition" in window) || location.protocol != "https:") {
+  if (!("webkitSpeechRecognition" in window)) {
     common.warn(
       "speech to text isn't supported in your browser or in http protocol (https required)"
     );

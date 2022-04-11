@@ -186,9 +186,10 @@ export const injectColorAdjustmentsBackgroundCss = `
 }
 
 .FundoAzul span,
-.FundoAzul div {
+.FundoAzul div{
   background-color: #06a1dd;
 }
+
 
 .FundoAmarelo span,
 .FundoAmarelo div {
@@ -196,7 +197,7 @@ export const injectColorAdjustmentsBackgroundCss = `
 }
 
 .FundoRosa span,
-.FundoRosa div {
+.FundoRosa div, {
   background-color: #e40d7d;
 }
 
@@ -220,4 +221,13 @@ export const injectColorAdjustmentsBackgroundCss = `
   background-color: #ffffff;
 }
 
-`;
+
+  
+  
+  ._access-menu._access,
+  ._access-menu._access div,
+  ._access-menu._access span{ 
+    background-color: #FFFFFF;
+  } 
+  
+  `;
