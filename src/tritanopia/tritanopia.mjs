@@ -1,7 +1,6 @@
 import resetIfDefined from "../utils/resetIfDefined/resetIfDefined.mjs";
 
 export default function tritanopia(self, destroy) {
-  console.log('"tritanopia"');
   if (typeof self.initialValues.html.filter === "undefined")
     self.initialValues.html.filter = getComputedStyle(self.html).filter;
   if (typeof self.initialValues.html.webkitFilter === "undefined")

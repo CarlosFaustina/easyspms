@@ -1,7 +1,6 @@
 import resetIfDefined from "../utils/resetIfDefined/resetIfDefined.mjs";
 
 export default function protanopia(self, destroy) {
-  console.log('"protanopia"');
   if (typeof self.initialValues.html.filter === "undefined")
     self.initialValues.html.filter = getComputedStyle(self.html).filter;
   if (typeof self.initialValues.html.webkitFilter === "undefined")

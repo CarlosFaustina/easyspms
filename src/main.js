@@ -12,6 +12,13 @@ import grayHues from "./grayHues/grayHues.mjs";
 import protanopia from "./protanopia/protanopia.mjs";
 import deuteranopia from "./deutanopia/deutanopia.mjs";
 import tritanopia from "./tritanopia/tritanopia.mjs";
+import { toogleImageSpeaker, describeImgCss} from "./describeImg/describeImg.mjs";
+import leiaFocus from "./leiaFocus/leiaFocus.mjs";
+import readingGuide from "./readingGuide/readingGuide.mjs";
+import dicionario from "./dicionario/dicionario.mjs";
+import virtualKeyboard from "./virtualKeyboard/virtualKeyboard.js";
+import linkHighlight from "./linkHighlight/linkHighlight.mjs";
+import ampliadorTexto from "./ampliadorDeTexto/ampliadottexto.mjs";
 
 let _options = {
   
@@ -69,6 +76,28 @@ export class Accessibility {
     },
     tritanopia: (destroy) => {
       tritanopia(this, destroy);
+    },
+    imageSpeaker: (destroy) => {
+      toogleImageSpeaker(this, destroy);
+    },
+    leiaFocus: (destroy) => {
+      leiaFocus(this, destroy);
+    },
+    readingGuide: (destroy) => {
+      readingGuide(this, destroy);
+    },
+    dicionario: (destroy) => {
+      dicionario(this, destroy);
+    },
+    tecladoVirtual: () => {
+      callTecladoVirtual();
+    },
+    linkHighlight: (destroy) => {
+      linkHighlight(this, destroy);
+    },
+    ampliadorTexto: (destroy) => {
+      addHasText(destroy);
+      ampliadorTexto(this, destroy);
     },
   }
 

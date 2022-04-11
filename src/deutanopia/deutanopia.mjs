@@ -1,7 +1,6 @@
 import resetIfDefined from "../utils/resetIfDefined/resetIfDefined.mjs";
 
 export default function deutanopia(self, destroy) {
-  console.log('"deutanopia"');
   if (typeof self.initialValues.html.filter === "undefined")
     self.initialValues.html.filter = getComputedStyle(self.html).filter;
   if (typeof self.initialValues.html.webkitFilter === "undefined")
