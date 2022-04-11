@@ -1,6 +1,7 @@
 import resetIfDefined from "../utils/resetIfDefined/resetIfDefined.mjs";
 
 export default function grayHues(self, destroy) {
+  console.log('gray');
   if (typeof self.initialValues.html.filter === "undefined")
     self.initialValues.html.filter = getComputedStyle(self.html).filter;
   if (typeof self.initialValues.html.webkitFilter === "undefined")

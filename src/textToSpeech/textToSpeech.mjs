@@ -4,6 +4,7 @@ import read from "./read.mjs";
 import { toogleAudioPlayer } from "../audioPlayer/index.mjs";
 
 export default function textToSpeech(self, destroy) {
+  
   const allTexts = document.querySelectorAll(".hasText");
   self.sessionState.textToSpeech =
     typeof destroy === "undefined" ? true : false;
@@ -22,18 +23,19 @@ export default function textToSpeech(self, destroy) {
   };
   ;
   if (destroy) {
-    document
-      .querySelector('._access-menu [data-access-action="textToSpeech"]')
-      .classList.remove("active");
+    
+    //document
+    //  .querySelector('._access-menu [data-access-action="textToSpeech"]')
+    //  .classList.remove("active");
     self.initialValues.textToSpeech = false;
     console.log("pause");
 
     return remove();
   }
 
-  document
-    .querySelector('._access-menu [data-access-action="textToSpeech"]')
-    .classList.toggle("active");
+  //document
+  //  .querySelector('._access-menu [data-access-action="textToSpeech"]')
+  //  .classList.toggle("active");
 
   self.initialValues.textToSpeech = !self.initialValues.textToSpeech;
   if (self.initialValues.textToSpeech) {

@@ -1,9 +1,14 @@
 "use strict";
-//import common from "./utils/common.js";
-//import storage from "./utils/storage.js";
+import common from "./utils/common.js";
+import storage from "./utils/storage.js";
 import theme from "./theme/theme.mjs";
 import addListeners from './utils/addListeners/addListeners.mjs';
+
 import textToSpeech from "./textToSpeech/textToSpeech.mjs";
+import bigCursorReset from "./bigCursorReset/bigCursorReset.mjs";
+import bigCursorWhite from "./bigCursorWhite/bigCursorWhite.mjs";
+import bigCursorBlack from "./bigCursorBlack/bigCursorBlack.mjs";
+import grayHues from "../src/grayHues/grayHues.mjs";
 
 let _options = {
   
@@ -26,8 +31,7 @@ export class Accessibility {
 
     this.render(() => {
       addListeners(this);
-      //textToSpeech();
-    }); 
+    });
   }
 
   render(callback) {
@@ -36,6 +40,51 @@ export class Accessibility {
     } else {
       console.log('erro ao renderizar template');
     }
+  }
+
+  menuInterface = {
+    textToSpeech: (destroy) => {
+      textToSpeech(this, destroy);
+    },
+    bigCursorReset: () => {
+      bigCursorReset(this);
+    },
+    bigCursorWhite: (destroy) => {
+      bigCursorWhite(this, destroy);
+    },
+    bigCursorBlack: (destroy) => {
+      bigCursorBlack(this, destroy);
+    },
+    grayHues: (destroy) => {
+      grayHues(this, destroy);
+    },
+  }
+
+  sessionState = {
+    leiaFocus: false,
+    dicionario: false,
+    customTranslate: false,
+    keyboardNav: false,
+    callTecladoVirtual: false,
+    imageSpeaker: false,
+    textSize: 0,
+    lineHeight: 0,
+    textSpace: 0,
+    deuteranopia: false,
+    tritanopia: false,
+    protanopia: false,
+    grayHues: false,
+    linkHighlight: false,
+    bigCursorReset: true,
+    bigCursorWhite: false,
+    bigCursorBlack: false,
+    readingGuide: false,
+    voiceTotext: false,
+  }
+
+  onChange(updateSession) {
+    if (updateSession && this.options.session.persistent)
+      storage.set("_accessState", this.sessionState);
   }
 }
 
