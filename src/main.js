@@ -20,115 +20,141 @@ import virtualKeyboard from "./virtualKeyboard/virtualKeyboard.js";
 import linkHighlight from "./linkHighlight/linkHighlight.mjs";
 import ampliadorTexto from "./ampliadorDeTexto/ampliadottexto.mjs";
 
-let _options = {
-  
-  modules: {
-    theme: true,
-    textToSpeech: true,
-  },
-};
-
+let body;
+let html;
 let self = null;
 export class Accessibility {
-
-  funcionalidades = {
-    theme: new theme(),
-  }
   
-  constructor(options = {}) {
-    self          = this;
-    this.options  = _options;
+    constructor() {
+        self = this;
 
-    this.render(() => {
-      addListeners(this);
-    });
-  }
+        this.render(() => {
+            addListeners(this);
 
-  render(callback) {
-    if (this.funcionalidades.theme.render()) {
-      callback();
-    } else {
-      console.log('erro ao renderizar template');
+            // add params to modules
+            this.body = document.body || document.getElementsByTagName("body")[0];
+            this.html = document.html || document.getElementsByTagName("html")[0]; 
+        });
     }
-  }
 
-  menuInterface = {
-    textToSpeech: (destroy) => {
-      textToSpeech(this, destroy);
-    },
-    bigCursorReset: () => {
-      bigCursorReset(this);
-    },
-    bigCursorWhite: (destroy) => {
-      bigCursorWhite(this, destroy);
-    },
-    bigCursorBlack: (destroy) => {
-      bigCursorBlack(this, destroy);
-    },
-    grayHues: (destroy) => {
-      grayHues(this, destroy);
-    },
-    protanopia: (destroy) => {
-      protanopia(this, destroy);
-    },
-    deuteranopia: (destroy) => {
-      deuteranopia(this, destroy);
-    },
-    tritanopia: (destroy) => {
-      tritanopia(this, destroy);
-    },
-    imageSpeaker: (destroy) => {
-      toogleImageSpeaker(this, destroy);
-    },
-    leiaFocus: (destroy) => {
-      leiaFocus(this, destroy);
-    },
-    readingGuide: (destroy) => {
-      readingGuide(this, destroy);
-    },
-    dicionario: (destroy) => {
-      dicionario(this, destroy);
-    },
-    tecladoVirtual: () => {
-      callTecladoVirtual();
-    },
-    linkHighlight: (destroy) => {
-      linkHighlight(this, destroy);
-    },
-    ampliadorTexto: (destroy) => {
-      addHasText(destroy);
-      ampliadorTexto(this, destroy);
-    },
-  }
+    render(callback) {
+        if (this.menuInterface.theme.render()) {
+            callback();
+        } else {
+            console.log('erro ao renderizar template');
+        }
+    }
 
-  sessionState = {
-    leiaFocus: false,
-    dicionario: false,
-    customTranslate: false,
-    keyboardNav: false,
-    callTecladoVirtual: false,
-    imageSpeaker: false,
-    textSize: 0,
-    lineHeight: 0,
-    textSpace: 0,
-    deuteranopia: false,
-    tritanopia: false,
-    protanopia: false,
-    grayHues: false,
-    linkHighlight: false,
-    bigCursorReset: true,
-    bigCursorWhite: false,
-    bigCursorBlack: false,
-    readingGuide: false,
-    voiceTotext: false,
-  }
+    menuInterface = {
+        theme: new theme(),
 
-  onChange(updateSession) {
-    if (updateSession && this.options.session.persistent)
-      storage.set("_accessState", this.sessionState);
-  }
+        textToSpeech: (destroy) => {
+            textToSpeech(this, destroy);
+        },
+
+        bigCursorReset: () => {
+            bigCursorReset(this);
+        },
+
+        bigCursorWhite: (destroy) => {
+            bigCursorWhite(this, destroy);
+        },
+
+        bigCursorBlack: (destroy) => {
+            bigCursorBlack(this, destroy);
+        },
+
+        grayHues: (destroy) => {
+            grayHues(this, destroy);
+        },
+        
+        protanopia: (destroy) => {
+            protanopia(this, destroy);
+        },
+
+        deuteranopia: (destroy) => {
+            deuteranopia(this, destroy);
+        },
+
+        tritanopia: (destroy) => {
+            tritanopia(this, destroy);
+        },
+
+        imageSpeaker: (destroy) => {
+            toogleImageSpeaker(this, destroy);
+        },
+
+        leiaFocus: (destroy) => {
+            leiaFocus(this, destroy);
+        },
+
+        readingGuide: (destroy) => {
+            readingGuide(this, destroy);
+        },
+
+        dicionario: (destroy) => {
+            dicionario(this, destroy);
+        },
+
+        tecladoVirtual: () => {
+            callTecladoVirtual();
+        },
+
+        linkHighlight: (destroy) => {
+            linkHighlight(this, destroy);
+        },
+
+        ampliadorTexto: (destroy) => {
+            addHasText(destroy);
+            ampliadorTexto(this, destroy);
+        },
+    }
+
+    sessionState = {
+        leiaFocus: false,
+        dicionario: false,
+        customTranslate: false,
+        keyboardNav: false,
+        callTecladoVirtual: false,
+        imageSpeaker: false,
+        textSize: 0,
+        lineHeight: 0,
+        textSpace: 0,
+        deuteranopia: false,
+        tritanopia: false,
+        protanopia: false,
+        grayHues: false,
+        linkHighlight: false,
+        bigCursorReset: true,
+        bigCursorWhite: false,
+        bigCursorBlack: false,
+        readingGuide: false,
+        voiceTotext: false,
+    }
+
+    initialValues = {
+        leiaFocus: false,
+        dicionario: false,
+        linkHighlight: false,
+        textToSpeech: false,
+        bigCursorReset: true,
+        bigCursorWhite: false,
+        bigCursorBlack: false,
+        readingGuide: false,
+        ampliadorTexto: false,
+        voiceTotext: false,
+        body: {},
+        html: {},
+    }
+
+    onChange(updateSession) {
+        if (updateSession) {
+            storage.set("_accessState", this.sessionState);
+        }
+    }
 }
 
+// Starting EasyApp
 Accessibility.init = (opt) => {
   common.warn(
     '"Accessibility.init()" is deprecated! Please use "new Accessibility()" instead'
