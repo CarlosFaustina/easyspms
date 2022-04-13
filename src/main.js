@@ -11,7 +11,9 @@ import bigCursorBlack from "./bigCursorBlack/bigCursorBlack.mjs";
 import grayHues from "./grayHues/grayHues.mjs";
 import {
     contrasteEscuro,
-    contrasteClaro
+    contrasteClaro,
+    baixaSaturacao,
+    altaSaturacao
 } from "./colorsAdjustment/contrasteSaturacao.mjs";
 import protanopia from "./protanopia/protanopia.mjs";
 import deuteranopia from "./deutanopia/deutanopia.mjs";
@@ -80,7 +82,15 @@ export class Accessibility {
         altoContrasteClaro: (destroy) => {
             contrasteClaro(this, destroy);
         },
-        
+
+        baixaSaturacao: (destroy) => {
+            baixaSaturacao(this, destroy);
+        },
+
+        altaSaturacao: (destroy) => {
+            altaSaturacao(this, destroy);
+        },
+
         protanopia: (destroy) => {
             protanopia(this, destroy);
         },
