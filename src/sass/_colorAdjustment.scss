@@ -1,9 +1,25 @@
-#contrasteClaro {
-    border-top: 1px solid #0a0a0a !important;
-    background: #ffffff !important;
-    color: #000000 !important;
+html:not(#easyapp) body:not(#easyapp).easyContrasteEscuro,
+html:not(#easyapp) body:not(#easyapp).easyContrasteEscuro>:not(#easyapp),
+html:not(#easyapp) body:not(#easyapp).easyContrasteEscuro>:not(#easyapp) *:not(img):not(video) {
+  color: White;
+  background-color: Black;
+
+  a {
+    outline: 1px dashed Gold;
   }
-  
+}
+
+html:not(#easyapp) body:not(#easyapp).easyContrasteClaro,
+html:not(#easyapp) body:not(#easyapp).easyContrasteClaro>:not(#easyapp),
+html:not(#easyapp) body:not(#easyapp).easyContrasteClaro>:not(#easyapp) *:not(img):not(video) {
+  color: black;
+  background-color: white;
+
+  a {
+    outline: 1px dashed midnightblue;
+  }
+}
+
   #contrasteEscuro {
     border-top: 1px solid #ffffff !important;
     background: #000000 !important;

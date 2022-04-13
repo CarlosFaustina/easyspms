@@ -1,51 +1,19 @@
-export default function contrasteSaturacao(self, destroy) {
-  // Selecionando os botões no Easy
-  var linksContraste = document.querySelectorAll('nav a[data-contraste]');
-  var linksSaturacao = document.querySelectorAll('nav a[data-saturacao]');
-  
-  // Contraste
-  linksContraste.forEach(linksContraste => 
-    linksContraste.addEventListener('click', function() {
-      var dataContraste = this.dataset.contraste;
-      contraste(dataContraste);
-    })
-  );
+// Alterna o fundo do site para preto com fontes brilhantes.
+let contrasteEscuro = (self, destroy) => {
+    $('body').toggleClass('easyContrasteEscuro');
+}
 
-  function contraste(dataContraste) {
-    var setId;
+// Altera o fundo do site para branco com fontes escuras.
+let contrasteClaro = (self, destroy) => {
+    $('body').toggleClass('easyContrasteClaro');
+}
 
-    switch (dataContraste) {
-      case '1':
-        setId = 'contrasteClaro';
-        break;
+let altoContraste = (self, destroy) => {
+    console.log('alto contraste');
+}
 
-      case '2':
-        setId = 'contrasteEscuro';
-        break;
-
-      case '3':
-        setId = 'altoContraste';
-        break;
-
-      default:
-        setId = '';
-    }
-    
-    document.querySelector('body').setAttribute('id', setId);
-    document.cookie = 'contraste=' + setId + '';
-  }
-
-  // Saturação
-  linksSaturacao.forEach(linksSaturacao =>
-    linksSaturacao.addEventListener('click', function() {
-      var dataSaturacao = this.dataset.saturacao;
-      saturacao(dataSaturacao);
-    })
-  );
-
-  function saturacao(value)
-    {
-      var rows = document.querySelectorAll('.row-collors');
+let saturacao = (self, destroy) => {
+    var rows = document.querySelectorAll('.row-collors');
   
       rows.forEach(row => {
         
@@ -64,5 +32,11 @@ export default function contrasteSaturacao(self, destroy) {
   
         $(row).css('filter', 'saturate(' + saturate + ')');
       });
-    }
+}
+
+export {
+    contrasteEscuro,
+    contrasteClaro,
+    altoContraste,
+    saturacao
 }

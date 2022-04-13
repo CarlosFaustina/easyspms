@@ -21,13 +21,15 @@ export default class theme {
     render() {
         var resultado = false;
 
+        $("head").append("<link href='../api/main.css' type='text/css' rel='stylesheet' />");
+
         let divEasy = $('<div>', {
             id: 'easyapp'
             }
         ).appendTo('body');
 
         $.ajax({
-            url: 'src/theme/theme.html',
+            url: '../src/theme/theme.html',
             type: 'GET',
             async: false,
             success: (data) => {

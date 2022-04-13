@@ -9,6 +9,10 @@ import bigCursorReset from "./bigCursorReset/bigCursorReset.mjs";
 import bigCursorWhite from "./bigCursorWhite/bigCursorWhite.mjs";
 import bigCursorBlack from "./bigCursorBlack/bigCursorBlack.mjs";
 import grayHues from "./grayHues/grayHues.mjs";
+import {
+    contrasteEscuro,
+    contrasteClaro
+} from "./colorsAdjustment/contrasteSaturacao.mjs";
 import protanopia from "./protanopia/protanopia.mjs";
 import deuteranopia from "./deutanopia/deutanopia.mjs";
 import tritanopia from "./tritanopia/tritanopia.mjs";
@@ -23,6 +27,7 @@ import ampliadorTexto from "./ampliadorDeTexto/ampliadottexto.mjs";
 let body;
 let html;
 let self = null;
+let baseUrl = 'http://easy.test:88/';
 export class Accessibility {
   
     constructor() {
@@ -66,6 +71,14 @@ export class Accessibility {
 
         grayHues: (destroy) => {
             grayHues(this, destroy);
+        },
+
+        altoContrasteEscuro: (destroy) => {
+            contrasteEscuro(this, destroy);
+        },
+        
+        altoContrasteClaro: (destroy) => {
+            contrasteClaro(this, destroy);
         },
         
         protanopia: (destroy) => {

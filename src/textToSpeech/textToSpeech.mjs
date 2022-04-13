@@ -4,41 +4,39 @@ import read from "./read.mjs";
 import { toogleAudioPlayer } from "../audioPlayer/index.mjs";
 
 export default function textToSpeech(self, destroy) {
+    const allTexts = document.querySelectorAll(".hasText");
+    self.sessionState.textToSpeech = typeof destroy === "undefined" ? true : false;
+    self.onChange(false);
+    let className = "_access-text-to-speech";
+    let el = $('._access-menu [data-access-action="textToSpeech"]');
   
-  const allTexts = document.querySelectorAll(".hasText");
-  self.sessionState.textToSpeech =
-    typeof destroy === "undefined" ? true : false;
-  self.onChange(false);
-  let className = "_access-text-to-speech";
-  let remove = () => {
-    let style = document.querySelector("." + className);
-    if (style) {
-      style.parentElement.removeChild(style);
-      for (const text of allTexts) {
-        text.removeEventListener("click", read);
-      }
-      // document.removeEventListener("click", read, false);
-      common.deployedObjects.remove("." + className);
+    let remove = () => {
+        let style = document.querySelector("." + className);
+        if (style) {
+            style.parentElement.removeChild(style);
+                for (const text of allTexts) {
+                    text.removeEventListener("click", read);
+                }
+      
+            common.deployedObjects.remove("." + className);
+        }
+    };
+  
+    if (destroy) {
+        if (el) {
+            el.classList.remove("active");
+        }
+        
+        self.initialValues.textToSpeech = false;
+        console.log("pause");
+
+        return remove();
     }
-  };
-  ;
-  if (destroy) {
-    
-    //document
-    //  .querySelector('._access-menu [data-access-action="textToSpeech"]')
-    //  .classList.remove("active");
-    self.initialValues.textToSpeech = false;
-    console.log("pause");
 
-    return remove();
-  }
+    el.toggleClass("active");
 
-  //document
-  //  .querySelector('._access-menu [data-access-action="textToSpeech"]')
-  //  .classList.toggle("active");
-
-  self.initialValues.textToSpeech = !self.initialValues.textToSpeech;
-  if (self.initialValues.textToSpeech) {
+    self.initialValues.textToSpeech = !self.initialValues.textToSpeech;
+    if (self.initialValues.textToSpeech) {
     let css = `
                         .hasText:hover {
                             box-shadow: 2px 2px 2px rgba(180,180,180,0.7);
