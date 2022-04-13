@@ -1,23 +1,34 @@
 html:not(#easyapp) body:not(#easyapp).easyContrasteEscuro,
 html:not(#easyapp) body:not(#easyapp).easyContrasteEscuro>:not(#easyapp),
 html:not(#easyapp) body:not(#easyapp).easyContrasteEscuro>:not(#easyapp) *:not(img):not(video) {
-  color: White;
-  background-color: Black;
+    color: White;
+    background-color: Black;
 
-  a {
-    outline: 1px dashed Gold;
-  }
+    a {
+        outline: 1px dashed Gold;
+    }
 }
 
 html:not(#easyapp) body:not(#easyapp).easyContrasteClaro,
 html:not(#easyapp) body:not(#easyapp).easyContrasteClaro>:not(#easyapp),
 html:not(#easyapp) body:not(#easyapp).easyContrasteClaro>:not(#easyapp) *:not(img):not(video) {
-  color: black;
-  background-color: white;
+    color: black;
+    background-color: white;
 
-  a {
-    outline: 1px dashed midnightblue;
-  }
+    a {
+        outline: 1px dashed midnightblue;
+    }
+}
+
+html:not(#easyapp) body:not(#easyapp).easyAltoContraste,
+html:not(#easyapp) body:not(#easyapp).easyAltoContraste>:not(#easyapp),
+html:not(#easyapp) body:not(#easyapp).easyAltoContraste>:not(#easyapp) *:not(img):not(video) {
+    color: black;
+
+    a, span {
+        background-color: white;
+        outline: 1px dashed midnightblue;
+    }
 }
 
   #contrasteEscuro {

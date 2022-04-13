@@ -13,7 +13,8 @@ import {
     contrasteEscuro,
     contrasteClaro,
     baixaSaturacao,
-    altaSaturacao
+    altaSaturacao,
+    altoContraste
 } from "./colorsAdjustment/contrasteSaturacao.mjs";
 import protanopia from "./protanopia/protanopia.mjs";
 import deuteranopia from "./deutanopia/deutanopia.mjs";
@@ -91,6 +92,10 @@ export class Accessibility {
             altaSaturacao(this, destroy);
         },
 
+        modoContraste: (destroy) => {
+            altoContraste(this, destroy);
+        },
+        
         protanopia: (destroy) => {
             protanopia(this, destroy);
         },

@@ -8,8 +8,9 @@ let contrasteClaro = (self, destroy) => {
     $('body').toggleClass('easyContrasteClaro');
 }
 
+// permitirá a alteração da gradação do site para outra escala de contrastes.
 let altoContraste = (self, destroy) => {
-    console.log('alto contraste');
+    $('body').toggleClass('easyAltoContraste');
 }
 
 // permitirá a diminuição da intensidade das cores para o conteúdo menos enfatizado.
