@@ -19,6 +19,7 @@ import {
 import protanopia from "./protanopia/protanopia.mjs";
 import deuteranopia from "./deutanopia/deutanopia.mjs";
 import tritanopia from "./tritanopia/tritanopia.mjs";
+import mudaCorFundo from "./colorsAdjustment/mudaCorFundo.mjs";
 import { toogleImageSpeaker, describeImgCss} from "./describeImg/describeImg.mjs";
 import leiaFocus from "./leiaFocus/leiaFocus.mjs";
 import readingGuide from "./readingGuide/readingGuide.mjs";
@@ -26,6 +27,7 @@ import dicionario from "./dicionario/dicionario.mjs";
 import virtualKeyboard from "./virtualKeyboard/virtualKeyboard.js";
 import linkHighlight from "./linkHighlight/linkHighlight.mjs";
 import ampliadorTexto from "./ampliadorDeTexto/ampliadottexto.mjs";
+
 
 let body;
 let html;
@@ -41,7 +43,11 @@ export class Accessibility {
 
             // add params to modules
             this.body = document.body || document.getElementsByTagName("body")[0];
-            this.html = document.html || document.getElementsByTagName("html")[0]; 
+            this.html = document.html || document.getElementsByTagName("html")[0];
+
+            // funções não reativas
+            self.menuInterface.mudaCorFundo(false);
+
         });
     }
 
@@ -95,7 +101,7 @@ export class Accessibility {
         modoContraste: (destroy) => {
             altoContraste(this, destroy);
         },
-        
+
         protanopia: (destroy) => {
             protanopia(this, destroy);
         },
@@ -106,6 +112,10 @@ export class Accessibility {
 
         tritanopia: (destroy) => {
             tritanopia(this, destroy);
+        },
+
+        mudaCorFundo: (destroy) => {
+            mudaCorFundo(this, destroy);
         },
 
         imageSpeaker: (destroy) => {

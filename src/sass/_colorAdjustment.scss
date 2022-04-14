@@ -30,30 +30,3 @@ html:not(#easyapp) body:not(#easyapp).easyAltoContraste>:not(#easyapp) *:not(img
         outline: 1px dashed midnightblue;
     }
 }
-
-  #contrasteEscuro {
-    border-top: 1px solid #ffffff !important;
-    background: #000000 !important;
-    color: #ffffff !important;
-  }
-  
-  #altoContraste .white {
-    background: white;
-    color: #000000;
-  }
-  #altoContraste .row-collors.black {
-    background: black;
-    color: white;
-  }
-  #altoContraste .row-collors.red {
-    background: darkred !important;
-    color: white;
-  }
-  #altoContraste .row-collors.blue {
-    background: darkblue !important;
-    color: white;
-  }
-  #altoContraste .row-collors.green {
-    background: darkgreen !important;
-    color: white;
-  }
