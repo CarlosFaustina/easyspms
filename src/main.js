@@ -4,6 +4,7 @@ import storage from "./utils/storage.js";
 import theme from "./theme/theme.mjs";
 import addListeners from './utils/addListeners/addListeners.mjs';
 
+import intermitenciaBrilho from "./colorsAdjustment/intermitenciaBrilho.mjs";
 import textToSpeech from "./textToSpeech/textToSpeech.mjs";
 import bigCursorReset from "./bigCursorReset/bigCursorReset.mjs";
 import bigCursorWhite from "./bigCursorWhite/bigCursorWhite.mjs";
@@ -61,6 +62,10 @@ export class Accessibility {
 
     menuInterface = {
         theme: new theme(),
+
+        intermitenciaBrilho: (destroy) => {
+            intermitenciaBrilho(this, destroy);
+        },
 
         textToSpeech: (destroy) => {
             textToSpeech(this, destroy);
