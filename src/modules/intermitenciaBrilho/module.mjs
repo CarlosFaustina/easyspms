@@ -1,9 +1,9 @@
 let intermitenciaBrilho = (self, destroy) => {
-    $('body').toggleClass('notransitions');
-
     if (destroy) {
         $('body').removeClass('notransitions');
     }
+    
+    $('body').toggleClass('notransitions');  
 }
 
 export default intermitenciaBrilho;

@@ -1,25 +1,15 @@
 import invoke from "./invoke.mjs";
 
 export default function addListeners(self) {
-  
-  let funcionalidades = $('._access-menu');
-  
-  for (let i = 0; i < funcionalidades.length; i++) {
-    funcionalidades[i].addEventListener(
-      "click",
-      (e) => {
-        let event = e || window.event;
-        invoke(self, event.target.getAttribute("data-access-action"));
-      },
-      false
-    );
-    funcionalidades[i].addEventListener(
-      "keypress",
-      (e) => {
-        let event = e || window.event;
-        invoke(self, event.target.getAttribute("data-access-action"));
-      },
-      false
-    );
-  }
+    $('._access-menu').each(function() {
+        let el = $(this);
+        $(this).on(
+            'click',
+            {el: el, self: self},
+            function() {
+                invoke(self, el.attr('data-access-action'));
+                window.event.stopImmediatePropagation();
+            }
+        );
+    });
 }

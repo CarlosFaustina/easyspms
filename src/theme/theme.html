@@ -70,7 +70,7 @@
         <div id="topo_wrapper" class="d-flex justify-content-between flex-wrap flex-row">
             <div class="col-8 col-md-9 col-lg-9">
                 <select id="idiomas" class="bg-white" name="idiomas">
-                    <option value="" selected="" class="hasText">Selecione o idioma</option>
+                    <option value="empty" selected="" class="hasText">Selecione o idioma</option>
                     <option value="ar" class="hasText">العربية</option>
                     <option value="bg" class="hasText">bălgarski</option>
                     <option value="ca" class="hasText">català</option>
@@ -135,8 +135,7 @@
 
                 <div class="col-12  grid_big_1_mb d-flex justify-content-between flex-wrap flex-row">
                     <div id="ajuste_de_leitor_de_ecra_mb"
-                        class="col-12 d-flex justify-content-center flex-wrap flex-row _access-menu"
-                        data-access-action="textToSpeech">
+                        class="col-12 d-flex justify-content-center flex-wrap flex-row">
                         <div class="col-12 d-flex justify-content-between">
                             <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="right"
                                     title=""
@@ -161,7 +160,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Ajuste de<br>
+                                <span class="text-center d-flex align-items-center">Ajuste de
                                     Leitor de Ecrã</span>
                             </div>
                         </div>
@@ -175,9 +174,9 @@
                                     title=""
                                     data-original-title="Desabilita os elementos em movimento na página.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
+                        <div class="col-12 easy_inside_btns_big _access-menu" data-access-action="intermitenciaBrilho">
                             <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu" data-access-action="intermitenciaBrilho">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Bloqueio de intermitência de brilho</title>
@@ -197,7 +196,7 @@
                                             stroke-width="2" />
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Bloco de Intermitência<br>
+                                <span class="text-center d-flex align-items-center">Bloco de Intermitência
                                     de Brilho</span>
                             </div>
                         </div>
@@ -232,8 +231,9 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Leitor de<br>
-                                    Texto</span>
+                                <span class="text-center d-flex align-items-center">
+                                    Leitor de Texto
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -243,20 +243,20 @@
                     <div class="col-12 titulo_nav">Controlo do Ponteiro do Rato</div>
                     <div class="col-12 sub_titulo_nav mb-3">Altere o tamanho e a cor</div>
                     <div class="col-12 d-flex position-relative flex-row flex-wrap " id="controlo_rato_mix">
-                        <div class="col-auto grid_small_ponteiro" id="ponteiro_normal">
-                            <div
-                                class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center">
-                                <span class="text-center d-flex align-items-center">Normal</span> </div>
+                        <div class="col-auto grid_small_ponteiro _access-menu" data-access-action="bigCursorReset" id="ponteiro_normal" >
+                            <div class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center">
+                                <span class="text-center d-flex align-items-center">Normal</span>
+                            </div>
                         </div>
-                        <div class="col-auto grid_small_ponteiro" id="ponteiro_branco">
-                            <div
-                                class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center">
-                                <span class="text-center d-flex align-items-center">Branco</span> </div>
+                        <div class="col-auto grid_small_ponteiro _access-menu" data-access-action="bigCursorWhite" id="ponteiro_branco">
+                            <div class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center">
+                                <span class="text-center d-flex align-items-center">Branco</span>
+                            </div>
                         </div>
-                        <div class="col-auto grid_small_ponteiro" id="ponteiro_preto">
-                            <div
-                                class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center">
-                                <span class="text-center d-flex align-items-center">Preto</span> </div>
+                        <div class="col-auto grid_small_ponteiro _access-menu" data-access-action="bigCursorBlack" id="ponteiro_preto">
+                            <div class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center">
+                                <span class="text-center d-flex align-items-center">Preto</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -274,7 +274,7 @@
                                     title=""
                                     data-original-title="Torna o site compatível para a leitura por meio de secções.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
                         <div class="col-12 easy_inside_btns_big">
                             <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
@@ -293,7 +293,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Ajuste de<br>
+                                <span class="text-center d-flex align-items-center">Ajuste de
                                     Leitor de Ecrã</span>
                             </div>
                         </div>
@@ -306,10 +306,10 @@
                             <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="top" title=""
                                     data-original-title="Desabilita os elementos em movimento na página.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu" data-access-action="intermitenciaBrilho">
+                        <div class="col-12 easy_inside_btns_big _access-menu" data-access-action="intermitenciaBrilho">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Bloqueio de intermitência de brilho</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -328,7 +328,7 @@
                                             stroke-width="2" />
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Bloco de Intermitência<br>
+                                <span class="text-center d-flex align-items-center">Bloco de Intermitência
                                     de Brilho</span>
                             </div>
                         </div>
@@ -341,11 +341,10 @@
                                     title=""
                                     data-original-title="Leitura do site em voz alta em navegadores compatíveis.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
                         <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="textToSpeech">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Leitor de texto</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -362,7 +361,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Leitor de<br>
+                                <span class="text-center d-flex align-items-center">Leitor de
                                     Texto</span>
                             </div>
                         </div>
@@ -379,21 +378,18 @@
             <div class="col-12 titulo_nav">Controlo do Ponteiro do Rato</div>
             <div class="col-12 sub_titulo_nav mb-3">Altere o tamanho e a cor</div>
             <div class="col-12 d-flex position-relative flex-row flex-wrap " id="controlo_rato">
-                <div class="col-auto grid_small_ponteiro" id="ponteiro_normal">
-                    <div class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center _access-menu"
-                        data-access-action="bigCursorReset">
+                <div class="col-auto grid_small_ponteiro _access-menu" data-access-action="ponteiroNormal" id="ponteiro_normal">
+                    <div class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center">
                         <span class="text-center d-flex align-items-center">Normal</span>
                     </div>
                 </div>
-                <div class="col-auto grid_small_ponteiro" id="ponteiro_branco">
-                    <div class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center _access-menu"
-                        data-access-action="bigCursorWhite">
+                <div class="col-auto grid_small_ponteiro _access-menu" data-access-action="ponteiroBranco" id="ponteiro_branco">
+                    <div class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center">
                         <span class="text-center d-flex align-items-center">Branco</span>
                     </div>
                 </div>
-                <div class="col-auto grid_small_ponteiro" id="ponteiro_preto">
-                    <div class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center _access-menu"
-                        data-access-action="bigCursorBlack">
+                <div class="col-auto grid_small_ponteiro _access-menu" data-access-action="ponteiroPreto" id="ponteiro_preto">
+                    <div class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center">
                         <span class="text-center d-flex align-items-center">Preto</span>
                     </div>
                 </div>
@@ -413,11 +409,10 @@
                             <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="right"
                                     title="" data-original-title="Converte as cores em preto e branco.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="grayHues">
+                        <div class="col-12 easy_inside_btns_big _access-menu" data-access-action="modoMonocromatico">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Modo Monocromático</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -431,7 +426,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Modo<br>
+                                <span class="text-center d-flex align-items-center">Modo
                                     Monocromático</span>
                             </div>
                         </div>
@@ -456,7 +451,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Alto Contraste<br>
+                                <span class="text-center d-flex align-items-center">Alto Contraste
                                     Escuro</span>
                             </div>
                         </div>
@@ -500,7 +495,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Alto Contraste<br>
+                                <span class="text-center d-flex align-items-center">Alto Contraste
                                     Claro</span>
                             </div>
                         </div>
@@ -526,7 +521,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Baixa<br>
+                                <span class="text-center d-flex align-items-center">Baixa
                                     Saturação</span>
                             </div>
                         </div>
@@ -553,7 +548,7 @@
                                             fill="#0F4E64" />
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Alta<br>
+                                <span class="text-center d-flex align-items-center">Alta
                                     Saturação</span>
                             </div>
                         </div>
@@ -595,7 +590,7 @@
                                             d="m18.025 23.514c-3.8557-0.62658-6.5071-3.9332-6.2808-7.8417 0.19775-3.4183 2.9262-6.3297 6.3642-6.8078 0.28862-0.040112 0.23007 0.12119 0.23007 0.27391 5.143e-4 2.3592 3.429e-4 4.7184 3.429e-4 7.0776 0 2.3377-0.004286 4.6755 0.006102 7.0132 0.0011841 0.26214-0.065077 0.32622-0.32001 0.28482m1.0874-16.261c-4.8815-0.0084042-8.9744 4.0029-8.9063 8.8743 0.078176 5.5906 4.162 8.9373 8.9033 8.9512 4.7387-0.015203 8.8-3.3669 8.8895-8.9313 0.078348-4.8697-3.9966-8.8857-8.8864-8.8942" />
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Modo de<br>
+                                <span class="text-center d-flex align-items-center">Modo de
                                     Contraste</span>
                             </div>
                         </div>
@@ -629,7 +624,7 @@
                                             fill="#0F4E64" mask="url(#b)"></path>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Daltonismo<br>
+                                <span class="text-center d-flex align-items-center">Daltonismo
                                     Protanopia</span>
                             </div>
                         </div>
@@ -657,7 +652,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Daltonismo<br>
+                                <span class="text-center d-flex align-items-center">Daltonismo
                                     Deuteranopia</span>
                             </div>
                         </div>
@@ -685,7 +680,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Daltonismo<br>
+                                <span class="text-center d-flex align-items-center">Daltonismo
                                     Tritanopia</span>
                             </div>
                         </div>
@@ -697,6 +692,7 @@
             <!-- DESKTOP -->
             <div
                 class="col-12 position-relative d-none d-sm-none d-md-flex flex-row flex-wrap desktop justify-content-between">
+
                 <!-- PRIMEIRA LINHA -->
                 <div class="col-12  grid_big_1 d-flex justify-content-center flex-wrap flex-row">
                     <div id="modo_monocromatico_dk" class="col-12 d-flex justify-content-center flex-wrap flex-row">
@@ -704,11 +700,10 @@
                             <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="right"
                                     title="" data-original-title="Converte as cores em preto e branco.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="grayHues">
+                        <div class="col-12 easy_inside_btns_big _access-menu" data-access-action="modoMonocromatico">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Modo Monocromático</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -722,26 +717,22 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">
-                                    Modo<br>
-                                    Monocromático
-                                </span>
+                                <span class="text-center d-flex align-items-center">Modo
+                                    Monocromático</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-12  grid_big_1 d-flex justify-content-center flex-wrap flex-row">
                     <div id="alto_contraste_escuro_dk" class="col-12 d-flex justify-content-center flex-wrap flex-row">
                         <div class="col-12 d-flex justify-content-between">
                             <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="top" title=""
                                     data-original-title="Alterna as cores do fundo do site para preto com fontes brilhantes.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="altoContrasteEscuro">
+                        <div class="col-12 easy_inside_btns_big _access-menu" data-access-action="contrasteEscuro">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Alto contraste escuro</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -751,15 +742,12 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">
-                                    Alto Contraste<br>
-                                    Escuro
-                                </span>
+                                <span class="text-center d-flex align-items-center">Alto Contraste
+                                    Escuro</span>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-12  grid_big_1 d-flex justify-content-center flex-wrap flex-row">
                     <div id="alto_contraste_claro_dk" class="col-12 d-flex justify-content-center flex-wrap flex-row">
                         <div class="col-12 d-flex justify-content-between">
@@ -767,11 +755,10 @@
                                     title=""
                                     data-original-title="Alterna as cores do fundo do site para preto com fontes escuras.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="altoContrasteClaro">
+                        <div class="col-12 easy_inside_btns_big _a _access-menu" data-access-action="contrasteClaro">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Alto contraste claro</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -797,10 +784,8 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">
-                                    Alto Contraste<br>
-                                    Claro
-                                </span>
+                                <span class="text-center d-flex align-items-center">Alto Contraste
+                                    Claro</span>
                             </div>
                         </div>
                     </div>
@@ -810,15 +795,14 @@
                 <div class="col-12  grid_big_2 d-flex justify-content-center flex-wrap flex-row mt-7">
                     <div id="baixa_saturacao_dk" class="col-12 d-flex justify-content-center flex-wrap flex-row">
                         <div class="col-12 d-flex justify-content-between">
-                            <div class="info">
-                                <abbr class="tooltip" data-toggle="tooltip" data-placement="right" title=""
+                            <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="right"
+                                    title=""
                                     data-original-title="Diminui a intensidade das cores para o conteúdo menos enfatizado.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="baixaSaturacao">
+                        <div class="col-12 easy_inside_btns_big _access-menu" data-access-action="baixaSaturacao">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Baixa saturação</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -828,10 +812,8 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">
-                                    Baixa<br>
-                                    Saturação
-                                </span>
+                                <span class="text-center d-flex align-items-center">Baixa
+                                    Saturação</span>
                             </div>
                         </div>
                     </div>
@@ -842,11 +824,10 @@
                             <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="top" title=""
                                     data-original-title="Aumenta a intensidade das cores para o conteúdo enfatizado.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="altaSaturacao">
+                        <div class="col-12 easy_inside_btns_big _access-menu" data-access-action="altaSaturacao">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Alta saturação</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -855,10 +836,8 @@
                                             fill="#0F4E64" />
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">
-                                    Alta<br>
-                                    Saturação
-                                </span>
+                                <span class="text-center d-flex align-items-center">Alta
+                                    Saturação</span>
                             </div>
                         </div>
                     </div>
@@ -866,15 +845,14 @@
                 <div class="col-12  grid_big_2 d-flex justify-content-center flex-wrap flex-row mt-7">
                     <div id="modo_de_contraste_dk" class="col-12 d-flex justify-content-center flex-wrap flex-row">
                         <div class="col-12 d-flex justify-content-between">
-                            <div class="info">
-                                <abbr class="tooltip" data-toggle="tooltip" data-placement="left" title=""
+                            <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="left"
+                                    title=""
                                     data-original-title="Altera a gradação do site para outra escala de contrastes.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="modoContraste">
+                        <div class="col-12 easy_inside_btns_big _access-menu" data-access-action="modoContraste">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Modo de contraste</title>
                                     <g fill="#0F4E64" fill-rule="evenodd">
@@ -900,10 +878,8 @@
                                             d="m18.025 23.514c-3.8557-0.62658-6.5071-3.9332-6.2808-7.8417 0.19775-3.4183 2.9262-6.3297 6.3642-6.8078 0.28862-0.040112 0.23007 0.12119 0.23007 0.27391 5.143e-4 2.3592 3.429e-4 4.7184 3.429e-4 7.0776 0 2.3377-0.004286 4.6755 0.006102 7.0132 0.0011841 0.26214-0.065077 0.32622-0.32001 0.28482m1.0874-16.261c-4.8815-0.0084042-8.9744 4.0029-8.9063 8.8743 0.078176 5.5906 4.162 8.9373 8.9033 8.9512 4.7387-0.015203 8.8-3.3669 8.8895-8.9313 0.078348-4.8697-3.9966-8.8857-8.8864-8.8942" />
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">
-                                    Modo de<br>
-                                    Contraste
-                                </span>
+                                <span class="text-center d-flex align-items-center">Modo de
+                                    Contraste</span>
                             </div>
                         </div>
                     </div>
@@ -917,11 +893,10 @@
                                     title=""
                                     data-original-title="Auxilia utilizadores na distinção dos tons de vermelho.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="protanopia">
+                        <div class="col-12 easy_inside_btns_big _access-menu" data-access-action="protanopia">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <title>Daltonismo protanopia</title>
@@ -937,7 +912,7 @@
                                             fill="#0F4E64" mask="url(#b)" />
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Daltonismo<br>
+                                <span class="text-center d-flex align-items-center">Daltonismo
                                     Protanopia</span>
                             </div>
                         </div>
@@ -950,11 +925,10 @@
                                     title=""
                                     data-original-title="Auxilia utilizadores na distinção dos tons de verde.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="deuteranopia">
+                        <div class="col-12 easy_inside_btns_big _access-menu" data-access-action="deuteranopia">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Daltonismo protanopia</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -966,7 +940,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Daltonismo<br>
+                                <span class="text-center d-flex align-items-center">Daltonismo
                                     Deuteranopia</span>
                             </div>
                         </div>
@@ -979,11 +953,10 @@
                                     title=""
                                     data-original-title="Auxilia utilizadores na distinção dos tons de azul.">&nbsp;</abbr>
                             </div>
-                            <div class="check_show"></div>
+                            <div class="check"></div>
                         </div>
-                        <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="tritanopia">
+                        <div class="col-12 easy_inside_btns_big _access-menu" data-access-action="tritanopia">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Daltonismo tritanopia</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -993,7 +966,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Daltonismo<br>
+                                <span class="text-center d-flex align-items-center">Daltonismo
                                     Tritanopia</span>
                             </div>
                         </div>
@@ -1013,9 +986,8 @@
                     <div class="col-auto grid_small_cor_mb" id="planos_de_fundo_mb">
                         <div
                             class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center">
-                            <span class="text-center d-flex align-items-center">Planos<br>
-                                de Fundo</span>
-                        </div>
+                            <span class="text-center d-flex align-items-center">Planos
+                                de Fundo</span> </div>
                     </div>
                     <div class="col-auto grid_small_cor_mb" id="cabecalhos_mb">
                         <div
@@ -1035,8 +1007,7 @@
                     <div class="col-auto grid_small_cor" id="planos_de_fundo">
                         <div
                             class="easy_inside_btns_small d-flex justify-content-center flex-row flex-wrap align-items-center">
-                            <span class="text-center d-flex align-items-center">Planos de Fundo</span>
-                        </div>
+                            <span class="text-center d-flex align-items-center">Planos de Fundo</span> </div>
                     </div>
                     <div class="col-auto grid_small_cor" id="cabecalhos">
                         <div
@@ -1074,7 +1045,7 @@
                                 class="col-1 col-md-1 col-lg-auto lh-1 sat_less easy_basic_color d-flex justify-content-start align-items-center">
                                 -</div>
                             <div
-                                class="lh-1 d-flex justify-content-center align-items-center col-10 col-md-10 col-lg-auto">
+                                class="lh-1 d-flex justify-content-center align-items-center col-10 col-md-10">
                                 <input id="r" type="range" />
                             </div>
                             <div
@@ -1108,15 +1079,14 @@
                     <div id="descricao_de_imagem_em_audio_mb"
                         class="col-12 d-flex justify-content-center flex-wrap flex-row">
                         <div class="col-12 d-flex justify-content-between">
-                            <div class="info">
-                                <abbr class="tooltip" data-toggle="tooltip" data-placement="right" title=""
+                            <div class="info"> <abbr class="tooltip" data-toggle="tooltip" data-placement="right"
+                                    title=""
                                     data-original-title="Habilita um comando de voz que descreve as imagens.">&nbsp;</abbr>
                             </div>
                             <div class="check_show"></div>
                         </div>
                         <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="imageSpeaker">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Descrição de imagem em áudio</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -1137,7 +1107,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Descrição de Imagem<br>
+                                <span class="text-center d-flex align-items-center">Descrição de Imagem
                                     em Áudio</span>
                             </div>
                         </div>
@@ -1166,7 +1136,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Descrição de Imagem<br>
+                                <span class="text-center d-flex align-items-center">Descrição de Imagem
                                     em Texto</span>
                             </div>
                         </div>
@@ -1210,7 +1180,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Modo de<br>
+                                <span class="text-center d-flex align-items-center">Modo de
                                     Leitura</span>
                             </div>
                         </div>
@@ -1234,7 +1204,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Leia com<br>
+                                <span class="text-center d-flex align-items-center">Leia com
                                     Foco</span>
                             </div>
                         </div>
@@ -1263,7 +1233,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Guia de<br>
+                                <span class="text-center d-flex align-items-center">Guia de
                                     Leitura</span>
                             </div>
                         </div>
@@ -1351,7 +1321,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Ampliador de<br>
+                                <span class="text-center d-flex align-items-center">Ampliador de
                                     Texto</span>
                             </div>
                         </div>
@@ -1393,7 +1363,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Hiperligações dos<br>
+                                <span class="text-center d-flex align-items-center">Hiperligações dos
                                     Textos</span>
                             </div>
                         </div>
@@ -1434,7 +1404,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Teclado<br>
+                                <span class="text-center d-flex align-items-center">Teclado
                                     Virtual</span>
                             </div>
                         </div>
@@ -1459,8 +1429,7 @@
                             <div class="check_show"></div>
                         </div>
                         <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="imageSpeaker">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Descrição de imagem em áudio</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -1481,10 +1450,8 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">
-                                    Descrição de Imagem<br>
-                                    em Áudio
-                                </span>
+                                <span class="text-center d-flex align-items-center">Descrição de Imagem
+                                    em Áudio</span>
                             </div>
                         </div>
                     </div>
@@ -1498,8 +1465,7 @@
                             <div class="check_show"></div>
                         </div>
                         <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="imageSpeaker">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Descrição da imagem em texto</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -1513,7 +1479,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Descrição de Imagem<br>
+                                <span class="text-center d-flex align-items-center">Descrição de Imagem
                                     em Texto</span>
                             </div>
                         </div>
@@ -1555,7 +1521,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Modo de<br>
+                                <span class="text-center d-flex align-items-center">Modo de
                                     Leitura</span>
                             </div>
                         </div>
@@ -1571,8 +1537,7 @@
                             <div class="check_show"></div>
                         </div>
                         <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="leiaFocus">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Leia com foco</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -1582,7 +1547,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Leia com<br>
+                                <span class="text-center d-flex align-items-center">Leia com
                                     Foco</span>
                             </div>
                         </div>
@@ -1597,8 +1562,7 @@
                             <div class="check_show"></div>
                         </div>
                         <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="readingGuide">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Guia de leitura</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -1609,7 +1573,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Guia de<br>
+                                <span class="text-center d-flex align-items-center">Guia de
                                     Leitura</span>
                             </div>
                         </div>
@@ -1624,8 +1588,7 @@
                             <div class="check_show"></div>
                         </div>
                         <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="dicionario">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Dicionário</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -1672,8 +1635,7 @@
                             <div class="check_show"></div>
                         </div>
                         <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="tecladoVirtual">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                                     <title>Teclado virtual</title>
                                     <g fill="none" fill-rule="evenodd">
@@ -1697,7 +1659,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Teclado<br>
+                                <span class="text-center d-flex align-items-center">Teclado
                                     Virtual</span>
                             </div>
                         </div>
@@ -1712,8 +1674,7 @@
                             <div class="check_show"></div>
                         </div>
                         <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="linkHighlight">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <title>Hiperligações dos textos</title>
@@ -1740,7 +1701,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Hiperligações dos<br>
+                                <span class="text-center d-flex align-items-center">Hiperligações dos
                                     Textos</span>
                             </div>
                         </div>
@@ -1754,8 +1715,7 @@
                             <div class="check_show"></div>
                         </div>
                         <div class="col-12 easy_inside_btns_big">
-                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100 _access-menu"
-                                data-access-action="ampliadorTexto">
+                            <div class="d-flex justify-content-center flex-wrap flex-column align-items-center h-100">
                                 <svg class="mb-4" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <title>Ampliador de texto</title>
@@ -1783,7 +1743,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="text-center d-flex align-items-center">Ampliador de<br>
+                                <span class="text-center d-flex align-items-center">Ampliador de
                                     Texto</span>
                             </div>
                         </div>

@@ -4,22 +4,30 @@ import storage from "./utils/storage.js";
 import theme from "./theme/theme.mjs";
 import addListeners from './utils/addListeners/addListeners.mjs';
 
-import intermitenciaBrilho from "./colorsAdjustment/intermitenciaBrilho.mjs";
-import textToSpeech from "./textToSpeech/textToSpeech.mjs";
-import bigCursorReset from "./bigCursorReset/bigCursorReset.mjs";
-import bigCursorWhite from "./bigCursorWhite/bigCursorWhite.mjs";
-import bigCursorBlack from "./bigCursorBlack/bigCursorBlack.mjs";
-import grayHues from "./grayHues/grayHues.mjs";
+import intermitenciaBrilho from "./modules/intermitenciaBrilho/module.mjs"
+import {
+    ponteiroBranco,
+    ponteiroPreto,
+    ponteiroNormal
+} from './modules/ponteiroRato/module.mjs';
+import modoMonocromatico from './modules/ajustesCor/modoMonocromatico.mjs';
 import {
     contrasteEscuro,
     contrasteClaro,
-    baixaSaturacao,
-    altaSaturacao,
     altoContraste
-} from "./colorsAdjustment/contrasteSaturacao.mjs";
-import protanopia from "./protanopia/protanopia.mjs";
-import deuteranopia from "./deutanopia/deutanopia.mjs";
-import tritanopia from "./tritanopia/tritanopia.mjs";
+} from './modules/ajustesCor/contrastes.mjs';
+import {
+    baixaSaturacao,
+    altaSaturacao
+} from './modules/ajustesCor/saturacao.mjs';
+import {
+    deuteranopia,
+    protanopia,
+    tritanopia
+} from './modules/daltonismo/module.mjs';
+
+
+import textToSpeech from "./textToSpeech/textToSpeech.mjs";
 import mudaCorFundo from "./colorsAdjustment/mudaCorFundo.mjs";
 import { toogleImageSpeaker, describeImgCss} from "./describeImg/describeImg.mjs";
 import leiaFocus from "./leiaFocus/leiaFocus.mjs";
@@ -40,27 +48,55 @@ export class Accessibility {
         self = this;
 
         this.render(() => {
-            addListeners(this);
-
             // add params to modules
             this.body = document.body || document.getElementsByTagName("body")[0];
             this.html = document.html || document.getElementsByTagName("html")[0];
+            
+            addListeners(this);
 
             // funções não reativas
-            self.menuInterface.mudaCorFundo(false);
+            self.actions.mudaCorFundo(false);
 
         });
     }
 
     render(callback) {
-        if (this.menuInterface.theme.render()) {
+        if (this.actions.theme.render()) {
             callback();
         } else {
             console.log('erro ao renderizar template');
         }
     }
 
-    menuInterface = {
+    parseStatus(module, turnOff = false) {
+        if (turnOff) {
+            this.initialValues[module]  = false;
+            this.sessionState[module]   = false;
+
+            $('[data-access-action="'+module+'"]').removeClass("active");
+
+            storage.set("_accessState", this.sessionState);
+
+            return;
+        }
+
+        this.initialValues[module]  = !this.initialValues[module];
+        this.sessionState[module]   = this.initialValues[module];
+
+        if (this.sessionState[module]) {
+            $('[data-access-action="'+module+'"]').addClass("active");
+            $('[data-access-action="'+module+'"]').parent().find('.check').addClass('check_show');
+        } else {
+            $('[data-access-action="'+module+'"]').removeClass("active");
+            $('[data-access-action="'+module+'"]').parent().find('.check').removeClass('check_show');
+        }
+
+        
+
+        storage.set("_accessState", this.sessionState);
+    }
+
+    actions = {
         theme: new theme(),
 
         intermitenciaBrilho: (destroy) => {
@@ -71,27 +107,27 @@ export class Accessibility {
             textToSpeech(this, destroy);
         },
 
-        bigCursorReset: () => {
-            bigCursorReset(this);
+        ponteiroNormal: (destroy) => {
+            ponteiroNormal(this, destroy);
         },
 
-        bigCursorWhite: (destroy) => {
-            bigCursorWhite(this, destroy);
+        ponteiroBranco: (destroy) => {
+            ponteiroBranco(this, destroy);
         },
 
-        bigCursorBlack: (destroy) => {
-            bigCursorBlack(this, destroy);
+        ponteiroPreto: (destroy) => {
+            ponteiroPreto(this, destroy);
         },
 
-        grayHues: (destroy) => {
-            grayHues(this, destroy);
+        modoMonocromatico: (destroy) => {
+            modoMonocromatico(this, destroy);
         },
 
-        altoContrasteEscuro: (destroy) => {
+        contrasteEscuro: (destroy) => {
             contrasteEscuro(this, destroy);
         },
         
-        altoContrasteClaro: (destroy) => {
+        contrasteClaro: (destroy) => {
             contrasteClaro(this, destroy);
         },
 
@@ -176,6 +212,12 @@ export class Accessibility {
     }
 
     initialValues = {
+        modoMonocromatico: false,
+        baixaSaturacao: false,
+        altaSaturacao: false,
+        protanopia: false,
+        deuteranopia: false,
+        tritanopia: false,
         leiaFocus: false,
         dicionario: false,
         linkHighlight: false,
