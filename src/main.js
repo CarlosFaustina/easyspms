@@ -4,6 +4,8 @@ import storage from "./utils/storage.js";
 import theme from "./theme/theme.mjs";
 import addListeners from './utils/addListeners/addListeners.mjs';
 
+import addHasText from './modules/leitorTexto/addHasText.mjs';
+import leitorTexto from "./modules/leitorTexto/module.mjs";
 import intermitenciaBrilho from "./modules/intermitenciaBrilho/module.mjs"
 import {
     ponteiroBranco,
@@ -103,8 +105,8 @@ export class Accessibility {
             intermitenciaBrilho(this, destroy);
         },
 
-        textToSpeech: (destroy) => {
-            textToSpeech(this, destroy);
+        leitorTexto: (destroy) => {
+            leitorTexto(this, destroy);
         },
 
         ponteiroNormal: (destroy) => {
