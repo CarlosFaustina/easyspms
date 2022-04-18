@@ -28,7 +28,7 @@ import {
     tritanopia
 } from './modules/daltonismo/module.mjs';
 
-
+import leitorImagens from './modules/descricaoImagens/module.mjs';
 import textToSpeech from "./textToSpeech/textToSpeech.mjs";
 import mudaCorFundo from "./colorsAdjustment/mudaCorFundo.mjs";
 import { toogleImageSpeaker, describeImgCss} from "./describeImg/describeImg.mjs";
@@ -157,6 +157,10 @@ export class Accessibility {
 
         mudaCorFundo: (destroy) => {
             mudaCorFundo(this, destroy);
+        },
+
+        leitorImagens: (destroy) => {
+            leitorImagens(this, destroy);
         },
 
         imageSpeaker: (destroy) => {

@@ -5,7 +5,6 @@
     color:white;
 }
 
-// Audio player
 .accessibilityPlayerAudioContainer { 
     position: fixed; 
     width: 350px; 
@@ -16,20 +15,23 @@
     border-radius: 4px; 
     -webkit-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.24); 
     box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.24);
-}
-.accessibilityPlayerAudioHeader { 
+  }
+  .accessibilityPlayerAudioHeader { 
     display: flex; 
     justify-content: space-between; 
     color: grey;  
     border-bottom: 1px solid lightgrey; 
     padding: 8px;
-}
-.accessibilityPlayerAudioBody {
+    background-color: rgb(15, 78, 100);
+    color: white;
+  }
+  .accessibilityPlayerAudioBody {
     padding: 8px; 
     display: flex; 
     flex-direction: column;
-}
-.accessibilityPlayerAudioFooter {
+  }
+  
+  .accessibilityPlayerAudioFooter {
     display: flex; 
     flex-direction: row; 
     justify-content: space-between; 
@@ -38,4 +40,29 @@
     border-color: lightgrey; 
     padding: 8px; 
     margin-top: 10px;
-}
+    background-color: rgb(15, 78, 100);
+    color: white;
+  }
+  
+  .containerInputVolume {
+    position: absolute;
+    padding: 14px;
+    left: -122px;
+    bottom: 67px;
+    transform: rotateZ(270deg);
+    display: none;
+    background-color: rgb(15, 78, 100);
+    flex-direction: row-reverse;
+    align-items:center;
+  }
+  
+  .inputVolumeAutoPlayer {
+    width:auto;
+  }
+  
+  .valueVolumeText {
+    transform: rotateZ(90deg);
+    width: 30px;
+    display: flex;
+    justify-content: center;
+  }
