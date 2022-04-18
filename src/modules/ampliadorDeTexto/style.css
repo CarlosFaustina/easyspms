@@ -1,0 +1,39 @@
+
+
+
+
+.tool-tip[title-new]:hover:after {
+    content: attr(title-new);
+    position:absolute;
+    display: inline-block;
+   
+  max-width: auto;
+	background-color:#262626;
+	border: 2px solid #ccc;
+
+    font-family: Arial;
+    font-size: 26px;
+    color: #fff;
+    border-radius: 7.5px;
+    max-height: auto;
+    z-index: 1;
+    overflow: auto;
+    padding: 10px 15px;
+  }
+
+  /*
+
+ content: attr(title-new);
+    position: absolute;
+    border: #c0c0c0 1px dotted;
+    padding: 10px;
+    display: block;
+    z-index: 100;
+    background-color: #000000;
+    color: #ffffff;
+    max-width: 200px;
+    text-decoration: none;
+    text-align:center;
+
+
+  */

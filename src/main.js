@@ -37,7 +37,7 @@ import readingGuide from "./readingGuide/readingGuide.mjs";
 import dicionario from "./dicionario/dicionario.mjs";
 import virtualKeyboard from "./virtualKeyboard/virtualKeyboard.js";
 import linkHighlight from "./linkHighlight/linkHighlight.mjs";
-import ampliadorTexto from "./ampliadorDeTexto/ampliadottexto.mjs";
+import ampliadorTexto from './modules/ampliadorDeTexto/ampliadottexto.mjs';
 
 
 let body;
@@ -92,8 +92,6 @@ export class Accessibility {
             $('[data-access-action="'+module+'"]').removeClass("active");
             $('[data-access-action="'+module+'"]').parent().find('.check').removeClass('check_show');
         }
-
-        
 
         storage.set("_accessState", this.sessionState);
     }
